@@ -11,4 +11,25 @@ package business;
  */
 public class Country {
     
+    private String name;
+    private int id;
+    private static int count = 0;
+    
+    public Country(){
+        count++;
+        id = count;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }

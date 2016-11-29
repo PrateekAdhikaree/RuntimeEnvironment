@@ -10,5 +10,6 @@ package business.person.employee.trainer;
  * @author raseswaridas
  */
 public class Trainer {
-    
+     
+    //add enum for trainer type
 }
