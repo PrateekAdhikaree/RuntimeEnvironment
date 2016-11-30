@@ -9,15 +9,6 @@ package business;
  *
  * @author Skull
  */
-public class Business {
-    
-    private static Business business;
-
-    public static Business getInstance() {
-        if (business == null) {
-            business = new Business();
-        }
-        return business;
-    }
+public class Initialize {
     
 }

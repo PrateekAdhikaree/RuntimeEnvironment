@@ -18,8 +18,8 @@ import userinterface.mastertrainerrole.MasterTrainerWorkAreaJPanel;
 public class MasterTrainerRole extends Role {
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Branch branch, Business business){
-        return new MasterTrainerWorkAreaJPanel(userProcessContainer, account, business); // set constructor of MasterTrainerWorkAreaJPanel
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Branch branch, Business business){
+        return new MasterTrainerWorkAreaJPanel(userProcessContainer, userAccount, branch, business);
     }
     
 }
