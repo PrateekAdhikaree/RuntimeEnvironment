@@ -5,17 +5,28 @@
  */
 package userinterface.superadminrole;
 
+import business.Business;
+import business.useraccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author soumiyaroy
  */
 public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
+    
     /**
      * Creates new form SuperAdminJPanel
      */
-    public SuperAdminWorkAreaJPanel() {
+    public SuperAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.business = business;
     }
 
     /**

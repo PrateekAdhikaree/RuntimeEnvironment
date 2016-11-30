@@ -11,4 +11,14 @@ package business.branch;
  */
 public class Accounting {
     
+    private int currentFunds;
+
+    public int getCurrentFunds() {
+        return currentFunds;
+    }
+
+    public void setCurrentFunds(int currentFunds) {
+        this.currentFunds = currentFunds;
+    }
+    
 }

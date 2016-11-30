@@ -5,10 +5,24 @@
  */
 package business.person.employee;
 
+import business.person.Person;
+
 /**
  *
  * @author raseswaridas
  */
-public class Employee {
+public class Employee extends Person {
+    
+    private int id;
+    private static int count = 0;
+    
+    public Employee (){
+        id = count;
+        count++;
+    }
+
+    public int getId() {
+        return id;
+    }
     
 }

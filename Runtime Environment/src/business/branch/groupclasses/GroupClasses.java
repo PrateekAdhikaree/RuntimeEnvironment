@@ -5,7 +5,7 @@
  */
 package business.branch.groupclasses;
 
-import business.person.employee.trainer.RegularTrainerRole;
+import business.role.RegularTrainerRole;
 import java.util.ArrayList;
 
 /**

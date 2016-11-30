@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package business.branch.workorder;
-import business.person.useraccount.UserAccount;
+import business.useraccount.UserAccount;
 import java.util.Date;
 
 /**

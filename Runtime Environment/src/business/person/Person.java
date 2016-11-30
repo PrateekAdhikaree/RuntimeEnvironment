@@ -7,15 +7,14 @@ package business.person;
 
 /**
  *
- * @author raseswaridas
+ * @author Skull
  */
 public class Person {
-
+    
     private String name;
-    private String contact;
     private String address;
-    private int age;
-    private String gender;
+    private String email;
+    private long mobile;
 
     public String getName() {
         return name;
@@ -23,14 +22,6 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
     }
 
     public String getAddress() {
@@ -41,20 +32,20 @@ public class Person {
         this.address = address;
     }
 
-    public int getAge() {
-        return age;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getGender() {
-        return gender;
+    public long getMobile() {
+        return mobile;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setMobile(long mobile) {
+        this.mobile = mobile;
     }
-
+            
 }

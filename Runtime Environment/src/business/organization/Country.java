@@ -3,26 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.person.customer;
-
-import business.person.Person;
+package business.organization;
 
 /**
  *
  * @author raseswaridas
  */
-public class Customer extends Person {
+public class Country {
     
+    private String name;
     private int id;
     private static int count = 0;
     
-    public Customer (){
-        id = count;
+    public Country(){
         count++;
+        id = count;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package business.branch.message;
 
-import business.person.useraccount.UserAccount;
+import business.useraccount.UserAccount;
 import java.util.Date;
 
 /**

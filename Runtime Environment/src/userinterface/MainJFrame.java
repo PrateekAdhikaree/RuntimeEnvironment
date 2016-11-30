@@ -42,7 +42,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        lowerJPanel = new javax.swing.JPanel();
+        userProcessContainer = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -70,7 +70,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jMenu8.setText("jMenu8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.CardLayout());
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -89,8 +88,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Yuppy SC", 3, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 255));
         jLabel4.setText("Runtime Environment");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/soumiyaroy/aedlab/aed_fall_2016_project_prateek_adhikaree_1280941/Runtime Environment/src/userinterface/imageedit_2_2736498199.png")); // NOI18N
 
         javax.swing.GroupLayout upperJPanelLayout = new javax.swing.GroupLayout(upperJPanel);
         upperJPanel.setLayout(upperJPanelLayout);
@@ -130,7 +127,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jSplitPane1.setTopComponent(upperJPanel);
 
-        lowerJPanel.setBackground(new java.awt.Color(102, 102, 255));
+        userProcessContainer.setBackground(new java.awt.Color(102, 102, 255));
 
         jSeparator1.setForeground(new java.awt.Color(255, 204, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -164,21 +161,21 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 204, 0));
         jLabel7.setText("View our services:");
 
-        javax.swing.GroupLayout lowerJPanelLayout = new javax.swing.GroupLayout(lowerJPanel);
-        lowerJPanel.setLayout(lowerJPanelLayout);
-        lowerJPanelLayout.setHorizontalGroup(
-            lowerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lowerJPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout userProcessContainerLayout = new javax.swing.GroupLayout(userProcessContainer);
+        userProcessContainer.setLayout(userProcessContainerLayout);
+        userProcessContainerLayout.setHorizontalGroup(
+            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userProcessContainerLayout.createSequentialGroup()
                 .addContainerGap(570, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(lowerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lowerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lowerJPanelLayout.createSequentialGroup()
+                .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userProcessContainerLayout.createSequentialGroup()
                             .addComponent(jButton3)
                             .addGap(16, 16, 16))
-                        .addGroup(lowerJPanelLayout.createSequentialGroup()
-                            .addGroup(lowerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(userProcessContainerLayout.createSequentialGroup()
+                            .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel3)
@@ -188,13 +185,13 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addGap(24, 24, 24)))
                     .addComponent(jLabel7)))
         );
-        lowerJPanelLayout.setVerticalGroup(
-            lowerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lowerJPanelLayout.createSequentialGroup()
+        userProcessContainerLayout.setVerticalGroup(
+            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userProcessContainerLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(lowerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(lowerJPanelLayout.createSequentialGroup()
+                    .addGroup(userProcessContainerLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(41, 41, 41)
                         .addComponent(jLabel2)
@@ -213,9 +210,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
-        jSplitPane1.setRightComponent(lowerJPanel);
+        jSplitPane1.setRightComponent(userProcessContainer);
 
-        getContentPane().add(jSplitPane1, "card2");
+        getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -279,7 +276,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel lowerJPanel;
     private javax.swing.JPanel upperJPanel;
+    private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
 }
