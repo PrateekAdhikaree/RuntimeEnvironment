@@ -9,7 +9,7 @@ package business.person;
  *
  * @author Skull
  */
-public class Person {
+public abstract class Person {
     
     private String name;
     private String address;

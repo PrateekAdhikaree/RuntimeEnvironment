@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.branch.membership;
+package business.organization.membership;
 
 import java.util.ArrayList;
 

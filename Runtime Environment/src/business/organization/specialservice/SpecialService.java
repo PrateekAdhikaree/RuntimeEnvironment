@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.branch.specialservice;
+package business.organization.specialservice;
 
-import business.branch.membership.Membership;
-import java.util.ArrayList;
+import business.organization.Organization;
+import business.organization.membership.Membership;
 
 /**
  *
  * @author raseswaridas
  */
-public class SpecialService {
+public class SpecialService extends Organization {
     
     private String name;
     private String description;

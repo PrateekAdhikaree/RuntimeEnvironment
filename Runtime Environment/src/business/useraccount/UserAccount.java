@@ -5,7 +5,7 @@
  */
 package business.useraccount;
 
-import business.branch.workorder.WorkOrder;
+import business.organization.message.MessageQueue;
 import business.person.employee.Employee;
 import business.role.Role;
 
@@ -19,10 +19,10 @@ public class UserAccount {
     private String password;
     private Employee employee;
     private Role role;
-    private WorkOrder workOrder;
+    private MessageQueue workOrder;
 
     public UserAccount() {
-        workOrder = new WorkOrder();
+        workOrder = new MessageQueue();
     }
     
     public String getUsername() {
@@ -57,7 +57,7 @@ public class UserAccount {
         return employee;
     }
 
-    public WorkOrder getWorkOrder() {
+    public MessageQueue getWorkOrder() {
         return workOrder;
     }
     

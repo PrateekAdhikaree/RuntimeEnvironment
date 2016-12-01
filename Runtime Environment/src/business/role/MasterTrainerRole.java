@@ -6,7 +6,7 @@
 package business.role;
 
 import business.Business;
-import business.branch.Branch;
+import business.enterprise.GymEnterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.mastertrainerrole.MasterTrainerWorkAreaJPanel;
@@ -18,7 +18,7 @@ import userinterface.mastertrainerrole.MasterTrainerWorkAreaJPanel;
 public class MasterTrainerRole extends Role {
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Branch branch, Business business){
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, GymEnterprise branch, Business business){
         return new MasterTrainerWorkAreaJPanel(userProcessContainer, userAccount, branch, business);
     }
     

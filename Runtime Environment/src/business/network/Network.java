@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.organization;
+package business.network;
 
 /**
  *
  * @author raseswaridas
  */
-public class City {
+public class Network {
 
-    private String cityName;
+    private String city;
     private String country;
     private String state;
     private int id;
     
     private static int count =0;
     
-    public City(){
+    public Network(){
         count++;
         id = count;
     }
@@ -27,12 +27,12 @@ public class City {
         return id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCountry() {

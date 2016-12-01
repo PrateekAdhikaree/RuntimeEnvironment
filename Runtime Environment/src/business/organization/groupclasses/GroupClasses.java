@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.branch.groupclasses;
+package business.organization.groupclasses;
 
+import business.organization.Organization;
 import business.role.RegularTrainerRole;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author raseswaridas
  */
-public class GroupClasses {
+public class GroupClasses extends Organization {
 
     private String name;
     private int duration;

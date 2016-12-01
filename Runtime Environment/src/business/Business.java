@@ -5,19 +5,31 @@
  */
 package business;
 
+import business.enterprise.Enterprise;
+import business.parentnetwork.ParentNetworkDirectory;
+
 /**
  *
  * @author Skull
  */
-public class Business {
+public class Business extends Enterprise {
     
     private static Business business;
-
+    private ParentNetworkDirectory parentNetworkDirectory;
+    
     public static Business getInstance() {
         if (business == null) {
             business = new Business();
         }
         return business;
+    }
+
+    public ParentNetworkDirectory getParentNetworkDirectory() {
+        return parentNetworkDirectory;
+    }
+
+    public void setParentNetworkDirectory(ParentNetworkDirectory parentNetworkDirectory) {
+        this.parentNetworkDirectory = parentNetworkDirectory;
     }
     
 }

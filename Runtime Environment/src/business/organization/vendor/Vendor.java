@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.branch;
+package business.organization.vendor;
+
+import business.organization.Organization;
 
 /**
  *
  * @author raseswaridas
  */
-public class Vendor {
+public class Vendor extends Organization {
     
     private String name;
     private String address;

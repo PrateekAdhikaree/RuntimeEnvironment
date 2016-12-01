@@ -6,7 +6,7 @@
 package business.role;
 
 import business.Business;
-import business.branch.Branch;
+import business.enterprise.GymEnterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.adminrole.AdminRoleWorkAreaJPanel;
@@ -18,7 +18,7 @@ import userinterface.adminrole.AdminRoleWorkAreaJPanel;
 public class AdminRole extends Role {
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Branch branch, Business business){
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, GymEnterprise branch, Business business){
         return new AdminRoleWorkAreaJPanel(userProcessContainer, userAccount, branch, business);
     }
     

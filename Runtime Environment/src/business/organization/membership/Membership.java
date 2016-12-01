@@ -3,18 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.branch.membership;
+package business.organization.membership;
 
-import business.branch.specialservice.SpecialService;
+import business.organization.Organization;
+import business.organization.specialservice.SpecialService;
 import java.util.ArrayList;
 
 /**
  *
  * @author raseswaridas
  */
-public class Membership {
+public class Membership extends Organization {
 
-    private String membershipType; // enum
+    private enum membershipType{
+//        Gold("Gold"),
+//        Platinum("Platinum");
+//    
+//        private String value;
+//        private messageType(String value){
+//            this.value = value;
+//        }
+//
+//        public String getValue() {
+//            return value;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return value;
+//        }
+    };
+    
     private String membershipName;
     private String description;
     private int price;
@@ -51,14 +70,6 @@ public class Membership {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public String getMembershipType() {
-        return membershipType;
-    }
-
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
     }
 
     public int getId() {

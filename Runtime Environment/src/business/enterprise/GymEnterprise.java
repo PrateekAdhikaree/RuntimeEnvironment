@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.branch.workorder;
+package business.enterprise;
 
 /**
  *
  * @author raseswaridas
  */
-public class WorkOrderDirectory {
+public class GymEnterprise extends Enterprise {
     
 }

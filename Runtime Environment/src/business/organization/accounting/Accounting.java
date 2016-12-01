@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.branch;
+package business.organization.accounting;
+
+import business.organization.Organization;
 
 /**
  *
  * @author raseswaridas
  */
-public class Accounting {
+public class Accounting extends Organization{
     
     private int currentFunds;
 
