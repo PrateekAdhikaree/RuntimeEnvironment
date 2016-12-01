@@ -6,7 +6,7 @@
 package userinterface.mastertrainerrole;
 
 import business.Business;
-import business.branch.Branch;
+import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -18,17 +18,17 @@ public class MasterTrainerWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private UserAccount userAccount;
-    private Branch branch;
+    private Enterprise enterprise;
     private Business business;
             
     /**
      * Creates new form MasterTrainerWorkAreaJPanel
      */
-    public MasterTrainerWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Branch branch, Business business) {
+    public MasterTrainerWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
-        this.branch = branch;
+        this.enterprise = enterprise;
         this.business = business;
     }
 

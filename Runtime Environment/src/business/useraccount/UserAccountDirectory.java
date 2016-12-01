@@ -5,10 +5,42 @@
  */
 package business.useraccount;
 
+import business.role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author raseswaridas
  */
 public class UserAccountDirectory {
+    
+    private ArrayList<UserAccount> userAccountlist;
+    
+    public UserAccountDirectory(){
+        userAccountlist = new ArrayList<UserAccount>();
+    }
+
+    public ArrayList<UserAccount> getUserAccountlist() {
+        return userAccountlist;
+    }
+    
+    public UserAccount addUserAccount(Role role) {
+        UserAccount userAccount = new UserAccount(role);
+        userAccountlist.add(userAccount);
+        return userAccount;
+    }
+
+    public UserAccount searchUserAccountById(int id) {
+        for (UserAccount ua : userAccountlist) {
+            if (ua.getId() == id) {
+                return ua;
+            }
+        }
+        return null;
+    }
+
+    public void removeUserAccount(UserAccount ua) {
+        userAccountlist.remove(ua);
+    }
     
 }

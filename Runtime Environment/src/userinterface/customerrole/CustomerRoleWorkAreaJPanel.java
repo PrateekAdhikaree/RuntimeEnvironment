@@ -5,7 +5,7 @@
  */
 package userinterface.customerrole;
 
-import business.branch.Branch;
+import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -17,16 +17,16 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private UserAccount userAccount;
-    private Branch branch;
+    private Enterprise enterprise;
     
     /**
      * Creates new form CustomerRoleWorkAreaJPanel
      */
-    public CustomerRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Branch branch) {
+    public CustomerRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
-        this.branch = branch;
+        this.enterprise = enterprise;
     }
 
     /**

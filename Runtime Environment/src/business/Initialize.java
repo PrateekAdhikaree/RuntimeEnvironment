@@ -7,10 +7,13 @@ package business;
 
 import business.parentnetwork.ParentNetworkDirectory;
 import business.parentnetwork.ParentNetwork;
+import business.person.employee.Employee;
+import business.role.Role;
+import business.role.SuperAdminRole;
+import business.useraccount.UserAccount;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +25,17 @@ public class Initialize {
     
     private FileReader file;
     private BufferedReader reader;
+    private Business business;
+    
+    public Initialize(Business business){
+        this.business = business;
+    }
+    
+    public void createGlobalUsers(){
+        business.getEmployeeDirectory().addEmployee(Role.RoleType.SuperAdmin);
+        Role role = new SuperAdminRole();
+        business.getUserAccountDirectory().addUserAccount(role);
+    }
     
     public Business configureBusiness(){
         Business business;

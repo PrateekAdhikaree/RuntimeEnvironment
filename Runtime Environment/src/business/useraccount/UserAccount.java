@@ -19,10 +19,23 @@ public class UserAccount {
     private String password;
     private Employee employee;
     private Role role;
-    private MessageQueue workOrder;
+    private MessageQueue messageQueue;
+    
+    private static int count = 0;
+    private int id;
 
-    public UserAccount() {
-        workOrder = new MessageQueue();
+    public UserAccount(Role role) {
+        count++;
+        id = count;
+        this.role = role;
+    }
+
+    public MessageQueue getMessageQueue() {
+        return messageQueue;
+    }
+
+    public int getId() {
+        return id;
     }
     
     public String getUsername() {
@@ -55,10 +68,6 @@ public class UserAccount {
 
     public Employee getEmployee() {
         return employee;
-    }
-
-    public MessageQueue getWorkOrder() {
-        return workOrder;
     }
     
 }

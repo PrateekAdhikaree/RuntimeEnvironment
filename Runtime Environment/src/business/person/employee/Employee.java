@@ -15,14 +15,20 @@ public class Employee extends Person {
     
     private int id;
     private static int count = 0;
+    private String role;
     
-    public Employee (){
+    public Employee (String role){
         id = count;
         count++;
+        this.role = role;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getRole() {
+        return role;
     }
     
 }

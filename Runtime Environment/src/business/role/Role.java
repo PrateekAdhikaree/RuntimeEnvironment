@@ -16,7 +16,7 @@ import business.enterprise.GymEnterprise;
  */
 public abstract class Role {
     
-    public enum RoleType{
+    public static enum RoleType{
         Accountant("Accountant"),
         Admin("Admin"),
         Customer("Customer"),

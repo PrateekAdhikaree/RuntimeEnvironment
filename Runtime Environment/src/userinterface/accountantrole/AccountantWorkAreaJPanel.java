@@ -5,7 +5,7 @@
  */
 package userinterface.accountantrole;
 
-import business.branch.Branch;
+import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -17,16 +17,16 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private UserAccount userAccount;
-    private Branch branch;
+    private Enterprise enterprise;
     
     /**
      * Creates new form AccountantWorkAreaJPanel
      */
-    public AccountantWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Branch branch) {
+    public AccountantWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
-        this.branch = branch;
+        this.enterprise = enterprise;
     }
 
     /**

@@ -6,7 +6,7 @@
 package userinterface.adminrole;
 
 import business.Business;
-import business.branch.Branch;
+import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -19,17 +19,17 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
-    private Branch branch;
+    private Enterprise enterprise;
     
     /**
      * Creates new form AdminRoleWorkAreaJPanel
      */
-    public AdminRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Branch branch, Business business) {
+    public AdminRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
-        this.branch = branch;
+        this.enterprise = enterprise;
     }
 
     /**
