@@ -51,11 +51,11 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         jSeparator2.setForeground(new java.awt.Color(255, 204, 0));
 
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 204, 0));
+        jButton1.setForeground(new java.awt.Color(255, 153, 51));
         jButton1.setText("Save");
 
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 204, 0));
+        jButton2.setForeground(new java.awt.Color(255, 153, 51));
         jButton2.setText("Back");
 
         jLabel1.setFont(new java.awt.Font("Yuppy SC", 3, 24)); // NOI18N
@@ -70,13 +70,13 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 204, 0));
         jLabel5.setText("Confirm Password:");
 
-        jPasswordField1.setForeground(new java.awt.Color(255, 204, 0));
+        jPasswordField1.setForeground(new java.awt.Color(255, 153, 51));
         jPasswordField1.setText("jPasswordField1");
 
-        jPasswordField2.setForeground(new java.awt.Color(255, 204, 0));
+        jPasswordField2.setForeground(new java.awt.Color(255, 153, 51));
         jPasswordField2.setText("jPasswordField2");
 
-        jPasswordField3.setForeground(new java.awt.Color(255, 204, 0));
+        jPasswordField3.setForeground(new java.awt.Color(255, 153, 51));
         jPasswordField3.setText("jPasswordField3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
