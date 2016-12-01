@@ -5,10 +5,35 @@
  */
 package business.person.employee;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author raseswaridas
  */
 public class EmployeeDirectory {
+    private ArrayList<Employee> employeeList;
+
+    public ArrayList<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+   public Employee addEmployee(){
+   Employee employee =  new Employee();
+   employeeList.add(employee);
+   return employee;
+   }
+   
+    public Employee searchEmployeeById(int id){
+        for(Employee employee : employeeList){
+            if(employee.getId() == id){
+                return employee;
+            }
+        }
+        return null;
+    }
     
+    public void removeCustomer(Employee employee){
+        employeeList.remove(employee);
+    }
 }
