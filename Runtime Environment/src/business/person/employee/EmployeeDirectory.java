@@ -20,8 +20,8 @@ public class EmployeeDirectory {
         return employeeList;
     }
 
-    public Employee addEmployee(Role.RoleType roleType) {
-        Employee employee = new Employee(roleType.getValue());
+    public Employee addEmployee(Role role) {
+        Employee employee = new Employee(role);
         employeeList.add(employee);
         return employee;
     }

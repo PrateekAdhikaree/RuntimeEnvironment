@@ -10,7 +10,7 @@ import business.organization.groupclasses.GroupClassesDirectory;
 import business.organization.membership.MembershipDirectory;
 import business.organization.specialservice.SpecialServiceDirectory;
 import business.organization.vendor.Vendor;
-import business.organization.message.MessageQueueDirectory;
+import business.organization.message.MessageDirectory;
 
 /**
  *
@@ -19,7 +19,7 @@ import business.organization.message.MessageQueueDirectory;
 public class OrganizationDirectory {
     
     private MembershipDirectory membershipDirectory;
-    private MessageQueueDirectory workOrderDirectory;
+    private MessageDirectory workOrderDirectory;
     private GroupClassesDirectory groupClassesDirectory;
     private SpecialServiceDirectory sevicesDirectory;
     private Vendor vendor;
@@ -33,11 +33,11 @@ public class OrganizationDirectory {
         this.membershipDirectory = membershipDirectory;
     }
 
-    public MessageQueueDirectory getWorkOrderDirectory() {
+    public MessageDirectory getWorkOrderDirectory() {
         return workOrderDirectory;
     }
 
-    public void setWorkOrderDirectory(MessageQueueDirectory workOrderDirectory) {
+    public void setWorkOrderDirectory(MessageDirectory workOrderDirectory) {
         this.workOrderDirectory = workOrderDirectory;
     }
 

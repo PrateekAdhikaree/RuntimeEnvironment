@@ -9,6 +9,6 @@ package business.organization.message;
  *
  * @author raseswaridas
  */
-public class MessageQueueDirectory {
+public class MessageDirectory {
     
 }

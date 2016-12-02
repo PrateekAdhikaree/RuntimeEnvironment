@@ -5,13 +5,8 @@
  */
 package business.enterprise;
 
-import business.organization.accounting.Accounting;
 import business.organization.OrganizationDirectory;
-import business.organization.vendor.Vendor;
-import business.organization.specialservice.SpecialServiceDirectory;
-import business.organization.message.MessageQueueDirectory;
-import business.organization.groupclasses.GroupClassesDirectory;
-import business.organization.membership.MembershipDirectory;
+import business.organization.message.Message;
 import business.person.customer.CustomerDirectory;
 import business.person.employee.EmployeeDirectory;
 import business.useraccount.UserAccountDirectory;
@@ -20,7 +15,7 @@ import business.useraccount.UserAccountDirectory;
  *
  * @author Skull
  */
-public class Enterprise {
+public abstract class Enterprise {
     
     private int id;
     private static int count = 0;
@@ -28,6 +23,7 @@ public class Enterprise {
     private EmployeeDirectory employeeDirectory;
     private CustomerDirectory customerDirectory;
     private UserAccountDirectory userAccountDirectory;
+    private Message messageQueue;
     
     private OrganizationDirectory organizationDirectory;
     
@@ -70,6 +66,14 @@ public class Enterprise {
 
     public void setOrganizationDirectory(OrganizationDirectory organizationDirectory) {
         this.organizationDirectory = organizationDirectory;
+    }
+
+    public Message getMessageQueue() {
+        return messageQueue;
+    }
+
+    public void setMessageQueue(Message messageQueue) {
+        this.messageQueue = messageQueue;
     }
     
 }

@@ -15,26 +15,26 @@ import java.util.ArrayList;
  */
 public class Membership extends Organization {
 
-    private enum membershipType{
-//        Gold("Gold"),
-//        Platinum("Platinum");
-//    
-//        private String value;
-//        private messageType(String value){
-//            this.value = value;
-//        }
-//
-//        public String getValue() {
-//            return value;
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return value;
-//        }
+    public enum membershipType{
+        Gold("Gold"),
+        Platinum("Platinum");
+    
+        private String value;
+        private membershipType(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
     };
     
-    private String membershipName;
+    private String name;
     private String description;
     private int price;
     private ArrayList<SpecialService> specialServiceList;
@@ -44,16 +44,16 @@ public class Membership extends Organization {
 
     public Membership() {
         count++;
-        id = count;
+        this.id = count;
         specialServiceList = new ArrayList<SpecialService>();
     }
 
-    public String getMembershipName() {
-        return membershipName;
+    public String getName() {
+        return name;
     }
 
-    public void setMembershipName(String membershipName) {
-        this.membershipName = membershipName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

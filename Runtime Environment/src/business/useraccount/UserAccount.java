@@ -5,7 +5,7 @@
  */
 package business.useraccount;
 
-import business.organization.message.MessageQueue;
+import business.organization.message.Message;
 import business.person.employee.Employee;
 import business.role.Role;
 import java.util.logging.Level;
@@ -23,7 +23,7 @@ public class UserAccount {
     private Employee employee;
     private Customer customer;
     private Role role;
-    private MessageQueue messageQueue;
+    private Message messageQueue;
     
     private static int count = 0;
     private int id;
@@ -34,7 +34,7 @@ public class UserAccount {
         this.role = role;
     }
 
-    public MessageQueue getMessageQueue() {
+    public Message getMessageQueue() {
         return messageQueue;
     }
 

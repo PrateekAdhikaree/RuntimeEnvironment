@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author raseswaridas
  */
-public class MessageQueue extends Organization {
+public class Message extends Organization {
     
     private enum messageType{
         Message("Message"),
@@ -39,9 +39,11 @@ public class MessageQueue extends Organization {
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    private String type;
     
-    public MessageQueue(){
+    public Message(messageType type){
         requestDate = new Date();
+        this.type = type.getValue();
     }
 
     public String getMessage() {
@@ -80,15 +82,15 @@ public class MessageQueue extends Organization {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
-        this.requestDate = requestDate;
-    }
-
     public Date getResolveDate() {
         return resolveDate;
     }
 
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
+    }
+
+    public String getType() {
+        return type;
     }
 }

@@ -42,5 +42,4 @@ public class MembershipDirectory {
         membershipList.remove(membership);
     }
     
-    
 }

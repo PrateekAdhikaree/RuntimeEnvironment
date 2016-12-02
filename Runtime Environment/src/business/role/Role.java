@@ -8,7 +8,7 @@ package business.role;
 import javax.swing.JPanel;
 import business.useraccount.UserAccount;
 import business.*;
-import business.enterprise.GymEnterprise;
+import business.enterprise.Enterprise;
 
 /**
  *
@@ -43,7 +43,7 @@ public abstract class Role {
     
     public abstract JPanel createWorkArea(JPanel userProcessContainer, 
             UserAccount account,
-            GymEnterprise branch,
+            Enterprise enterprise,
             Business business);
 
     @Override

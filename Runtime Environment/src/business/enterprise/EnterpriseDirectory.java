@@ -24,9 +24,9 @@ public class EnterpriseDirectory {
     }
 
     public Enterprise addBranch() {
-        Enterprise branch = new GymEnterprise();
-        enterpriseList.add(branch);
-        return branch;
+        Enterprise enterprise = new GymEnterprise();
+        enterpriseList.add(enterprise);
+        return enterprise;
     }
 
     public Enterprise searchBranchById(int id) {

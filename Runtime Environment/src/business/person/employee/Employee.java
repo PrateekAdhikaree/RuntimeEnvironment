@@ -6,6 +6,7 @@
 package business.person.employee;
 
 import business.person.Person;
+import business.role.Role;
 
 /**
  *
@@ -15,9 +16,9 @@ public class Employee extends Person {
     
     private int id;
     private static int count = 0;
-    private String role;
+    private Role role;
     
-    public Employee (String role){
+    public Employee (Role role){
         id = count;
         count++;
         this.role = role;
@@ -27,7 +28,7 @@ public class Employee extends Person {
         return id;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
     

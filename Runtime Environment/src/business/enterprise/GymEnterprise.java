@@ -10,5 +10,10 @@ package business.enterprise;
  * @author raseswaridas
  */
 public class GymEnterprise extends Enterprise {
-    
+
+    private final String name = "Runtime Environment";
+
+    public String getName() {
+        return name;
+    }
 }

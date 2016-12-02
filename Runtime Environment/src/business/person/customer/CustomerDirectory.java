@@ -5,6 +5,7 @@
  */
 package business.person.customer;
 
+import business.organization.membership.Membership;
 import java.util.ArrayList;
 
 /**
@@ -18,8 +19,8 @@ public class CustomerDirectory {
         return customerList;
     }
 
-   public Customer addCustomer(){
-   Customer customer =  new Customer();
+   public Customer addCustomer(Membership membership){
+   Customer customer =  new Customer(membership);
    customerList.add(customer);
    return customer;
    }

@@ -6,7 +6,7 @@
 package business.role;
 
 import business.Business;
-import business.enterprise.GymEnterprise;
+import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.regulartrainerrole.RegularTrainerRoleWorkAreaJPanel;
@@ -18,8 +18,8 @@ import userinterface.regulartrainerrole.RegularTrainerRoleWorkAreaJPanel;
 public class RegularTrainerRole extends Role {
     
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, GymEnterprise branch, Business business){
-        return new RegularTrainerRoleWorkAreaJPanel(userProcessContainer, userAccount, branch);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
+        return new RegularTrainerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);
     }
     
 }

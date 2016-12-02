@@ -5,6 +5,7 @@
  */
 package business.person.customer;
 
+import business.organization.membership.Membership;
 import business.person.Person;
 
 /**
@@ -15,14 +16,20 @@ public class Customer extends Person {
     
     private int id;
     private static int count = 0;
+    private Membership membership;
     
-    public Customer (){
+    public Customer (Membership membership){
         id = count;
         count++;
+        this.membership = membership;
     }
 
     public int getId() {
         return id;
+    }
+
+    public Membership getMembership() {
+        return membership;
     }
     
 }

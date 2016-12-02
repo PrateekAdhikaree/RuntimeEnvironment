@@ -7,12 +7,10 @@ package business;
 
 import business.parentnetwork.ParentNetworkDirectory;
 import business.parentnetwork.ParentNetwork;
-import business.person.customer.Customer;
 import business.person.employee.Employee;
 import business.role.MarketingRole;
 import business.role.Role;
 import business.role.SuperAdminRole;
-import business.useraccount.UserAccount;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -36,12 +34,14 @@ public final class Initialize {
     }
     
     private void createGlobalUsers(Business business){
-        Employee employee = business.getEmployeeDirectory().addEmployee(Role.RoleType.SuperAdmin);
+        Role role = new SuperAdminRole();
+        Employee employee = business.getEmployeeDirectory().addEmployee(role);
         Boolean accountCreated = business.getUserAccountDirectory().createNewUserAccount("sysadmin", "sysadmin", employee, null, new SuperAdminRole());
         if(!accountCreated)
             Logger.getLogger(Initialize.class.getName()+" in createGlobalUsers()").log(Level.SEVERE, null, "SuperAdmin Account not created!");
         
-        employee = business.getEmployeeDirectory().addEmployee(Role.RoleType.Marketing);
+        role = new MarketingRole();
+        employee = business.getEmployeeDirectory().addEmployee(role);
         accountCreated = business.getUserAccountDirectory().createNewUserAccount("marketadmin", "marketadmin", employee, null, new MarketingRole());
         if(!accountCreated)
             Logger.getLogger(Initialize.class.getName()+" in createGlobalUsers()").log(Level.SEVERE, null, "MarketAdmin Account not created!");    
