@@ -15,6 +15,10 @@ import java.util.ArrayList;
 public class EmployeeDirectory {
 
     private ArrayList<Employee> employeeList;
+    
+    public EmployeeDirectory(){
+        employeeList = new ArrayList<Employee>();
+    }
 
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;

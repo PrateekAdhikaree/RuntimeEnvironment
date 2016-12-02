@@ -5,6 +5,8 @@
  */
 package business.parentnetwork;
 
+import business.network.NetworkDirectory;
+
 /**
  *
  * @author raseswaridas
@@ -14,6 +16,8 @@ public class ParentNetwork {
     private String countryName;
     private int id;
     private static int count = 0;
+    
+    private NetworkDirectory networkDirectory;
     
     public ParentNetwork(){
         count++;
@@ -31,5 +35,15 @@ public class ParentNetwork {
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
+
+    public NetworkDirectory getNetworkDirectory() {
+        return networkDirectory;
+    }
+
+    public void setNetworkDirectory(NetworkDirectory networkDirectory) {
+        this.networkDirectory = networkDirectory;
+    }
+    
+    
     
 }

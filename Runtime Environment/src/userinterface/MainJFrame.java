@@ -5,17 +5,29 @@
  */
 package userinterface;
 
+import business.Business;
+import business.Initialize;
+import java.awt.CardLayout;
+import javax.swing.JFrame;
+import userinterface.registration.RegisterJPanel;
+
 /**
  *
  * @author soumiyaroy
  */
 public class MainJFrame extends javax.swing.JFrame {
 
+    Business business;
+
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
+        btnProfile.setVisible(false);
+        btnLogout.setVisible(false);
+        Initialize initialize = new Initialize();
+        business = initialize.configureBusiness();
     }
 
     /**
@@ -37,24 +49,26 @@ public class MainJFrame extends javax.swing.JFrame {
         jMenu8 = new javax.swing.JMenu();
         jSplitPane1 = new javax.swing.JSplitPane();
         upperJPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnNewUser = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
+        btnProfile = new javax.swing.JButton();
         userProcessContainer = new javax.swing.JPanel();
+        welcomeJPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -78,19 +92,38 @@ public class MainJFrame extends javax.swing.JFrame {
 
         upperJPanel.setBackground(new java.awt.Color(255, 204, 0));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(102, 102, 255));
-        jButton1.setText("New User");
+        btnNewUser.setBackground(new java.awt.Color(255, 255, 255));
+        btnNewUser.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnNewUser.setForeground(new java.awt.Color(102, 102, 255));
+        btnNewUser.setText("New User");
+        btnNewUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewUserActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(102, 102, 255));
-        jButton2.setText("Login");
+        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogin.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(102, 102, 255));
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Yuppy SC", 3, 34)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 255));
         jLabel4.setText("Runtime Environment");
+
+        btnLogout.setBackground(new java.awt.Color(102, 102, 255));
+        btnLogout.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(102, 102, 255));
+        btnLogout.setText("Logout");
+
+        btnProfile.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnProfile.setForeground(new java.awt.Color(102, 102, 255));
+        btnProfile.setText("Profile");
 
         javax.swing.GroupLayout upperJPanelLayout = new javax.swing.GroupLayout(upperJPanel);
         upperJPanel.setLayout(upperJPanelLayout);
@@ -103,21 +136,25 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(507, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upperJPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnProfile)
+                .addGap(12, 12, 12)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         upperJPanelLayout.setVerticalGroup(
             upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upperJPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNewUser)
+                        .addComponent(btnLogout)
+                        .addComponent(btnProfile))
+                    .addComponent(btnLogin))
                 .addContainerGap())
             .addGroup(upperJPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -131,22 +168,22 @@ public class MainJFrame extends javax.swing.JFrame {
         jSplitPane1.setTopComponent(upperJPanel);
 
         userProcessContainer.setBackground(new java.awt.Color(102, 102, 255));
+        userProcessContainer.setLayout(new java.awt.CardLayout());
+
+        welcomeJPanel.setBackground(new java.awt.Color(102, 102, 255));
+        welcomeJPanel.setForeground(new java.awt.Color(102, 102, 255));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 153, 0));
+        jButton1.setText("Go");
+        jButton1.setEnabled(false);
 
         jSeparator1.setForeground(new java.awt.Color(255, 204, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setEnabled(false);
-
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 204, 0));
-        jButton3.setText("Go");
-        jButton3.setEnabled(false);
-
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel2.setForeground(new java.awt.Color(255, 204, 51));
         jLabel2.setText("Select Country");
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -157,87 +194,90 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 204, 0));
         jLabel6.setText("Select Branch");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setEnabled(false);
-
-        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 204, 0));
         jLabel7.setText("View our services:");
 
-        jButton4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 153, 0));
-        jButton4.setText("About Us");
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 153, 0));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 153, 51));
-        jButton5.setText("Contact Us");
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(255, 153, 0));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setEnabled(false);
 
-        jButton6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 153, 51));
-        jButton6.setText("Services");
+        jComboBox3.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox3.setForeground(new java.awt.Color(255, 153, 0));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setEnabled(false);
 
-        javax.swing.GroupLayout userProcessContainerLayout = new javax.swing.GroupLayout(userProcessContainer);
-        userProcessContainer.setLayout(userProcessContainerLayout);
-        userProcessContainerLayout.setHorizontalGroup(
-            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userProcessContainerLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jButton6)
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 153, 0));
+        jButton2.setText("About Us");
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 153, 0));
+        jButton3.setText("Contact Us");
+
+        javax.swing.GroupLayout welcomeJPanelLayout = new javax.swing.GroupLayout(welcomeJPanel);
+        welcomeJPanel.setLayout(welcomeJPanelLayout);
+        welcomeJPanelLayout.setHorizontalGroup(
+            welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomeJPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userProcessContainerLayout.createSequentialGroup()
-                            .addComponent(jButton3)
-                            .addGap(16, 16, 16))
-                        .addGroup(userProcessContainerLayout.createSequentialGroup()
-                            .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jComboBox1, 0, 177, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(24, 24, 24)))
-                    .addComponent(jLabel7)))
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addGroup(welcomeJPanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel6))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
-        userProcessContainerLayout.setVerticalGroup(
-            userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userProcessContainerLayout.createSequentialGroup()
-                .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(userProcessContainerLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+        welcomeJPanelLayout.setVerticalGroup(
+            welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(welcomeJPanelLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jButton3))
+                    .addGroup(welcomeJPanelLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(5, 5, 5)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(5, 5, 5)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton3))
-                    .addGroup(userProcessContainerLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(userProcessContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5)
-                            .addComponent(jButton6)))
-                    .addGroup(userProcessContainerLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(209, Short.MAX_VALUE))
+                        .addGap(17, 17, 17)
+                        .addComponent(jButton1))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
+
+        userProcessContainer.add(welcomeJPanel, "card14");
 
         jSplitPane1.setRightComponent(userProcessContainer);
 
@@ -245,6 +285,23 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        LoginJPanel loginJPanel = new LoginJPanel(userProcessContainer, business);
+        userProcessContainer.add("loginJPanel", loginJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUserActionPerformed
+        // TODO add your handling code here:
+        RegisterJPanel registerJPanel = new RegisterJPanel(userProcessContainer, business);
+        userProcessContainer.add("registerJPanel", registerJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnNewUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,18 +333,21 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                MainJFrame mjf = new MainJFrame();
+                mjf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                mjf.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnNewUser;
+    private javax.swing.JButton btnProfile;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -310,5 +370,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel upperJPanel;
     private javax.swing.JPanel userProcessContainer;
+    private javax.swing.JPanel welcomeJPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package business.enterprise;
 
 import business.organization.OrganizationDirectory;
 import business.organization.message.Message;
+import business.organization.message.MessageDirectory;
 import business.person.customer.CustomerDirectory;
 import business.person.employee.EmployeeDirectory;
 import business.useraccount.UserAccountDirectory;
@@ -23,13 +24,17 @@ public abstract class Enterprise {
     private EmployeeDirectory employeeDirectory;
     private CustomerDirectory customerDirectory;
     private UserAccountDirectory userAccountDirectory;
-    private Message messageQueue;
+    private MessageDirectory messageDirectory;
     
     private OrganizationDirectory organizationDirectory;
     
     public Enterprise(){
         count++;
         id = count;
+        employeeDirectory = new EmployeeDirectory();
+        customerDirectory = new CustomerDirectory();
+        userAccountDirectory = new UserAccountDirectory();
+        messageDirectory = new MessageDirectory();
     }
 
     public int getId() {
@@ -68,12 +73,12 @@ public abstract class Enterprise {
         this.organizationDirectory = organizationDirectory;
     }
 
-    public Message getMessageQueue() {
-        return messageQueue;
+    public MessageDirectory getMessageDirectory() {
+        return messageDirectory;
     }
 
-    public void setMessageQueue(Message messageQueue) {
-        this.messageQueue = messageQueue;
+    public void setMessageDirectory(MessageDirectory messageDirectory) {
+        this.messageDirectory = messageDirectory;
     }
     
 }

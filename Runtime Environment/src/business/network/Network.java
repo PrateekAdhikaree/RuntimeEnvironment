@@ -5,6 +5,8 @@
  */
 package business.network;
 
+import business.enterprise.EnterpriseDirectory;
+
 /**
  *
  * @author raseswaridas
@@ -15,6 +17,7 @@ public class Network {
     private String country;
     private String state;
     private int id;
+    private EnterpriseDirectory enterpriseDirectory;
     
     private static int count =0;
     
@@ -50,4 +53,13 @@ public class Network {
     public void setState(String state) {
         this.state = state;
     }
+
+    public EnterpriseDirectory getEnterpriseDirectory() {
+        return enterpriseDirectory;
+    }
+
+    public void setEnterpriseDirectory(EnterpriseDirectory enterpriseDirectory) {
+        this.enterpriseDirectory = enterpriseDirectory;
+    }
+    
 }

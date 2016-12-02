@@ -29,7 +29,7 @@ public final class Initialize {
     public Business configureBusiness(){
         Business business = Business.getInstance();
         createGlobalUsers(business);
-        readFromCSV(business);
+//        readFromCSV(business);
         return business;
     }
     
