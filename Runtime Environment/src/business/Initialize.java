@@ -7,7 +7,9 @@ package business;
 
 import business.parentnetwork.ParentNetworkDirectory;
 import business.parentnetwork.ParentNetwork;
+import business.person.customer.Customer;
 import business.person.employee.Employee;
+import business.role.MarketingRole;
 import business.role.Role;
 import business.role.SuperAdminRole;
 import business.useraccount.UserAccount;
@@ -21,27 +23,28 @@ import java.util.logging.Logger;
  *
  * @author Skull
  */
-public class Initialize {
+public final class Initialize {
     
     private FileReader file;
     private BufferedReader reader;
-    private Business business;
-    
-    public Initialize(Business business){
-        this.business = business;
-    }
-    
-    public void createGlobalUsers(){
-        business.getEmployeeDirectory().addEmployee(Role.RoleType.SuperAdmin);
-        Role role = new SuperAdminRole();
-        business.getUserAccountDirectory().addUserAccount(role);
-    }
     
     public Business configureBusiness(){
-        Business business;
-        business = Business.getInstance();
-        business = readFromCSV(business);
+        Business business = Business.getInstance();
+        createGlobalUsers(business);
+        readFromCSV(business);
         return business;
+    }
+    
+    private void createGlobalUsers(Business business){
+        Employee employee = business.getEmployeeDirectory().addEmployee(Role.RoleType.SuperAdmin);
+        Boolean accountCreated = business.getUserAccountDirectory().createNewUserAccount("sysadmin", "sysadmin", employee, null, new SuperAdminRole());
+        if(!accountCreated)
+            Logger.getLogger(Initialize.class.getName()+" in createGlobalUsers()").log(Level.SEVERE, null, "SuperAdmin Account not created!");
+        
+        employee = business.getEmployeeDirectory().addEmployee(Role.RoleType.Marketing);
+        accountCreated = business.getUserAccountDirectory().createNewUserAccount("marketadmin", "marketadmin", employee, null, new MarketingRole());
+        if(!accountCreated)
+            Logger.getLogger(Initialize.class.getName()+" in createGlobalUsers()").log(Level.SEVERE, null, "MarketAdmin Account not created!");    
     }
     
     private Business readFromCSV(Business business){

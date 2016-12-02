@@ -7,6 +7,10 @@ package business.useraccount;
 
 import business.role.Role;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import business.person.employee.Employee;
+import business.person.customer.Customer;
 
 /**
  *
@@ -24,10 +28,17 @@ public class UserAccountDirectory {
         return userAccountlist;
     }
     
-    public UserAccount addUserAccount(Role role) {
-        UserAccount userAccount = new UserAccount(role);
-        userAccountlist.add(userAccount);
-        return userAccount;
+    public Boolean createNewUserAccount(String username, String password, Employee employee, Customer customer, Role role) {
+        if(checkIfUsernameIsUnique(username)){
+            UserAccount userAccount = new UserAccount(role);
+            userAccount.setUsername(username);
+            userAccount.setPassword(password);
+            userAccount.setEmployee(employee);
+            userAccount.setCustomer(customer);
+            userAccountlist.add(userAccount);
+            return true;
+        }
+        return false;
     }
 
     public UserAccount searchUserAccountById(int id) {
@@ -41,6 +52,28 @@ public class UserAccountDirectory {
 
     public void removeUserAccount(UserAccount ua) {
         userAccountlist.remove(ua);
+    }
+    
+    public UserAccount authenticateUser(String username, String password){
+        for (UserAccount ua : userAccountlist)
+            if (ua.getUsername().equals(username)){
+                try {
+                    Boolean isAuthentic = PasswordHash.check(password, ua.getPassword());
+                    if(isAuthentic)
+                        return ua;
+                } catch (Exception ex) {
+                    Logger.getLogger(UserAccountDirectory.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        return null;
+    }
+    
+    public boolean checkIfUsernameIsUnique(String username){
+        for (UserAccount ua : userAccountlist){
+            if (ua.getUsername().equals(username))
+                return false;
+        }
+        return true;
     }
     
 }

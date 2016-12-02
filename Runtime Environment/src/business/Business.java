@@ -17,11 +17,6 @@ public class Business extends Enterprise {
     private static Business business;
     private ParentNetworkDirectory parentNetworkDirectory;
     
-    private Business(){
-        Initialize initialize = new Initialize(business);
-        initialize.createGlobalUsers();
-    }
-    
     public static Business getInstance() {
         if (business == null) {
             business = new Business();

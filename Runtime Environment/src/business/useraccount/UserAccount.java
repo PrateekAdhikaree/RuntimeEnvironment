@@ -8,6 +8,9 @@ package business.useraccount;
 import business.organization.message.MessageQueue;
 import business.person.employee.Employee;
 import business.role.Role;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import business.person.customer.Customer;
 
 /**
  *
@@ -18,6 +21,7 @@ public class UserAccount {
     private String username;
     private String password;
     private Employee employee;
+    private Customer customer;
     private Role role;
     private MessageQueue messageQueue;
     
@@ -46,12 +50,17 @@ public class UserAccount {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public void setPassword(String password) {
+        try {
+            String hashedPassword = PasswordHash.getSaltedHash(password);
+            this.password = hashedPassword;
+        } catch (Exception ex) {
+            Logger.getLogger(UserAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPassword() {
+        return password;
     }
 
     public Role getRole() {
@@ -68,6 +77,14 @@ public class UserAccount {
 
     public Employee getEmployee() {
         return employee;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     
 }
