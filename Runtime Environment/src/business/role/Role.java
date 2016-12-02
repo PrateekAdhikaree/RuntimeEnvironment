@@ -15,8 +15,8 @@ import business.enterprise.Enterprise;
  * @author Skull
  */
 public abstract class Role {
-
-    public static enum RoleType {
+    
+    public static enum RoleType{
         Accountant("Accountant"),
         Admin("Admin"),
         Customer("Customer"),
@@ -24,11 +24,11 @@ public abstract class Role {
         Marketing("Marketing"),
         MasterTrainer("Master Trainer"),
         RegularTrainer("Regular Trainer"),
-        SuperAdmin("Super Admin");
-
+        SuperAdmin("Super Admin"),
+        Vendor("Vendor");
+        
         private String value;
-
-        private RoleType(String value) {
+        private RoleType(String value){
             this.value = value;
         }
 
@@ -41,8 +41,8 @@ public abstract class Role {
             return value;
         }
     }
-
-    public abstract JPanel createWorkArea(JPanel userProcessContainer,
+    
+    public abstract JPanel createWorkArea(JPanel userProcessContainer, 
             UserAccount account,
             Enterprise enterprise,
             Business business);
@@ -51,5 +51,5 @@ public abstract class Role {
     public String toString() {
         return this.getClass().getName();
     }
-
+    
 }

@@ -24,6 +24,10 @@ public class Business extends Enterprise {
         return business;
     }
 
+    public void setParentNetworkDirectory(ParentNetworkDirectory parentNetworkDirectory) {
+        this.parentNetworkDirectory = parentNetworkDirectory;
+    }
+
     public ParentNetworkDirectory getParentNetworkDirectory() {
         return parentNetworkDirectory;
     }

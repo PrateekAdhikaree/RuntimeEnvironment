@@ -16,7 +16,6 @@ public class ParentNetwork {
     private String countryName;
     private int id;
     private static int count = 0;
-    
     private NetworkDirectory networkDirectory;
     
     public ParentNetwork(){
@@ -43,7 +42,5 @@ public class ParentNetwork {
     public void setNetworkDirectory(NetworkDirectory networkDirectory) {
         this.networkDirectory = networkDirectory;
     }
-    
-    
     
 }
