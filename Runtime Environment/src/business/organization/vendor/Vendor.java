@@ -17,6 +17,10 @@ public class Vendor extends Organization {
     private String address;
     private int contact;
     private int vendorId;
+    
+    public Vendor(){
+        super(organizationType.Vendor);
+    }
 
     public String getName() {
         return name;

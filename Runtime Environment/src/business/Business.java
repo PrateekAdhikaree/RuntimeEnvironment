@@ -5,17 +5,21 @@
  */
 package business;
 
-import business.enterprise.Enterprise;
+import business.organization.Organization;
 import business.parentnetwork.ParentNetworkDirectory;
 
 /**
  *
  * @author Skull
  */
-public class Business extends Enterprise {
+public class Business extends Organization {
     
     private static Business business;
     private ParentNetworkDirectory parentNetworkDirectory;
+    
+    private Business(){
+        super(organizationType.Business);
+    }
     
     public static Business getInstance() {
         if (business == null) {

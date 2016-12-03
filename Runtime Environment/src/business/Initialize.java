@@ -5,6 +5,11 @@
  */
 package business;
 
+import business.enterprise.Enterprise;
+import business.enterprise.EnterpriseDirectory;
+import business.network.Network;
+import business.network.NetworkDirectory;
+import business.organization.Organization;
 import business.parentnetwork.ParentNetworkDirectory;
 import business.parentnetwork.ParentNetwork;
 import business.person.employee.Employee;
@@ -50,9 +55,17 @@ public final class Initialize {
     private Business readFromCSV(Business business){
         
         ParentNetworkDirectory parentNetworkDirectory = getParentNetworks();
-        
-        
-        
+        for(ParentNetwork pn: parentNetworkDirectory.getParentNetworkList()){
+            NetworkDirectory networkDirectory = getNetworks(pn.getCountryName());
+            pn.setNetworkDirectory(networkDirectory);
+            for(Network n: networkDirectory.getNetworkList()){
+                EnterpriseDirectory ed = getEnterprises(n.getCountry(), n.getCity());
+                n.setEnterpriseDirectory(ed);
+                for(Enterprise enterprise: ed.getEnterpriseList()){
+//                    OrganizationDirectory od = getOrganizations();                  
+                }
+            }
+        }
         return business;
     }
     
@@ -86,5 +99,76 @@ public final class Initialize {
          
         return parentNetworkDirectory;
     }
+    
+    private NetworkDirectory getNetworks(String country){
+            
+        NetworkDirectory networkDirectory = new NetworkDirectory();
+        
+        try {
+            this.file = new FileReader("resources/files/NetworkDataset.csv");
+            reader = new BufferedReader(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getNetworks(): Error in reading file").log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            String line;
+            int row = 0;
+            while ((line = reader.readLine()) != null) { // reads each line (row) in the CSV
+                
+                String[] b = line.split(",");
+                if(row != 0){
+                    if(b[0].equals(country)){
+                        Network network = networkDirectory.addNetwork();
+//                    network.setCity(b[0]);
+                    }
+                }
+                row++;
+            }
+            reader.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getNetworks()").log(Level.SEVERE, null, ex);
+        }
+         
+        return networkDirectory;
+    }
+    
+    private EnterpriseDirectory getEnterprises(String country, String city){
+            
+        EnterpriseDirectory enterpriseDirectory = new EnterpriseDirectory();
+        
+        try {
+            this.file = new FileReader("resources/files/EnterpriseDataset.csv");
+            reader = new BufferedReader(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getNetworks(): Error in reading file").log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            String line;
+            int row = 0;
+            while ((line = reader.readLine()) != null) { // reads each line (row) in the CSV
+                
+                String[] b = line.split(",");
+                if(row != 0){
+                    if(b[0].equals(country)){
+                        if(b[0].equals(city)){
+                            Enterprise enterprise = enterpriseDirectory.addEnterprise(Organization.organizationType.Enterprise, Enterprise.enterpriseType.GymEnterprise);
+//                            enterprise.setOrganizationDirectory();
+                    
+                        }
+                    }
+                }
+                row++;
+            }
+            reader.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getNetworks()").log(Level.SEVERE, null, ex);
+        }
+         
+        return enterpriseDirectory;
+    }
+    
+    
     
 }

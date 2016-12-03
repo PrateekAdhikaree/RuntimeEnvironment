@@ -14,6 +14,10 @@ import business.organization.Organization;
 public class Accounting extends Organization{
     
     private int currentFunds;
+    
+    public Accounting(){
+        super(organizationType.Account);
+    }
 
     public int getCurrentFunds() {
         return currentFunds;

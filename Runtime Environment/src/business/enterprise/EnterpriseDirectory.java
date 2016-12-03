@@ -5,6 +5,7 @@
  */
 package business.enterprise;
 
+import business.organization.Organization;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ public class EnterpriseDirectory {
     
     private ArrayList<Enterprise> enterpriseList;
 
-    private EnterpriseDirectory() {
+    public EnterpriseDirectory() {
         enterpriseList = new ArrayList<Enterprise>();
     }
 
@@ -23,13 +24,13 @@ public class EnterpriseDirectory {
         return enterpriseList;
     }
 
-    public Enterprise addBranch() {
-        Enterprise enterprise = new GymEnterprise();
+    public Enterprise addEnterprise(Organization.organizationType orgType, Enterprise.enterpriseType entType) {
+        Enterprise enterprise = new GymEnterprise(orgType, entType);
         enterpriseList.add(enterprise);
         return enterprise;
     }
 
-    public Enterprise searchBranchById(int id) {
+    public Enterprise searchEnterpriseById(int id) {
         for (Enterprise enterprise : enterpriseList) {
             if (enterprise.getId() == id) {
                 return enterprise;

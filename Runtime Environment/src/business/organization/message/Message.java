@@ -15,59 +15,32 @@ import java.util.Date;
 public class Message extends Organization {
     
     public enum messageType{
-        Message("Message"),
-        WorkOrder("Work Order");
-    
-        private String value;
-        private messageType(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
+        Message,
+        WorkOrder;
     };
     
     public enum statusType{
-        Open("Open"),
-        InProgressWithVendor("In Progress With Vendor"),
-        InProgressWithMaintenance("In Progress With Maintenance"),
-        Completed("Completed");
-    
-        private String value;
-        private statusType(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
+        Open,
+        InProgressWithVendor,
+        InProgressWithMaintenance,
+        Completed;
     };
     
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
-    private String status;
+    private statusType status;
     private Date requestDate;
     private Date resolveDate;
-    private String type;
+    private messageType type;
     
     public Message(messageType type, UserAccount sender, UserAccount receiver, statusType status, String message){
+        super(organizationType.Message);
         requestDate = new Date();
-        this.type = type.getValue();
+        this.type = type;
         this.sender = sender;
         this.receiver = receiver;
-        this.status = status.getValue();
+        this.status = status;
         this.message = message;
     }
 
@@ -95,11 +68,11 @@ public class Message extends Organization {
         this.receiver = receiver;
     }
 
-    public String getStatus() {
+    public statusType getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(statusType status) {
         this.status = status;
     }
 
@@ -115,7 +88,7 @@ public class Message extends Organization {
         this.resolveDate = resolveDate;
     }
 
-    public String getType() {
+    public messageType getType() {
         return type;
     }
 }

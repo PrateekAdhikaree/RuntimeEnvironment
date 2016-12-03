@@ -16,22 +16,8 @@ import java.util.ArrayList;
 public class Membership extends Organization {
 
     public enum membershipType{
-        Gold("Gold"),
-        Platinum("Platinum");
-    
-        private String value;
-        private membershipType(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
+        Gold,
+        Platinum;
     };
     
     private String name;
@@ -43,6 +29,7 @@ public class Membership extends Organization {
     private static int count = 0;
 
     public Membership() {
+        super(organizationType.Membership);
         count++;
         this.id = count;
         specialServiceList = new ArrayList<SpecialService>();

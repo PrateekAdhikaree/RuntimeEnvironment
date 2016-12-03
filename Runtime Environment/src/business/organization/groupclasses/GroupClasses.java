@@ -24,6 +24,7 @@ public class GroupClasses extends Organization {
     private static int count = 0;
 
     public GroupClasses() {
+        super(organizationType.GroupClasses);
         count++;
         id = count;
         trainerList = new ArrayList<RegularTrainerRole>();

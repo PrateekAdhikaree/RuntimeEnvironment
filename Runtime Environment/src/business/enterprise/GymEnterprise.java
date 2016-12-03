@@ -10,6 +10,10 @@ package business.enterprise;
  * @author raseswaridas
  */
 public class GymEnterprise extends Enterprise {
+    
+    public GymEnterprise(organizationType orgType, enterpriseType entType){
+        super(orgType, entType);
+    }
 
     private final String name = "Runtime Environment";
 

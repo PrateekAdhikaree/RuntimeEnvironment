@@ -21,6 +21,7 @@ public class SpecialService extends Organization {
     private static int count = 0;
     
     public SpecialService(){
+        super(organizationType.SpecialService);
         count++;
         id = count;
     }

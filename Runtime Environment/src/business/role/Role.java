@@ -17,29 +17,15 @@ import business.enterprise.Enterprise;
 public abstract class Role {
     
     public static enum RoleType{
-        Accountant("Accountant"),
-        Admin("Admin"),
-        Customer("Customer"),
-        Maintenance("Maintenance"),
-        Marketing("Marketing"),
-        MasterTrainer("Master Trainer"),
-        RegularTrainer("Regular Trainer"),
-        SuperAdmin("Super Admin"),
-        Vendor("Vendor");
-        
-        private String value;
-        private RoleType(String value){
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
+        Accountant,
+        Admin,
+        Customer,
+        Maintenance,
+        Marketing,
+        MasterTrainer,
+        RegularTrainer,
+        SuperAdmin,
+        Vendor;
     }
     
     public abstract JPanel createWorkArea(JPanel userProcessContainer, 
