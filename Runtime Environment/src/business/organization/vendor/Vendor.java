@@ -17,6 +17,7 @@ public class Vendor extends Organization {
     private String address;
     private int contact;
     private int vendorId;
+    private String email;
     
     public Vendor(){
         super(organizationType.Vendor);
@@ -52,6 +53,14 @@ public class Vendor extends Organization {
 
     public void setVendorId(int vendorId) {
         this.vendorId = vendorId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

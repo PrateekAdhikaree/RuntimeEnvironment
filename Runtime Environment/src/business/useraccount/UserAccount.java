@@ -5,7 +5,7 @@
  */
 package business.useraccount;
 
-import business.organization.message.Message;
+import business.organization.message.MessageDirectory;
 import business.person.employee.Employee;
 import business.role.Role;
 import java.util.logging.Level;
@@ -20,10 +20,11 @@ public class UserAccount {
     
     private String username;
     private String password;
+    private String email;
     private Employee employee;
     private Customer customer;
     private Role role;
-    private Message messageQueue;
+    private MessageDirectory messageDirectory;
     
     private static int count = 0;
     private int id;
@@ -34,8 +35,12 @@ public class UserAccount {
         this.role = role;
     }
 
-    public Message getMessageQueue() {
-        return messageQueue;
+    public MessageDirectory getMessageDirectory() {
+        return messageDirectory;
+    }
+
+    public void setMessageDirectory(MessageDirectory messageDirectory) {
+        this.messageDirectory = messageDirectory;
     }
 
     public int getId() {
@@ -85,6 +90,14 @@ public class UserAccount {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

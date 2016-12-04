@@ -17,7 +17,7 @@ import business.useraccount.UserAccountDirectory;
 public abstract class Organization {
     
     public enum organizationType{
-        Membership, Message, WorkOrder, GroupClasses, SpecialService, Vendor, Account, Business, Enterprise;
+        Message, WorkOrder, GroupClasses, SpecialService, Vendor, Account, Business, Enterprise;
     };
     
     private int id;

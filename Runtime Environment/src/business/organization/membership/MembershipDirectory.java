@@ -23,8 +23,8 @@ public class MembershipDirectory {
         return membershipList;
     }
     
-    public Membership addMembership(){
-        Membership membership = new Membership();
+    public Membership addMembership(String type){
+        Membership membership = new Membership(type);
         membershipList.add(membership);
         return membership;
     }

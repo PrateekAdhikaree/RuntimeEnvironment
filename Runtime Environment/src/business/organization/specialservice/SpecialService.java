@@ -47,10 +47,8 @@ public class SpecialService extends Organization {
     }
  
     public Boolean isAvailableInMembership(Membership m){;
-        for(SpecialService services : m.getSpecialServiceList()){
-            if(services.getId() == this.id){
-                return true;
-            }
+        if(m.getHasSpecialServicesAccess()){
+            return true;
         }
         return false;
     }

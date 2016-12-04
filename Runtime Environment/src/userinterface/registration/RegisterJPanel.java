@@ -8,8 +8,8 @@ package userinterface.registration;
 import business.Business;
 import business.enterprise.Enterprise;
 import business.network.Network;
-import business.organization.membership.Membership;
 import business.parentnetwork.ParentNetwork;
+import business.person.Person;
 import business.person.customer.Customer;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -90,8 +90,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         txtLastName = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        txtPrefix = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -202,17 +200,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 204, 0));
         jLabel17.setText("Please fill all the fields below:");
-
-        jLabel18.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel18.setText("Prefix:");
-
-        txtPrefix.setForeground(new java.awt.Color(255, 153, 0));
-        txtPrefix.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrefixActionPerformed(evt);
-            }
-        });
 
         jSeparator3.setForeground(new java.awt.Color(255, 204, 0));
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -326,10 +313,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel8)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel18)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
+                                        .addGap(167, 167, 167)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel5)
                                             .addComponent(jLabel3))))
@@ -452,9 +436,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -655,7 +637,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
     }
 
     private void removeValidationDisplay() {
-
         txtPrefix.setBackground(Color.white);
         txtFirstName.setBackground(Color.white);
         txtLastName.setBackground(Color.white);
@@ -668,6 +649,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
 
+        removeValidationDisplay();
         Boolean isValid = validateRegisterForm();
         if (isValid) {
             for (ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
@@ -675,11 +657,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
                     for (Network network : parentNetwork.getNetworkDirectory().getNetworkList()) {
                         if (comboCity.getSelectedItem().equals(network.getCity())) {
                             for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
-                                if (comboBranch.equals(enterprise.getName())) {
+                                if (comboBranch.getSelectedItem().equals(enterprise.getName())) {
 
-                                    setFormData();
+                                    setFormData(enterprise);
 
-                                    JOptionPane.showMessageDialog(null, "Congratulations, you are now a member of Runtime Environment!");
+                                    JOptionPane.showMessageDialog(null, "Congratulations, you are now a member of Runtime Environment!", "Info", JOptionPane.INFORMATION_MESSAGE);
                                 }
                             }
                         }
@@ -693,24 +675,26 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
     
 
-    private void setFormData() {
+    private void setFormData(Enterprise enterprise) {
 
-//        Membership membership = new Membership(comboMembership.getSelectedItem());
+        Membership membership = new Membership(comboMembership.getSelectedItem());
         Customer customer = enterprise.getCustomerDirectory().addCustomer(membership);
         // bind user data
 
         customer.setPrefix(txtPrefix.getText());
-        customer.setFirstName(txtFirstName.getText());
-        customer.setLastName(txtLastName.getText());
-        customer.setGender(comboGender.getSelectedItem());
+        customer.setName(txtFirstName.getText()+" "+txtLastName.getText());
+        if(comboGender.getSelectedItem().toString().equals(Person.genderType.Male))
+            customer.setGender(Person.genderType.Male);
+        else
+            customer.setGender(Person.genderType.Female);
         customer.setAddress(txtAddress.getText());
-        customer.setCity(comboCity.getSelectedItem());
-        customer.setState(comboState.getSelectedItem());
-        customer.setCountry(comboCountry.getSelectedItem());
-        customer.setZipCode(txtZipCode.getText());
-        customer.setPhoneNo(txtPhoneNo.getText());
-        customer.setEmailID(txtEmailID.getText());
-
+        customer.setCity(txtCity.getText());
+        customer.setState(txtState.getText());
+        customer.setCountry(txtCountry.getText());
+        customer.setZip(txtZipCode.getText());
+        customer.setMobile(Long.parseLong(txtPhoneNo.getText()));
+        customer.setEmail(txtEmailID.getText());
+        
         try {
 
         } catch (Exception e) {
@@ -741,10 +725,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void txtPrefixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrefixActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrefixActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -769,7 +749,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -799,7 +778,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtPhoneNo;
-    private javax.swing.JTextField txtPrefix;
     private javax.swing.JTextField txtZipCode;
     // End of variables declaration//GEN-END:variables
 }

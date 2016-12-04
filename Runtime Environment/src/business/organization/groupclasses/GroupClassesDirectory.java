@@ -15,7 +15,7 @@ public class GroupClassesDirectory {
     
     private ArrayList<GroupClasses> groupClassesList;
 
-    private GroupClassesDirectory() {
+    public GroupClassesDirectory() {
         groupClassesList = new ArrayList<GroupClasses>();
     }
 

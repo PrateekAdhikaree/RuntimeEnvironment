@@ -13,34 +13,42 @@ import java.util.ArrayList;
  *
  * @author raseswaridas
  */
-public class Membership extends Organization {
+public class Membership {
 
     public enum membershipType{
+        Platinum,
+        Diamond,
         Gold,
-        Platinum;
+        Silver,
+        Bronze,
+        Steel;
     };
     
     private String name;
     private String description;
     private int price;
-    private ArrayList<SpecialService> specialServiceList;
+    private int durationInDays;
+    private Boolean hasSpecialServicesAccess;
 
     private int id;
     private static int count = 0;
 
-    public Membership() {
-        super(organizationType.Membership);
+    public Membership(String type) {
         count++;
         this.id = count;
-        specialServiceList = new ArrayList<SpecialService>();
+        this.name = type;
+    }
+
+    public int getDurationInDays() {
+        return durationInDays;
+    }
+
+    public void setDurationInDays(int durationInDays) {
+        this.durationInDays = durationInDays;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
@@ -63,15 +71,11 @@ public class Membership extends Organization {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Boolean getHasSpecialServicesAccess() {
+        return hasSpecialServicesAccess;
     }
 
-    public ArrayList<SpecialService> getSpecialServiceList() {
-        return specialServiceList;
-    }
-
-    public void addSpecialService(SpecialService specialService) {
-        specialServiceList.add(specialService);
+    public void setHasSpecialServicesAccess(Boolean hasSpecialServicesAccess) {
+        this.hasSpecialServicesAccess = hasSpecialServicesAccess;
     }
 }

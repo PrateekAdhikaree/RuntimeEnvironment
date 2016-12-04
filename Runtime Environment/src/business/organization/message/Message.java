@@ -14,6 +14,9 @@ import java.util.Date;
  */
 public class Message extends Organization {
     
+    private static int count = 0;
+    private int id;
+    
     public enum messageType{
         Message,
         WorkOrder;
@@ -21,6 +24,7 @@ public class Message extends Organization {
     
     public enum statusType{
         Open,
+        Delivered,
         InProgressWithVendor,
         InProgressWithMaintenance,
         Completed;
@@ -36,6 +40,8 @@ public class Message extends Organization {
     
     public Message(messageType type, UserAccount sender, UserAccount receiver, statusType status, String message){
         super(organizationType.Message);
+        count++;
+        id = count;
         requestDate = new Date();
         this.type = type;
         this.sender = sender;
@@ -90,5 +96,9 @@ public class Message extends Organization {
 
     public messageType getType() {
         return type;
+    }
+
+    public int getId() {
+        return id;
     }
 }

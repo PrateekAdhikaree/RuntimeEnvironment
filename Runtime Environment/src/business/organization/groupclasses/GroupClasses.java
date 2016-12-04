@@ -18,6 +18,7 @@ public class GroupClasses extends Organization {
     private String name;
     private int duration;
     private String description;
+    private int calories;
     private ArrayList<RegularTrainerRole> trainerList;
 
     private int id;
@@ -66,6 +67,14 @@ public class GroupClasses extends Organization {
         RegularTrainerRole trainer = new RegularTrainerRole();
         trainerList.add(trainer);
         return trainer;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 
 }

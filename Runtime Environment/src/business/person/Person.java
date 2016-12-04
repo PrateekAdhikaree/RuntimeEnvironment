@@ -5,6 +5,8 @@
  */
 package business.person;
 
+import java.util.Date;
+
 /**
  *
  * @author Skull
@@ -14,8 +16,38 @@ public abstract class Person {
     private String name;
     private String address;
     private String email;
-    private long mobile;
+    private String mobile;
+    private Date dob;
+    private String zip;
+    public enum genderType{
+        Male, Female;
+    };
+    private genderType gender;
 
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public genderType getGender() {
+        return gender;
+    }
+
+    public void setGender(genderType gender) {
+        this.gender = gender;
+    }
+    
     public String getName() {
         return name;
     }
@@ -40,11 +72,11 @@ public abstract class Person {
         this.email = email;
     }
 
-    public long getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(long mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
             
