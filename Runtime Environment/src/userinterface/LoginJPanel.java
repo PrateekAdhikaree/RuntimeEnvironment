@@ -8,7 +8,6 @@ package userinterface;
 import business.Business;
 import business.enterprise.Enterprise;
 import business.network.Network;
-import business.organization.Organization;
 import business.parentnetwork.ParentNetwork;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;

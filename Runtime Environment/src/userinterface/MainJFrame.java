@@ -274,7 +274,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(jButton1))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         userProcessContainer.add(welcomeJPanel, "card14");
