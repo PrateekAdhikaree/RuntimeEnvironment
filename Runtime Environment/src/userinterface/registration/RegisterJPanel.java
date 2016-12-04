@@ -12,6 +12,9 @@ import business.organization.membership.Membership;
 import business.parentnetwork.ParentNetwork;
 import business.person.customer.Customer;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -31,25 +34,21 @@ public class RegisterJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
-        
+
         populateComboBox();
     }
-    
+
     private void populateComboBox() {
         comboGender.removeAllItems();
         comboCountry.removeAllItems();
-        
+
         comboGender.addItem("Male");
         comboGender.addItem("Female");
-        
+
         for (ParentNetwork parentnetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
             comboCountry.addItem(parentnetwork);
         }
-        
-    }
-    
-    private Boolean validateRegisterForm() {
-        return false;
+
     }
 
     /**
@@ -61,9 +60,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         txtFirstName = new javax.swing.JTextField();
-        txtAge = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -119,13 +117,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(102, 102, 255));
 
-        jLabel4.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel4.setText("Age:");
-
         txtFirstName.setForeground(new java.awt.Color(51, 51, 255));
-
-        txtAge.setForeground(new java.awt.Color(51, 51, 255));
 
         jSeparator1.setForeground(new java.awt.Color(255, 204, 0));
 
@@ -216,6 +208,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel18.setText("Prefix:");
 
         txtPrefix.setForeground(new java.awt.Color(255, 153, 0));
+        txtPrefix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrefixActionPerformed(evt);
+            }
+        });
 
         jSeparator3.setForeground(new java.awt.Color(255, 204, 0));
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -224,26 +221,32 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel19.setForeground(new java.awt.Color(255, 204, 0));
         jLabel19.setText("Membership:");
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(255, 204, 0));
         jRadioButton1.setText("Weekly Gym Membership- ");
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 204, 0));
         jRadioButton2.setText("Monthly Gym Membership-");
 
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jRadioButton3.setForeground(new java.awt.Color(255, 204, 0));
         jRadioButton3.setText("Yearly Gym Membership-");
 
+        buttonGroup1.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 204, 0));
         jRadioButton4.setText("Weekly Gym Membership with Special Classes-");
 
+        buttonGroup1.add(jRadioButton5);
         jRadioButton5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jRadioButton5.setForeground(new java.awt.Color(255, 204, 0));
         jRadioButton5.setText("Monthly Gym Membership with Special Classes-");
 
+        buttonGroup1.add(jRadioButton6);
         jRadioButton6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jRadioButton6.setForeground(new java.awt.Color(255, 204, 0));
         jRadioButton6.setText("Yearly Gym Membership with Special Classes-");
@@ -354,10 +357,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(23, 23, 23)
-                                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(211, 211, 211)
+                                    .addGap(352, 352, 352)
                                     .addComponent(jLabel6)
                                     .addGap(99, 99, 99))
                                 .addComponent(jLabel17)
@@ -455,10 +455,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
                             .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18)
                             .addComponent(txtPrefix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
+                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(comboGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
@@ -539,41 +537,202 @@ public class RegisterJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private Boolean validateRegisterForm() {
+        int dialogShown = 0;
+        Pattern pattern;
+        Matcher matcher;
+
+        pattern = Pattern.compile("^[a-zA-Z]+$");
+        matcher = pattern.matcher(txtPrefix.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 1;
+            }
+            txtPrefix.setBackground(Color.PINK);
+        }
+        matcher = pattern.matcher(txtFirstName.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 2;
+            }
+            txtFirstName.setBackground(Color.PINK);
+        }
+        matcher = pattern.matcher(txtLastName.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 3;
+            }
+            txtLastName.setBackground(Color.PINK);
+        }
+        if (txtAddress.getText().trim().length() == 0) {
+            if (dialogShown <= 0) {
+                dialogShown = 4;
+            }
+            txtAddress.setBackground(Color.PINK);
+        }
+        if (txtZipCode.getText().trim().length() == 0) {
+            if (dialogShown <= 0) {
+                dialogShown = 5;
+            }
+            txtZipCode.setBackground(Color.PINK);
+        }
+        if (!validatePhoneNumber(txtPhoneNo.getText())) {
+            if (dialogShown <= 0) {
+                dialogShown = 6;
+            }
+            txtPhoneNo.setBackground(Color.PINK);
+        }
+        pattern = Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
+        matcher = pattern.matcher(txtEmailID.getText());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 7;
+            }
+            txtEmailID.setBackground(Color.PINK);
+        }
+
+        if (dialogShown == 0) {
+            return true;
+        } else {
+            showValidationDialog(dialogShown);
+            return false;
+        }
+    }
+
+    private void showValidationDialog(int flag) {
+        String errMessage = "";
+        switch (flag) {
+            case 1:
+                errMessage = "Invalid Prefix!";
+                break;
+
+            case 2:
+                errMessage = "Invalid First Name!";
+                break;
+
+            case 3:
+                errMessage = "Invalid Last Name!";
+                break;
+
+            case 4:
+                errMessage = "Invalid Address";
+
+            case 5:
+                errMessage = "Invalid Zip Code";
+
+            case 6:
+                errMessage = "Invalid Mobile number!";
+                break;
+
+            case 7:
+                errMessage = "Invalid Email address!";
+                break;
+
+        }
+
+        JOptionPane.showMessageDialog(null, errMessage, "Error Message", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private static boolean validatePhoneNumber(String phone) {
+
+        //validate phone numbers of format "1234567890"
+        if (phone.matches("\\d{10}")) {
+            return true;
+        } //validating phone number with -, . or spaces
+        else if (phone.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")) {
+            return true;
+        } //validating phone number with extension length from 3 to 5
+        else if (phone.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}")) {
+            return true;
+        } //validating phone number where area code is in braces ()
+        else if (phone.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")) {
+            return true;
+        } //return false if nothing matches the input
+        else {
+            return false;
+        }
+
+    }
+
+    private void removeValidationDisplay() {
+
+        txtPrefix.setBackground(Color.white);
+        txtFirstName.setBackground(Color.white);
+        txtLastName.setBackground(Color.white);
+        txtAddress.setBackground(Color.white);
+        txtZipCode.setBackground(Color.white);
+        txtPhoneNo.setBackground(Color.white);
+        txtEmailID.setBackground(Color.white);
+    }
+
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        
-//        Boolean isValid = validateRegisterForm();
-//        if (isValid) {
-//            for (ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
-//                if (comboCountry.getText().equals(parentNetwork.getCountryName())) {
-//                    for (Network network : parentNetwork.getNetworkDirectory().getNetworkList()) {
-//                        if (comboCity.getText().equals(network.getCity())) {
-//                            for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
-//                                if (enterpriseId.equals(enterprise.getId())) {
-//                                    Membership membership = new Membership(Membership.membershipType.Gold);
-//                                    Customer customer = enterprise.getCustomerDirectory().addCustomer(membership);
-//                                    
-//                                    customer.setPrefix(txtPrefix.getText());
-//                                    customer.setFirstName(txtFirstName.getText());
-//                                    customer.setLastName(txtLastName.getText());
-//                                    customer.setAge(Integer.parseInt(txtAge.getText()));
-//                                    customer.setGender(comboGender.getText());
-//                                    customer.setAddress(txtAddress.getText());
-//                                    customer.setCity(comboCity.getText());
-//                                    customer.setState(comboState.getText());
-//                                    customer.setCountry(comboCountry.getText());                                    
-//                                    
-//                                    JOptionPane.showMessageDialog(null, "Congratulations, you are now a member of Runtime Environment!");
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        
+
+        Boolean isValid = validateRegisterForm();
+        if (isValid) {
+            for (ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
+                if (comboCountry.getSelectedItem().equals(parentNetwork.getCountryName())) {
+                    for (Network network : parentNetwork.getNetworkDirectory().getNetworkList()) {
+                        if (comboCity.getSelectedItem().equals(network.getCity())) {
+                            for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                                if (comboBranch.equals(enterprise.getName())) {
+
+                                    setFormData();
+
+                                    JOptionPane.showMessageDialog(null, "Congratulations, you are now a member of Runtime Environment!");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    
+
+    private void setFormData() {
+
+//        Membership membership = new Membership(comboMembership.getSelectedItem());
+        Customer customer = enterprise.getCustomerDirectory().addCustomer(membership);
+        // bind user data
+
+        customer.setPrefix(txtPrefix.getText());
+        customer.setFirstName(txtFirstName.getText());
+        customer.setLastName(txtLastName.getText());
+        customer.setGender(comboGender.getSelectedItem());
+        customer.setAddress(txtAddress.getText());
+        customer.setCity(comboCity.getSelectedItem());
+        customer.setState(comboState.getSelectedItem());
+        customer.setCountry(comboCountry.getSelectedItem());
+        customer.setZipCode(txtZipCode.getText());
+        customer.setPhoneNo(txtPhoneNo.getText());
+        customer.setEmailID(txtEmailID.getText());
+
+        try {
+
+        } catch (Exception e) {
+            // log error
+        }
+
+        // prompt user data bind success
+        JOptionPane.showMessageDialog(null, "Successfully created!");
+
+        // remove all field values
+        txtPrefix.setText(null);
+        txtFirstName.setText(null);
+        txtLastName.setText(null);
+        comboGender.setSelectedItem(false);
+        txtAddress.setText(null);
+        comboCity.setSelectedItem(false);
+        comboState.setSelectedItem(false);
+        comboCountry.setSelectedItem(false);
+        txtZipCode.setText(null);
+        txtPhoneNo.setText(null);
+        txtEmailID.setText(null);
+    }
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -582,10 +741,15 @@ public class RegisterJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void txtPrefixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrefixActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrefixActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRegister;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboCity;
     private javax.swing.JComboBox comboCountry;
     private javax.swing.JComboBox<String> comboGender;
@@ -614,7 +778,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -632,7 +795,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField passwordConfirmPassword;
     private javax.swing.JPasswordField passwordPassword;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtEmailID;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
