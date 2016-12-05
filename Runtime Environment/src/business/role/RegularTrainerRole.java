@@ -17,6 +17,10 @@ import userinterface.regulartrainerrole.RegularTrainerRoleWorkAreaJPanel;
  */
 public class RegularTrainerRole extends Role {
     
+    public void setSalary(){
+        salary = 1800;
+    }
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new RegularTrainerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);

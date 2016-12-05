@@ -7,7 +7,6 @@ package business.organization;
 
 import business.organization.accounting.Accounting;
 import business.organization.groupclasses.GroupClassesDirectory;
-import business.organization.membership.MembershipDirectory;
 import business.organization.specialservice.SpecialServiceDirectory;
 import business.organization.vendor.Vendor;
 import business.organization.message.MessageDirectory;
@@ -18,20 +17,11 @@ import business.organization.message.MessageDirectory;
  */
 public class OrganizationDirectory {
     
-    private MembershipDirectory membershipDirectory;
     private MessageDirectory workOrderDirectory;
     private GroupClassesDirectory groupClassesDirectory;
     private SpecialServiceDirectory sevicesDirectory;
     private Vendor vendor;
     private Accounting accounting;
-
-    public MembershipDirectory getMembershipDirectory() {
-        return membershipDirectory;
-    }
-
-    public void setMembershipDirectory(MembershipDirectory membershipDirectory) {
-        this.membershipDirectory = membershipDirectory;
-    }
 
     public MessageDirectory getWorkOrderDirectory() {
         return workOrderDirectory;

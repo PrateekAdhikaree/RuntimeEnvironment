@@ -6,6 +6,7 @@
 package business.organization.accounting;
 
 import business.organization.Organization;
+import business.organization.membership.MembershipDirectory;
 
 /**
  *
@@ -13,10 +14,19 @@ import business.organization.Organization;
  */
 public class Accounting extends Organization{
     
+    private MembershipDirectory membershipDirectory;
     private int currentFunds;
     
     public Accounting(){
         super(organizationType.Account);
+    }
+
+    public MembershipDirectory getMembershipDirectory() {
+        return membershipDirectory;
+    }
+
+    public void setMembershipDirectory(MembershipDirectory membershipDirectory) {
+        this.membershipDirectory = membershipDirectory;
     }
 
     public int getCurrentFunds() {

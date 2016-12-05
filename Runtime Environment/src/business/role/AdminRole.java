@@ -17,6 +17,10 @@ import userinterface.adminrole.AdminRoleWorkAreaJPanel;
  */
 public class AdminRole extends Role {
     
+    public void setSalary(){
+        salary = 2000;
+    }
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new AdminRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise, business);

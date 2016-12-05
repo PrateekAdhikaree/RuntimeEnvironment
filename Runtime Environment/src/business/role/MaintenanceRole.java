@@ -17,6 +17,10 @@ import userinterface.maintenancerole.MaintenanceRoleWorkAreaJPanel;
  */
 public class MaintenanceRole extends Role {
     
+    public void setSalary(){
+        salary = 300;
+    }
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new MaintenanceRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);

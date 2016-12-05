@@ -17,6 +17,10 @@ import userinterface.mastertrainerrole.MasterTrainerWorkAreaJPanel;
  */
 public class MasterTrainerRole extends Role {
     
+    public void setSalary(){
+        salary = 2500;
+    }
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new MasterTrainerWorkAreaJPanel(userProcessContainer, userAccount, enterprise, business);

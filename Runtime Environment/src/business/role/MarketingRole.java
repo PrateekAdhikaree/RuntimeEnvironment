@@ -17,6 +17,10 @@ import userinterface.marketingrole.MarketingRoleWorkAreaJPanel;
  */
 public class MarketingRole extends Role {
     
+    public void setSalary(){
+        salary = 1200;
+    }
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new MarketingRoleWorkAreaJPanel(userProcessContainer, userAccount, business);

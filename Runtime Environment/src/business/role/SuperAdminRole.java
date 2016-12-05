@@ -17,6 +17,10 @@ import userinterface.superadminrole.SuperAdminWorkAreaJPanel;
  */
 public class SuperAdminRole extends Role {
     
+    public void setSalary(){
+        salary = 3000;
+    }
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new SuperAdminWorkAreaJPanel(userProcessContainer, userAccount, business);

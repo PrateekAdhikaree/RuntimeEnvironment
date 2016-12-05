@@ -16,6 +16,8 @@ import business.enterprise.Enterprise;
  */
 public abstract class Role {
     
+    public int salary;
+    
     public static enum RoleType{
         Accountant,
         Admin,
@@ -33,6 +35,12 @@ public abstract class Role {
             Enterprise enterprise,
             Business business);
 
+    public abstract void setSalary();
+    
+    public int getSalary(){
+        return salary;
+    }
+    
     @Override
     public String toString() {
         return this.getClass().getName();

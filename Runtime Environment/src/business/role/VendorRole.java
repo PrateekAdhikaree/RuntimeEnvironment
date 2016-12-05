@@ -15,6 +15,10 @@ import userinterface.vendorrole.VendorRoleWorkAreaJPanel;
  * @author raseswaridas
  */
 public class VendorRole extends Role {
+    
+    public void setSalary(){
+        salary = 0;
+    }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {

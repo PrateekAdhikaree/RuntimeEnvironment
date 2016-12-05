@@ -17,6 +17,10 @@ import userinterface.accountantrole.AccountantWorkAreaJPanel;
  */
 public class AccountantRole extends Role {
     
+    public void setSalary(){
+        salary = 1000;
+    }
+    
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new AccountantWorkAreaJPanel(userProcessContainer, userAccount, enterprise);

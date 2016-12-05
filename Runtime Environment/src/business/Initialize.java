@@ -167,16 +167,16 @@ public final class Initialize {
                             enterprise.setAddress(b[3]);
                             enterprise.setBranchName(b[4]);
                             
-                            MembershipDirectory membershipDirectory = new MembershipDirectory();
+                            MembershipDirectory membershipDirectory = getMemberships();
                             enterprise.setMembershipDirectory(membershipDirectory);
                             
                             CustomerDirectory customerDirectory = getCustomers(b[4], membershipDirectory);
                             enterprise.setCustomerDirectory(customerDirectory);
                             
-                            EmployeeDirectory employeeDirectory = getEmployees(country, city, b[4]);
+                            EmployeeDirectory employeeDirectory = getEmployees(b[4]);
                             enterprise.setEmployeeDirectory(employeeDirectory);
                             
-                            UserAccountDirectory userAccountDirectory = getUserAccounts(country, city, b[4]);
+                            UserAccountDirectory userAccountDirectory = getUserAccounts(b[4], employeeDirectory, customerDirectory);
                             enterprise.setUserAccountDirectory(userAccountDirectory);
                         }
                     }
@@ -276,7 +276,50 @@ public final class Initialize {
         return customerDirectory;
     }
     
-    private UserAccountDirectory getUserAccounts(String country, String city, String branch){
+    private EmployeeDirectory getEmployees(String branch){
+        EmployeeDirectory employeeDirectory = new EmployeeDirectory();
+        
+        try {
+            this.file = new FileReader("resources/files/EmployeeDataset.csv");
+            reader = new BufferedReader(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getEmployees(): Error in reading file").log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            String line;
+            int row = 0;
+            while ((line = reader.readLine()) != null) { // reads each line (row) in the CSV
+                
+                String[] b = line.split(",");
+                if(row != 0){
+                    if(b[12].equals(branch)){
+                        Role role = getRoleFromString(b[2]);
+                        Employee employee = employeeDirectory.addEmployee(role);
+                        employee.setAddress(b[10]);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        employee.setDob(sdf.parse(b[7]));
+                        employee.setEmail(b[9]);
+                        if(b[6].equals(Person.genderType.Male))
+                            employee.setGender(Person.genderType.Male);
+                        else if(b[6].equals(Person.genderType.Female))
+                            employee.setGender(Person.genderType.Female);
+                        employee.setMobile(b[8]);
+                        employee.setName(b[3]+" "+b[4]);
+                        employee.setZip(b[13]);
+                    }
+                }
+                row++;
+            }
+            reader.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getEmployees()").log(Level.SEVERE, null, ex);
+        }
+        
+        return employeeDirectory;
+    }
+    
+    private UserAccountDirectory getUserAccounts(String branch, EmployeeDirectory employeeDirectory, CustomerDirectory customerDirectory){
         UserAccountDirectory userAccountDirectory = new UserAccountDirectory();
         
         try {
@@ -293,31 +336,19 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    if(b[1].equals(country)){
-                        if(b[0].equals(city)){
-                            if(b[2].equals(branch)){
-                                Role role = null;
-                                if(b[5].equals(Role.RoleType.Accountant.toString())){
-                                    role = new AccountantRole();
-                                }else if(b[5].equals(Role.RoleType.Admin.toString())){
-                                    role = new AdminRole();
-                                }else if(b[5].equals(Role.RoleType.Customer.toString())){
-                                    role = new CustomerRole();
-                                }else if(b[5].equals(Role.RoleType.Maintenance.toString())){
-                                    role = new MaintenanceRole();
-                                }else if(b[5].equals(Role.RoleType.Marketing.toString())){
-                                    role = new MarketingRole();
-                                }else if(b[5].equals(Role.RoleType.MasterTrainer.toString())){
-                                    role = new MasterTrainerRole();
-                                }else if(b[5].equals(Role.RoleType.RegularTrainer.toString())){
-                                    role = new RegularTrainerRole();
-                                }else if(b[5].equals(Role.RoleType.SuperAdmin.toString())){
-                                    role = new SuperAdminRole();
-                                }else if(b[5].equals(Role.RoleType.Vendor.toString())){
-                                    role = new VendorRole();
-                                }
-                                UserAccount userAccount = userAccountDirectory.createNewUserAccount(line, country, employee, customer, role);
-                            }
+                    if(b[2].equals(branch)){
+                        Role role = getRoleFromString(b[5]);
+                        Employee employee = null;
+                        if(!b[2].equals("~")){
+                            employee = getEmployeeFromString(employeeDirectory, b[2]);
+                        }
+                        Customer customer = null;
+                        if(!b[3].equals("~")){
+                            customer = getCustomerFromString(customerDirectory, b[3]);
+                        }
+                        Boolean userAccountCreated = userAccountDirectory.createNewUserAccount(b[1], b[2], employee, customer, role);
+                        if(!userAccountCreated){
+                            Logger.getLogger(Initialize.class.getName()+" in getUserAccounts(): Error in reading file");
                         }
                     }
                 }
@@ -329,6 +360,52 @@ public final class Initialize {
         }
         
         return userAccountDirectory;
+    }
+    
+    private Employee getEmployeeFromString(EmployeeDirectory employeeDirectory, String text){
+        Employee employee = null;
+        for(Employee e: employeeDirectory.getEmployeeList()){
+            if(e.getEmail().equals(text)){
+                employee = e;
+                break;
+            }
+        }
+        return employee;
+    }
+    
+    private Customer getCustomerFromString(CustomerDirectory customerDirectory, String text){
+        Customer customer = null;
+        for(Customer c: customerDirectory.getCustomerList()){
+            if(c.getEmail().equals(text)){
+                customer = c;
+                break;
+            }
+        }
+        return customer;
+    }
+    
+    private Role getRoleFromString(String text){
+        Role role = null;
+        if(text.equals(Role.RoleType.Accountant.toString())){
+            role = new AccountantRole();
+        }else if(text.equals(Role.RoleType.Admin.toString())){
+            role = new AdminRole();
+        }else if(text.equals(Role.RoleType.Customer.toString())){
+            role = new CustomerRole();
+        }else if(text.equals(Role.RoleType.Maintenance.toString())){
+            role = new MaintenanceRole();
+        }else if(text.equals(Role.RoleType.Marketing.toString())){
+            role = new MarketingRole();
+        }else if(text.equals(Role.RoleType.MasterTrainer.toString())){
+            role = new MasterTrainerRole();
+        }else if(text.equals(Role.RoleType.RegularTrainer.toString())){
+            role = new RegularTrainerRole();
+        }else if(text.equals(Role.RoleType.SuperAdmin.toString())){
+            role = new SuperAdminRole();
+        }else if(text.equals(Role.RoleType.Vendor.toString())){
+            role = new VendorRole();
+        }
+        return role;
     }
     
     private OrganizationDirectory getOrganizations(String country, String city, String branch){
