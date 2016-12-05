@@ -16,6 +16,10 @@ import business.enterprise.Enterprise;
  */
 public abstract class Role {
     
+    public Role(){
+        setSalary();
+    }
+    
     public int salary;
     
     public static enum RoleType{
