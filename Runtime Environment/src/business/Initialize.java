@@ -11,17 +11,13 @@ import business.organization.*;
 import business.organization.accounting.Accounting;
 import business.organization.groupclasses.*;
 import business.organization.membership.*;
-import business.organization.message.Message;
-import business.organization.message.MessageDirectory;
+import business.organization.message.*;
 import business.parentnetwork.*;
 import business.person.Person;
-import business.person.customer.Customer;
-import business.person.customer.CustomerDirectory;
-import business.person.employee.Employee;
-import business.person.employee.EmployeeDirectory;
+import business.person.customer.*;
+import business.person.employee.*;
 import business.role.*;
-import business.useraccount.UserAccount;
-import business.useraccount.UserAccountDirectory;
+import business.useraccount.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -41,7 +37,7 @@ public final class Initialize {
     public Business configureBusiness(){
         Business business = Business.getInstance();
         createGlobalUsers(business);
-        readFromCSV(business);
+        business = readFromCSV(business);
         return business;
     }
     
@@ -60,19 +56,26 @@ public final class Initialize {
     }
     
     private Business readFromCSV(Business business){
+        
         ParentNetworkDirectory parentNetworkDirectory = getParentNetworks();
         for(ParentNetwork parentNetwork: parentNetworkDirectory.getParentNetworkList()){
+            
             NetworkDirectory networkDirectory = getNetworks(parentNetwork.getCountryName());
             parentNetwork.setNetworkDirectory(networkDirectory);
+            MembershipDirectory membershipDirectory = getMemberships();
             for(Network network: networkDirectory.getNetworkList()){
-                EnterpriseDirectory enterpriseDirectory = getEnterprises(network.getCountry(), network.getCity());
+                
+                EnterpriseDirectory enterpriseDirectory = getEnterprises(network.getCountry(), network.getCity(), membershipDirectory);
                 network.setEnterpriseDirectory(enterpriseDirectory);
                 for(Enterprise enterprise: enterpriseDirectory.getEnterpriseList()){
-                    OrganizationDirectory organizationDirectory = getOrganizations(enterprise.getCountry(), enterprise.getCity(), enterprise.getBranchName());
+                    
+                    OrganizationDirectory organizationDirectory = getOrganizations(enterprise.getCountry(), enterprise.getCity(), enterprise.getBranchName(), enterprise.getEmployeeDirectory());
                     enterprise.setOrganizationDirectory(organizationDirectory);
                 }
             }
         }
+        
+        business.setParentNetworkDirectory(parentNetworkDirectory);
         return business;
     }
     
@@ -125,9 +128,11 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    if(b[1].equals(country)){
+                    if(b[0].equals(country)){
                         Network network = networkDirectory.addNetwork();
-                        network.setCity(b[0]);
+                        network.setCity(b[1]);
+                        network.setState(b[2]);
+                        network.setCountry(b[0]);
                     }
                 }
                 row++;
@@ -140,7 +145,7 @@ public final class Initialize {
         return networkDirectory;
     }
     
-    private EnterpriseDirectory getEnterprises(String country, String city){
+    private EnterpriseDirectory getEnterprises(String country, String city, MembershipDirectory membershipDirectory){
             
         EnterpriseDirectory enterpriseDirectory = new EnterpriseDirectory();
         
@@ -158,17 +163,14 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    if(b[1].equals(country)){
-                        if(b[0].equals(city)){
+                    if(b[0].equals(country)){
+                        if(b[1].equals(city)){
                             Enterprise enterprise = enterpriseDirectory.addEnterprise(Organization.organizationType.Enterprise, Enterprise.enterpriseType.GymEnterprise);
                             enterprise.setCity(b[1]);
                             enterprise.setCountry(b[0]);
                             enterprise.setState(b[2]);
                             enterprise.setAddress(b[3]);
                             enterprise.setBranchName(b[4]);
-                            
-                            MembershipDirectory membershipDirectory = getMemberships();
-                            enterprise.setMembershipDirectory(membershipDirectory);
                             
                             CustomerDirectory customerDirectory = getCustomers(b[4], membershipDirectory);
                             enterprise.setCustomerDirectory(customerDirectory);
@@ -212,7 +214,7 @@ public final class Initialize {
                     membership.setPrice(Integer.parseInt(b[3]));
                     membership.setDurationInDays(Integer.parseInt(b[2]));
                     Boolean hasSpecialServices = false;
-                    if(b[0].equals(Membership.membershipType.Platinum) || b[0].equals(Membership.membershipType.Gold) || b[0].equals(Membership.membershipType.Bronze)){
+                    if(b[0].equals(Membership.membershipType.Platinum.toString()) || b[0].equals(Membership.membershipType.Gold.toString()) || b[0].equals(Membership.membershipType.Bronze.toString())){
                         hasSpecialServices = true;
                     }
                     membership.setHasSpecialServicesAccess(hasSpecialServices);
@@ -257,13 +259,14 @@ public final class Initialize {
                         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                         customer.setDob(sdf.parse(b[5]));
                         customer.setEmail(b[7]);
-                        if(b[4].equals(Person.genderType.Male))
-                            customer.setGender(Person.genderType.Male);
-                        else if(b[4].equals(Person.genderType.Female))
-                            customer.setGender(Person.genderType.Female);
+                        customer.setGender(getGenderFromCsv(b[4]));
                         customer.setMobile(b[6]);
                         customer.setName(b[1]+" "+b[2]);
                         customer.setZip(b[11]);
+                        Boolean hasPersonalTraining = false;
+                        if(b[14].equals("Yes"))
+                            hasPersonalTraining = true;
+                        customer.getMembership().setHasPersonalTraining(hasPersonalTraining);
                     }
                 }
                 row++;
@@ -274,6 +277,15 @@ public final class Initialize {
         }
         
         return customerDirectory;
+    }
+    
+    private Person.genderType getGenderFromCsv(String gender){
+        Person.genderType type = null;
+        if(gender.equals(Person.genderType.Male.toString()))
+            type = Person.genderType.Male;
+        else if(gender.equals(Person.genderType.Female.toString()))
+            type = Person.genderType.Female;
+        return type;
     }
     
     private EmployeeDirectory getEmployees(String branch){
@@ -293,17 +305,14 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    if(b[12].equals(branch)){
+                    if(b[1].equals(branch)){
                         Role role = getRoleFromString(b[2]);
                         Employee employee = employeeDirectory.addEmployee(role);
                         employee.setAddress(b[10]);
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         employee.setDob(sdf.parse(b[7]));
                         employee.setEmail(b[9]);
-                        if(b[6].equals(Person.genderType.Male))
-                            employee.setGender(Person.genderType.Male);
-                        else if(b[6].equals(Person.genderType.Female))
-                            employee.setGender(Person.genderType.Female);
+                        employee.setGender(getGenderFromCsv(b[6]));
                         employee.setMobile(b[8]);
                         employee.setName(b[3]+" "+b[4]);
                         employee.setZip(b[13]);
@@ -408,23 +417,24 @@ public final class Initialize {
         return role;
     }
     
-    private OrganizationDirectory getOrganizations(String country, String city, String branch){
+    private OrganizationDirectory getOrganizations(String country, String city, String branch, EmployeeDirectory employeeDirectory){
         
         OrganizationDirectory organizationDirectory = new OrganizationDirectory();
         
         Accounting accounting = new Accounting();
+        MembershipDirectory membershipDirectory = getMemberships();
+        accounting.setMembershipDirectory(membershipDirectory);
         organizationDirectory.setAccounting(accounting);
         
-        GroupClassesDirectory groupClassesDirectory = getGroupClasses(country, city, branch);
+        GroupClassesDirectory groupClassesDirectory = getGroupClasses(country, city, branch, employeeDirectory);
         organizationDirectory.setGroupClassesDirectory(groupClassesDirectory);
         
-        
-        MessageDiretory messageDirectory = getMessages(country, city, branch);
+//        MessageDiretory messageDirectory = getMessages(country, city, branch);
         
         return organizationDirectory;
     }
     
-    private GroupClassesDirectory getGroupClasses(String country, String city, String branch){
+    private GroupClassesDirectory getGroupClasses(String country, String city, String branch, EmployeeDirectory employeeDirectory){
         
         GroupClassesDirectory groupClassesDirectory = new GroupClassesDirectory();
         
@@ -446,10 +456,11 @@ public final class Initialize {
                         if(b[0].equals(city)){
                             if(b[2].equals(branch)){
                                 GroupClasses groupClasses = groupClassesDirectory.addGroupClasses();
-                                groupClasses.setCalories(Integer.parseInt(b[4]));
-                                groupClasses.setDescription(b[3]);
-                                groupClasses.setDuration(Integer.parseInt(b[5]));
-                                groupClasses.setName(b[6]);
+                                groupClasses.setTrainer(getEmployeeFromString(employeeDirectory, b[5]));
+                                groupClasses.setDescription(b[8]);
+                                groupClasses.setDuration(Integer.parseInt(b[6]));
+                                groupClasses.setTime(b[4]);
+                                groupClasses.setName(b[3]);
                             }
                         }
                     }
@@ -490,7 +501,7 @@ public final class Initialize {
                                 else
                                     type = Message.messageType.WorkOrder;
                                 
-                                messageDirectory.addMessage(type, sender, receiver, Message.statusType.Open, line);
+//                                messageDirectory.addMessage(type, sender, receiver, Message.statusType.Open, line);
                             }
                         }
                     }

@@ -6,8 +6,7 @@
 package business.organization.groupclasses;
 
 import business.organization.Organization;
-import business.role.RegularTrainerRole;
-import java.util.ArrayList;
+import business.person.employee.Employee;
 
 /**
  *
@@ -18,8 +17,8 @@ public class GroupClasses extends Organization {
     private String name;
     private int duration;
     private String description;
-    private int calories;
-    private ArrayList<RegularTrainerRole> trainerList;
+    private String time;
+    private Employee trainer;
 
     private int id;
     private static int count = 0;
@@ -28,11 +27,22 @@ public class GroupClasses extends Organization {
         super(organizationType.GroupClasses);
         count++;
         id = count;
-        trainerList = new ArrayList<RegularTrainerRole>();
     }
 
-    public ArrayList<RegularTrainerRole> getTrainerList() {
-        return trainerList;
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Employee getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Employee trainer) {
+        this.trainer = trainer;
     }
 
     public int getId() {
@@ -61,20 +71,6 @@ public class GroupClasses extends Organization {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public RegularTrainerRole addTrainer() {
-        RegularTrainerRole trainer = new RegularTrainerRole();
-        trainerList.add(trainer);
-        return trainer;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public void setCalories(int calories) {
-        this.calories = calories;
     }
 
 }

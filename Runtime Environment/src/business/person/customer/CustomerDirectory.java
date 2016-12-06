@@ -15,6 +15,10 @@ import java.util.ArrayList;
 public class CustomerDirectory {
     private ArrayList<Customer> customerList;
 
+    public CustomerDirectory(){
+        customerList = new ArrayList<Customer>();
+    }
+    
     public ArrayList<Customer> getCustomerList() {
         return customerList;
     }

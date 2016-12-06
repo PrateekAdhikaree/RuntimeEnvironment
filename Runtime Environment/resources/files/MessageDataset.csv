@@ -1,0 +1,13 @@
+MessageId,Country,City Name	,BranchName,Message Type,Message,Sender(UAid),Receiver(UAid),Status,Request Date,Resolve Date
+1,The United States,Boston	,RE-Huntington,WorkOrder,Need to fix equipement,s-dq@os1032fl3.com,6-kcg8e5s5od@sea7lh-k.com,Open,05/12/2016,05/12/2016
+2,The United States,Boston	,RE- Downtown,WorkOrder,No special classes tomorrow,o7ztppalt.j2k-@9wrncaft.com,ahqnw@em6p6ri2ui.com,Open,06/12/2016,06/12/2016
+3,The United States,Boston	,RE-Huntington,WorkOrder,Need to fix equipement,pxec@5orf-os.com,s-dq@os1032fl3.com,InProgressWithVendor,19/12/2016,19/12/2016
+4,The United States,Boston	,RE- Downtown,WorkOrder,No special classes tomorrow,q6_@rme6cqz.com,2jdwksr.44-0@fxc1e-4.com,InProgressWithVendor,20/12/2016,20/12/2016
+5,The United States,Boston	,RE-Huntington,WorkOrder,No special classes tomorrow,pxec@5orf-os.com,6-kcg8e5s5od@sea7lh-k.com,InProgressWithMaintenance,16/12/2017,16/12/2017
+6,The United States,Boston	,RE- Downtown,WorkOrder,Have to take leave,ahqnw@em6p6ri2ui.com,2jdwksr.44-0@fxc1e-4.com,InProgressWithMaintenance,17/12/2017,17/12/2017
+7,The United States,Boston	,RE-Huntington,WorkOrder,Need to fix equipement,9hq9jc@2o-7kjtzv.com,pxec@5orf-os.com,Completed,14/12/2018,14/12/2018
+8,The United States,Boston	,RE- Downtown,WorkOrder,No special classes tomorrow,ahqnw@em6p6ri2ui.com,q6_@rme6cqz.com,Completed,15/12/2018,15/12/2018
+9,The United States,Boston	,RE-Huntington,Message,"Hey, when is the next yoga class?",s-dq@os1032fl3.com,9hq9jc@2o-7kjtzv.com,Open,12/12/2018,12/12/2018
+10,The United States,Boston	,RE- Downtown,Message,Please shift my training session,o7ztppalt.j2k-@9wrncaft.com,q6_@rme6cqz.com,Open,13/12/2019,13/12/2019
+11,The United States,Boston	,RE-Huntington,Message,"Hey, when is the next yoga class?",6-kcg8e5s5od@sea7lh-k.com,s-dq@os1032fl3.com,Delivered,05/12/2016,05/12/2016
+12,The United States,Boston	,RE- Downtown,Message,Please shift my training session,q6_@rme6cqz.com,ahqnw@em6p6ri2ui.com,Delivered,06/12/2016,06/12/2016

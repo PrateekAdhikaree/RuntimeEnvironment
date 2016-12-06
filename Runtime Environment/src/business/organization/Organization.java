@@ -24,11 +24,11 @@ public abstract class Organization {
     private static int count = 0;
     private String name;
     
-    private EmployeeDirectory employeeDirectory;
-    private CustomerDirectory customerDirectory;
-    private UserAccountDirectory userAccountDirectory;
-    private MessageDirectory messageDirectory;
-    private organizationType type;
+    protected EmployeeDirectory employeeDirectory;
+    protected CustomerDirectory customerDirectory;
+    protected UserAccountDirectory userAccountDirectory;
+    protected MessageDirectory messageDirectory;
+    protected organizationType type;
     
     public Organization(organizationType type){
         id = count;

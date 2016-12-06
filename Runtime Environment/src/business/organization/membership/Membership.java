@@ -5,10 +5,6 @@
  */
 package business.organization.membership;
 
-import business.organization.Organization;
-import business.organization.specialservice.SpecialService;
-import java.util.ArrayList;
-
 /**
  *
  * @author raseswaridas
@@ -29,6 +25,7 @@ public class Membership {
     private int price;
     private int durationInDays;
     private Boolean hasSpecialServicesAccess;
+    private Boolean hasPersonalTraining;
 
     private int id;
     private static int count = 0;
@@ -77,5 +74,13 @@ public class Membership {
 
     public void setHasSpecialServicesAccess(Boolean hasSpecialServicesAccess) {
         this.hasSpecialServicesAccess = hasSpecialServicesAccess;
+    }
+
+    public void setHasPersonalTraining(Boolean hasPersonalTraining) {
+        this.hasPersonalTraining = hasPersonalTraining;
+    }
+
+    public Boolean getHasPersonalTraining() {
+        return hasPersonalTraining;
     }
 }

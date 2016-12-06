@@ -20,7 +20,7 @@ public abstract class Role {
         setSalary();
     }
     
-    public int salary;
+    protected int salary;
     
     public static enum RoleType{
         Accountant,
