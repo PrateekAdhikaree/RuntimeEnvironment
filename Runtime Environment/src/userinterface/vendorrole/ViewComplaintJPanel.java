@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.registration;
+package userinterface.vendorrole;
 
 /**
  *
  * @author soumiyaroy
  */
-public class MemberWorkAreaJPanel extends javax.swing.JPanel {
+public class ViewComplaintJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form MemberWorkAreaJPanel
+     * Creates new form VIewComplaintJPanel
      */
-    public MemberWorkAreaJPanel() {
+    public ViewComplaintJPanel() {
         initComponents();
     }
 
@@ -28,17 +28,16 @@ public class MemberWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         setBackground(new java.awt.Color(102, 102, 255));
-        setForeground(new java.awt.Color(102, 102, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGap(0, 747, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 523, Short.MAX_VALUE)
+            .addGap(0, 514, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

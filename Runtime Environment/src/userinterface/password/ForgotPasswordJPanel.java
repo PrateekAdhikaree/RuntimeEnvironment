@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.profile;
+package userinterface.password;
 
 import business.Business;
 import java.awt.CardLayout;

@@ -15,17 +15,17 @@ import business.organization.membership.MembershipDirectory;
  */
 public abstract class Enterprise extends Organization {
     
-    private int id;
-    private static int count = 0;
+    protected int id;
+    protected static int count = 0;
     
-    private String country;
-    private String city;
-    private String state;
-    private String branchName;
-    private String address;
-    private OrganizationDirectory organizationDirectory;
-    private MembershipDirectory membershipDirectory;
-    private enterpriseType type;
+    protected String country;
+    protected String city;
+    protected String state;
+    protected String branchName;
+    protected String address;
+    protected OrganizationDirectory organizationDirectory;
+    protected MembershipDirectory membershipDirectory;
+    protected enterpriseType type;
     public enum enterpriseType{
         GymEnterprise
     };

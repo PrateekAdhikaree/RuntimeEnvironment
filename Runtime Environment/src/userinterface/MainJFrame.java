@@ -9,7 +9,7 @@ import business.Business;
 import business.Initialize;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
-import userinterface.registration.RegisterJPanel;
+import userinterface.customerrole.RegisterJPanel;
 
 /**
  *

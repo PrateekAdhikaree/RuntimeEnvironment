@@ -13,7 +13,7 @@ import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import userinterface.profile.ForgotPasswordJPanel;
+import userinterface.password.ForgotPasswordJPanel;
 
 /**
  *

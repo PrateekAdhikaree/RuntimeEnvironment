@@ -6,6 +6,7 @@
 package business.organization.accounting;
 
 import business.organization.Organization;
+import business.organization.membership.MembershipDirectory;
 import business.person.customer.Customer;
 import business.person.customer.CustomerDirectory;
 import business.person.employee.Employee;
@@ -18,6 +19,7 @@ import business.person.employee.EmployeeDirectory;
 public class Accounting extends Organization{
     
     private int currentFunds;
+    private MembershipDirectory membershipDirectory;
     
     public Accounting(){
         super(organizationType.Account);
@@ -26,8 +28,20 @@ public class Accounting extends Organization{
     public int getCurrentFunds() {
         return currentFunds;
     }
+    
+    public void setCurrentFunds(int value){
+        currentFunds = value;
+    }
 
-    public void setCurrentFunds(EmployeeDirectory employeeDirectory, CustomerDirectory customerDirectory) {
+    public MembershipDirectory getMembershipDirectory() {
+        return membershipDirectory;
+    }
+
+    public void setMembershipDirectory(MembershipDirectory membershipDirectory) {
+        this.membershipDirectory = membershipDirectory;
+    }
+
+    public void calculateRevenue(EmployeeDirectory employeeDirectory, CustomerDirectory customerDirectory, int months) {
         int totalFunds = 0;
         int totalEmployeeSalary = 0;
         int totalCustomerFees = 0;
@@ -39,14 +53,18 @@ public class Accounting extends Organization{
             totalCustomerFees += calculateCustomerFees(customer);
         }
         
+        //Calculates revenue for 1 month
         totalFunds = totalCustomerFees - totalEmployeeSalary;
+        //Calculates revenue for required months
+        totalFunds = totalFunds * months;
         this.currentFunds = totalFunds;
     }
     
     public int calculateCustomerFees(Customer customer){
         int price = 0;
         price = customer.getMembership().getPrice();
-        if(customer.getHasPersonalTraining()){
+        price = (price / customer.getMembership().getDurationInDays()) * 30;
+        if(customer.getMembership().getHasPersonalTraining()){
             price += 50;
         }
         return price;

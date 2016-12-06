@@ -17,11 +17,10 @@ public class Customer extends Person {
     private int id;
     private static int count = 0;
     private Membership membership;
-    private Boolean hasPersonalTraining;
     
     public Customer (Membership membership){
-        id = count;
         count++;
+        id = count;
         this.membership = membership;
     }
 
@@ -32,13 +31,4 @@ public class Customer extends Person {
     public Membership getMembership() {
         return membership;
     }
-
-    public void setHasPersonalTraining(Boolean hasPersonalTraining) {
-        this.hasPersonalTraining = hasPersonalTraining;
-    }
-
-    public Boolean getHasPersonalTraining() {
-        return hasPersonalTraining;
-    }
-    
 }
