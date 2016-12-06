@@ -345,15 +345,15 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    if(b[2].equals(branch)){
+                    if(b[0].equals(branch)){
                         Role role = getRoleFromString(b[5]);
                         Employee employee = null;
-                        if(!b[2].equals("~")){
-                            employee = getEmployeeFromString(employeeDirectory, b[2]);
+                        if(!b[3].equals("~")){
+                            employee = getEmployeeFromString(employeeDirectory, b[3]);
                         }
                         Customer customer = null;
-                        if(!b[3].equals("~")){
-                            customer = getCustomerFromString(customerDirectory, b[3]);
+                        if(!b[4].equals("~")){
+                            customer = getCustomerFromString(customerDirectory, b[4]);
                         }
                         Boolean userAccountCreated = userAccountDirectory.createNewUserAccount(b[1], b[2], employee, customer, role);
                         if(!userAccountCreated){
