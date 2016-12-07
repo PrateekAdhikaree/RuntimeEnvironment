@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.organization.membership;
+package business.organization.accounting.membership;
 
 import business.parentnetwork.ParentNetwork;
 

@@ -5,7 +5,7 @@
  */
 package business.person.customer;
 
-import business.organization.membership.Membership;
+import business.organization.accounting.membership.Membership;
 import business.person.Person;
 
 /**

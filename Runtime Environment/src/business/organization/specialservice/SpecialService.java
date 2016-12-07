@@ -6,7 +6,7 @@
 package business.organization.specialservice;
 
 import business.organization.Organization;
-import business.organization.membership.Membership;
+import business.organization.accounting.membership.Membership;
 
 /**
  *

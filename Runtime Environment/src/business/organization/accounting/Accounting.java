@@ -6,7 +6,7 @@
 package business.organization.accounting;
 
 import business.organization.Organization;
-import business.organization.membership.MembershipDirectory;
+import business.organization.accounting.membership.MembershipDirectory;
 import business.parentnetwork.ParentNetwork;
 import business.person.customer.*;
 import business.person.employee.*;

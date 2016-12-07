@@ -7,7 +7,7 @@ package business.enterprise;
 
 import business.organization.Organization;
 import business.organization.OrganizationDirectory;
-import business.organization.membership.MembershipDirectory;
+import business.organization.accounting.membership.MembershipDirectory;
 
 /**
  *

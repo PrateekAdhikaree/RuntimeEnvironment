@@ -5,13 +5,14 @@
  */
 package business;
 
+import business.organization.accounting.membership.*;
 import business.enterprise.*;
 import business.network.*;
 import business.organization.*;
 import business.organization.accounting.Accounting;
 import business.organization.groupclasses.*;
-import business.organization.membership.*;
 import business.organization.message.*;
+import business.organization.promo.PromoDirectory;
 import business.parentnetwork.*;
 import business.person.Person;
 import business.person.customer.*;
@@ -58,6 +59,8 @@ public final class Initialize {
     private Business readFromCSV(Business business){
         
         ParentNetworkDirectory parentNetworkDirectory = getParentNetworks();
+        PromoDirectory promoDirectory = getPromos();
+        business.setPromoDirectory(promoDirectory);
         for(ParentNetwork parentNetwork: parentNetworkDirectory.getParentNetworkList()){
             
             NetworkDirectory networkDirectory = getNetworks(parentNetwork.getCountryName());
@@ -108,6 +111,36 @@ public final class Initialize {
         }
          
         return parentNetworkDirectory;
+    }
+    
+    private PromoDirectory getPromos(){
+        
+        PromoDirectory promoDirectory = new PromoDirectory();
+        
+        try {
+            this.file = new FileReader("resources/files/PromoDataset.csv");
+            reader = new BufferedReader(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getPromos(): Error in reading file").log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            String line;
+            int row = 0;
+            while ((line = reader.readLine()) != null) { // reads each line (row) in the CSV
+                
+                String[] b = line.split(",");
+                if(row != 0){
+                    promoDirectory.addPromo(b[0], Integer.parseInt(b[1]));
+                }
+                row++;
+            }
+            reader.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Initialize.class.getName()+" in getPromos()").log(Level.SEVERE, null, ex);
+        }
+         
+        return promoDirectory;
     }
     
     private NetworkDirectory getNetworks(String country){

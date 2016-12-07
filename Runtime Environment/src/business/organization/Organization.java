@@ -6,6 +6,7 @@
 package business.organization;
 
 import business.organization.message.MessageDirectory;
+import business.organization.promo.PromoDirectory;
 import business.person.customer.CustomerDirectory;
 import business.person.employee.EmployeeDirectory;
 import business.useraccount.UserAccountDirectory;
@@ -28,6 +29,7 @@ public abstract class Organization {
     protected CustomerDirectory customerDirectory;
     protected UserAccountDirectory userAccountDirectory;
     protected MessageDirectory messageDirectory;
+    protected PromoDirectory promoDirectory;
     protected organizationType type;
     
     public Organization(organizationType type){
@@ -38,6 +40,7 @@ public abstract class Organization {
         customerDirectory = new CustomerDirectory();
         userAccountDirectory = new UserAccountDirectory();
         messageDirectory = new MessageDirectory();
+        promoDirectory = new PromoDirectory();
     }
 
     public int getId() {
@@ -82,6 +85,14 @@ public abstract class Organization {
 
     public void setMessageDirectory(MessageDirectory messageDirectory) {
         this.messageDirectory = messageDirectory;
+    }
+
+    public PromoDirectory getPromoDirectory() {
+        return promoDirectory;
+    }
+
+    public void setPromoDirectory(PromoDirectory promoDirectory) {
+        this.promoDirectory = promoDirectory;
     }
     
 }
