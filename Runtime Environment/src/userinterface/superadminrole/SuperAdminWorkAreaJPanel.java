@@ -42,7 +42,11 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
         menu1 = new java.awt.Menu();
         menu2 = new java.awt.Menu();
         jMenu1 = new javax.swing.JMenu();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnManageTrainers = new javax.swing.JButton();
+        btnManageCustomers = new javax.swing.JButton();
+        btnManageClasses = new javax.swing.JButton();
 
         menu1.setLabel("File");
         menuBar1.add(menu1);
@@ -52,31 +56,102 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jMenu1.setText("jMenu1");
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setText("Workarea");
+        jPanel1.setBackground(new java.awt.Color(102, 102, 238));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel1.setText("My Work Area - Super Admin Role");
+
+        btnManageTrainers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageTrainers.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageTrainers.setText("Manage Employees >>");
+        btnManageTrainers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageTrainersActionPerformed(evt);
+            }
+        });
+
+        btnManageCustomers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageCustomers.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageCustomers.setText("Manage Customers >>");
+        btnManageCustomers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageCustomersActionPerformed(evt);
+            }
+        });
+
+        btnManageClasses.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageClasses.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageClasses.setText("Manage Classes >>");
+        btnManageClasses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageClassesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnManageTrainers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnManageClasses)
+                .addGap(18, 18, 18)
+                .addComponent(btnManageCustomers)
+                .addGap(18, 18, 18)
+                .addComponent(btnManageTrainers)
+                .addContainerGap(430, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(342, 342, 342)
-                .addComponent(jLabel1)
-                .addContainerGap(330, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(jLabel1)
-                .addContainerGap(486, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnManageTrainersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTrainersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnManageTrainersActionPerformed
+
+    private void btnManageCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnManageCustomersActionPerformed
+
+    private void btnManageClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageClassesActionPerformed
+        //        ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
+        //        userProcessContainer.add("ManageSupplierAdministrative", ms);
+        //        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        //        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageClassesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageClasses;
+    private javax.swing.JButton btnManageCustomers;
+    private javax.swing.JButton btnManageTrainers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JPanel jPanel1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;

@@ -42,8 +42,9 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnManageSuppliers = new javax.swing.JButton();
-        btnManageSuppliers1 = new javax.swing.JButton();
+        btnManageClasses = new javax.swing.JButton();
+        btnManageTrainers = new javax.swing.JButton();
+        btnManageCustomers = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 102, 255));
 
@@ -51,21 +52,30 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("My Work Area - Admin Role");
 
-        btnManageSuppliers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnManageSuppliers.setForeground(new java.awt.Color(255, 204, 0));
-        btnManageSuppliers.setText("Manage Customers >>");
-        btnManageSuppliers.addActionListener(new java.awt.event.ActionListener() {
+        btnManageClasses.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageClasses.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageClasses.setText("Manage Classes >>");
+        btnManageClasses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageSuppliersActionPerformed(evt);
+                btnManageClassesActionPerformed(evt);
             }
         });
 
-        btnManageSuppliers1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnManageSuppliers1.setForeground(new java.awt.Color(255, 204, 0));
-        btnManageSuppliers1.setText("Manage Trainers >>");
-        btnManageSuppliers1.addActionListener(new java.awt.event.ActionListener() {
+        btnManageTrainers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageTrainers.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageTrainers.setText("Manage Employees >>");
+        btnManageTrainers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageSuppliers1ActionPerformed(evt);
+                btnManageTrainersActionPerformed(evt);
+            }
+        });
+
+        btnManageCustomers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageCustomers.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageCustomers.setText("Manage Customers >>");
+        btnManageCustomers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageCustomersActionPerformed(evt);
             }
         });
 
@@ -80,12 +90,14 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(86, 86, 86)
-                        .addComponent(btnManageSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnManageClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnManageCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(554, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(86, 86, 86)
-                    .addComponent(btnManageSuppliers1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageTrainers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(554, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -93,32 +105,39 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(151, 151, 151)
-                .addComponent(btnManageSuppliers)
-                .addContainerGap(374, Short.MAX_VALUE))
+                .addGap(141, 141, 141)
+                .addComponent(btnManageCustomers)
+                .addGap(18, 18, 18)
+                .addComponent(btnManageClasses)
+                .addContainerGap(336, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(136, 136, 136)
-                    .addComponent(btnManageSuppliers1)
+                    .addComponent(btnManageTrainers)
                     .addContainerGap(434, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManageSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageSuppliersActionPerformed
-//        ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
-//        userProcessContainer.add("ManageSupplierAdministrative", ms);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnManageSuppliersActionPerformed
+    private void btnManageClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageClassesActionPerformed
+        //        ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
+        //        userProcessContainer.add("ManageSupplierAdministrative", ms);
+        //        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        //        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageClassesActionPerformed
 
-    private void btnManageSuppliers1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageSuppliers1ActionPerformed
+    private void btnManageCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomersActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnManageSuppliers1ActionPerformed
+    }//GEN-LAST:event_btnManageCustomersActionPerformed
+
+    private void btnManageTrainersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTrainersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnManageTrainersActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManageSuppliers;
-    private javax.swing.JButton btnManageSuppliers1;
+    private javax.swing.JButton btnManageClasses;
+    private javax.swing.JButton btnManageCustomers;
+    private javax.swing.JButton btnManageTrainers;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
