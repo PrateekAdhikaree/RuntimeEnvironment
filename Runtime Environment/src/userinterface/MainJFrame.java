@@ -6,7 +6,7 @@
 package userinterface;
 
 import business.Business;
-import business.Initialize;
+import business.DB4OUtil;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import userinterface.customerrole.RegisterJPanel;
@@ -26,8 +26,7 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         btnProfile.setVisible(false);
         btnLogout.setVisible(false);
-        Initialize initialize = new Initialize();
-        business = initialize.configureBusiness();
+        business = DB4OUtil.getInstance().retrieveSystem();
     }
     
     public void changeHeaderAfterLogin(String name){
