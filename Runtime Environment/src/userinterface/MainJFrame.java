@@ -29,6 +29,14 @@ public class MainJFrame extends javax.swing.JFrame {
         Initialize initialize = new Initialize();
         business = initialize.configureBusiness();
     }
+    
+    public void changeHeaderAfterLogin(String name){
+        btnProfile.setVisible(true);
+        btnLogout.setVisible(true);
+        btnNewUser.setVisible(false);
+        btnLogin.setVisible(false);
+        lblMainHeader.setText("Welcome, "+name);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +60,7 @@ public class MainJFrame extends javax.swing.JFrame {
         btnNewUser = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblMainHeader = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
@@ -112,9 +120,9 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Yuppy SC", 3, 34)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel4.setText("Runtime Environment");
+        lblMainHeader.setFont(new java.awt.Font("Yuppy SC", 3, 34)); // NOI18N
+        lblMainHeader.setForeground(new java.awt.Color(51, 51, 255));
+        lblMainHeader.setText("Runtime Environment");
 
         btnLogout.setBackground(new java.awt.Color(102, 102, 255));
         btnLogout.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -135,7 +143,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblMainHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnProfile)
                 .addGap(12, 12, 12)
@@ -160,7 +168,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMainHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -218,6 +226,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 153, 0));
         jButton2.setText("About Us");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -288,7 +301,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        LoginJPanel loginJPanel = new LoginJPanel(userProcessContainer, business);
+        LoginJPanel loginJPanel = new LoginJPanel(userProcessContainer, business, upperJPanel);
         userProcessContainer.add("loginJPanel", loginJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -302,6 +315,10 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnNewUserActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,7 +371,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -368,6 +384,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel lblMainHeader;
     private javax.swing.JPanel upperJPanel;
     private javax.swing.JPanel userProcessContainer;
     private javax.swing.JPanel welcomeJPanel;

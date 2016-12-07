@@ -23,14 +23,16 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Business business;
+    JPanel upperJPanel;
 
     /**
      * Creates new form LoginJPanel
      */
-    public LoginJPanel(JPanel userProcessContainer, Business business) {
+    public LoginJPanel(JPanel userProcessContainer, Business business, JPanel upperJPanel) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        this.upperJPanel = upperJPanel;
     }
 
     /**
@@ -199,6 +201,8 @@ public class LoginJPanel extends javax.swing.JPanel {
             userProcessContainer.add("WorkArea", userAccount.getRole().createWorkArea(userProcessContainer, userAccount, inEnterprise, business));
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
+            String name = null;
+//            upperJPanel.changeHeaderAfterLogin(name);
         }
 
         btnLogin.setEnabled(false);

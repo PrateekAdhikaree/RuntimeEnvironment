@@ -27,19 +27,40 @@ public class AboutUsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+
+        setBackground(new java.awt.Color(102, 102, 255));
+
+        jTextArea1.setBackground(new java.awt.Color(102, 102, 255));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Songti SC", 3, 20)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(255, 204, 0));
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Runtime Environment is one of the world’s leading health and fitness companies. \nOur purpose is clear: We are Fitness Leaders who inspire people to go further in life. \nTo make sure we achieve our purpose across our 13 markets, we ensure that we \nremain at the cutting edge of fitness innovation, that we are engaging our \nstaff into an ethos of service and fitness expertise and updating our clubs - \nrolling out the refurbishments across the globe. \n\nTo achieve our purpose, we need to lead and inspire. \nBased on research we have done, we have developed a philosophy and \na way of thinking about fitness, which we put into all aspects of our business.");
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

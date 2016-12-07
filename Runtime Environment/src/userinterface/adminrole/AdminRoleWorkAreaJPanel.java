@@ -41,19 +41,84 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        btnManageSuppliers = new javax.swing.JButton();
+        btnManageSuppliers1 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(102, 102, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel1.setText("My Work Area - Admin Role");
+
+        btnManageSuppliers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageSuppliers.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageSuppliers.setText("Manage Customers >>");
+        btnManageSuppliers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageSuppliersActionPerformed(evt);
+            }
+        });
+
+        btnManageSuppliers1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageSuppliers1.setForeground(new java.awt.Color(255, 204, 0));
+        btnManageSuppliers1.setText("Manage Trainers >>");
+        btnManageSuppliers1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageSuppliers1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(btnManageSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(554, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(86, 86, 86)
+                    .addComponent(btnManageSuppliers1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(554, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(151, 151, 151)
+                .addComponent(btnManageSuppliers)
+                .addContainerGap(374, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(136, 136, 136)
+                    .addComponent(btnManageSuppliers1)
+                    .addContainerGap(434, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnManageSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageSuppliersActionPerformed
+//        ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
+//        userProcessContainer.add("ManageSupplierAdministrative", ms);
+//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageSuppliersActionPerformed
+
+    private void btnManageSuppliers1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageSuppliers1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnManageSuppliers1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageSuppliers;
+    private javax.swing.JButton btnManageSuppliers1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
