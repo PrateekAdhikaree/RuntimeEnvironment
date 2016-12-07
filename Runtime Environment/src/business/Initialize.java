@@ -62,14 +62,14 @@ public final class Initialize {
             
             NetworkDirectory networkDirectory = getNetworks(parentNetwork.getCountryName());
             parentNetwork.setNetworkDirectory(networkDirectory);
-            MembershipDirectory membershipDirectory = getMemberships();
+            MembershipDirectory membershipDirectory = getMemberships(parentNetwork);
             for(Network network: networkDirectory.getNetworkList()){
                 
                 EnterpriseDirectory enterpriseDirectory = getEnterprises(network.getCountry(), network.getCity(), membershipDirectory);
                 network.setEnterpriseDirectory(enterpriseDirectory);
                 for(Enterprise enterprise: enterpriseDirectory.getEnterpriseList()){
                     
-                    OrganizationDirectory organizationDirectory = getOrganizations(enterprise.getCountry(), enterprise.getCity(), enterprise.getBranchName(), enterprise.getEmployeeDirectory());
+                    OrganizationDirectory organizationDirectory = getOrganizations(enterprise.getCountry(), enterprise.getCity(), enterprise.getBranchName(), parentNetwork, enterprise.getEmployeeDirectory(), enterprise.getCustomerDirectory());
                     enterprise.setOrganizationDirectory(organizationDirectory);
                 }
             }
@@ -97,7 +97,7 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    ParentNetwork parentNetwork = parentNetworkDirectory.addParentNetwork();
+                    ParentNetwork parentNetwork = parentNetworkDirectory.addParentNetwork(b[1],Float.parseFloat(b[2]));
                     parentNetwork.setCountryName(b[0]);
                 }
                 row++;
@@ -192,7 +192,7 @@ public final class Initialize {
         return enterpriseDirectory;
     }
     
-    public MembershipDirectory getMemberships(){
+    public MembershipDirectory getMemberships(ParentNetwork parentNetwork){
         MembershipDirectory membershipDirectory = new MembershipDirectory();
         
         try {
@@ -209,7 +209,7 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    Membership membership = membershipDirectory.addMembership(b[0]);
+                    Membership membership = membershipDirectory.addMembership(b[0], parentNetwork);
                     membership.setDescription(b[1]);
                     membership.setPrice(Integer.parseInt(b[3]));
                     membership.setDurationInDays(Integer.parseInt(b[2]));
@@ -417,13 +417,15 @@ public final class Initialize {
         return role;
     }
     
-    private OrganizationDirectory getOrganizations(String country, String city, String branch, EmployeeDirectory employeeDirectory){
+    private OrganizationDirectory getOrganizations(String country, String city, String branch, ParentNetwork parentNetwork, EmployeeDirectory employeeDirectory, CustomerDirectory customerDirectory){
         
         OrganizationDirectory organizationDirectory = new OrganizationDirectory();
         
-        Accounting accounting = new Accounting();
-        MembershipDirectory membershipDirectory = getMemberships();
+        Accounting accounting = new Accounting(parentNetwork);
+        MembershipDirectory membershipDirectory = getMemberships(parentNetwork);
         accounting.setMembershipDirectory(membershipDirectory);
+        accounting.setCustomerDirectory(customerDirectory);
+        accounting.setEmployeeDirectory(employeeDirectory);
         organizationDirectory.setAccounting(accounting);
         
         GroupClassesDirectory groupClassesDirectory = getGroupClasses(country, city, branch, employeeDirectory);

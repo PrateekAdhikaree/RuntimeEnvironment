@@ -5,6 +5,8 @@
  */
 package business.organization.membership;
 
+import business.parentnetwork.ParentNetwork;
+
 /**
  *
  * @author raseswaridas
@@ -22,20 +24,27 @@ public class Membership {
     
     private String name;
     private String description;
-    private int price;
+    private float price;
     private int durationInDays;
     private Boolean hasSpecialServicesAccess;
     private Boolean hasPersonalTraining;
+    private String currency;
+    private float currencyMultiplier;
 
     private int id;
     private static int count = 0;
 
-    public Membership(String type) {
+    public Membership(String type, ParentNetwork parentNetwork) {
         count++;
         this.id = count;
         this.name = type;
+        setParentNetworkCurrency(parentNetwork);
     }
 
+    private void setParentNetworkCurrency(ParentNetwork parentNetwork){
+        this.currency = parentNetwork.getCurrency();
+        this.currencyMultiplier = parentNetwork.getCurrencyMultiplier();
+    }
     public int getDurationInDays() {
         return durationInDays;
     }
@@ -56,11 +65,11 @@ public class Membership {
         this.description = description;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -82,5 +91,13 @@ public class Membership {
 
     public Boolean getHasPersonalTraining() {
         return hasPersonalTraining;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public float getCurrencyMultiplier() {
+        return currencyMultiplier;
     }
 }

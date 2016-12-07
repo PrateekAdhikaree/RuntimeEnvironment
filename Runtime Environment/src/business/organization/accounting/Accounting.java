@@ -7,10 +7,9 @@ package business.organization.accounting;
 
 import business.organization.Organization;
 import business.organization.membership.MembershipDirectory;
-import business.person.customer.Customer;
-import business.person.customer.CustomerDirectory;
-import business.person.employee.Employee;
-import business.person.employee.EmployeeDirectory;
+import business.parentnetwork.ParentNetwork;
+import business.person.customer.*;
+import business.person.employee.*;
 
 /**
  *
@@ -18,18 +17,26 @@ import business.person.employee.EmployeeDirectory;
  */
 public class Accounting extends Organization{
     
-    private int currentFunds;
+    private float currentFunds;
     private MembershipDirectory membershipDirectory;
+    private String currency;
+    private float currencyMultiplier;
     
-    public Accounting(){
+    public Accounting(ParentNetwork parentNetwork){
         super(organizationType.Account);
+        setParentNetworkCurrency(parentNetwork);
     }
 
-    public int getCurrentFunds() {
+    private void setParentNetworkCurrency(ParentNetwork parentNetwork){
+        this.currency = parentNetwork.getCurrency();
+        this.currencyMultiplier = parentNetwork.getCurrencyMultiplier();
+    }
+    
+    public float getCurrentFunds() {
         return currentFunds;
     }
     
-    public void setCurrentFunds(int value){
+    public void setCurrentFunds(float value){
         currentFunds = value;
     }
 
@@ -41,10 +48,10 @@ public class Accounting extends Organization{
         this.membershipDirectory = membershipDirectory;
     }
 
-    public void calculateRevenue(EmployeeDirectory employeeDirectory, CustomerDirectory customerDirectory, int months) {
-        int totalFunds = 0;
-        int totalEmployeeSalary = 0;
-        int totalCustomerFees = 0;
+    public float calculateRevenue(int months) {
+        float totalFunds = 0;
+        float totalEmployeeSalary = 0;
+        float totalCustomerFees = 0;
         for(Employee employee : employeeDirectory.getEmployeeList()){
             totalEmployeeSalary += employee.getRole().getSalary();
         }
@@ -57,17 +64,28 @@ public class Accounting extends Organization{
         totalFunds = totalCustomerFees - totalEmployeeSalary;
         //Calculates revenue for required months
         totalFunds = totalFunds * months;
+        
         this.currentFunds = totalFunds;
+        
+        return totalFunds;
     }
     
-    public int calculateCustomerFees(Customer customer){
-        int price = 0;
+    public float calculateCustomerFees(Customer customer){
+        float price = 0;
         price = customer.getMembership().getPrice();
         price = (price / customer.getMembership().getDurationInDays()) * 30;
         if(customer.getMembership().getHasPersonalTraining()){
             price += 50;
         }
         return price;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public float getCurrencyMultiplier() {
+        return currencyMultiplier;
     }
     
 }

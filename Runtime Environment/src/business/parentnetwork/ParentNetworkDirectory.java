@@ -23,8 +23,8 @@ public class ParentNetworkDirectory {
         return parentNetworkList;
     }
 
-    public ParentNetwork addParentNetwork() {
-        ParentNetwork parentNetwork = new ParentNetwork();
+    public ParentNetwork addParentNetwork(String currency, float currencyMultiplier) {
+        ParentNetwork parentNetwork = new ParentNetwork(currency, currencyMultiplier);
         parentNetworkList.add(parentNetwork);
         return parentNetwork;
     }

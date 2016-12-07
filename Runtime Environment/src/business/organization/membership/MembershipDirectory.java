@@ -5,6 +5,7 @@
  */
 package business.organization.membership;
 
+import business.parentnetwork.ParentNetwork;
 import java.util.ArrayList;
 
 /**
@@ -23,8 +24,8 @@ public class MembershipDirectory {
         return membershipList;
     }
     
-    public Membership addMembership(String type){
-        Membership membership = new Membership(type);
+    public Membership addMembership(String type, ParentNetwork parentNetwork){
+        Membership membership = new Membership(type, parentNetwork);
         membershipList.add(membership);
         return membership;
     }

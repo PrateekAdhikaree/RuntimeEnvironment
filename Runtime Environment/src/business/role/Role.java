@@ -18,6 +18,7 @@ public abstract class Role {
     
     public Role(){
         setSalary();
+        
     }
     
     protected int salary;

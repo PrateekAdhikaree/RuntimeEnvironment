@@ -1,4 +1,4 @@
-Countries
-The United States
-Canada
-India
+Countries,Currency,Currency Multiplier
+The United States,USD,1
+Canada,CAD,1.33
+India,INR,67.74

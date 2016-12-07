@@ -15,12 +15,16 @@ public class ParentNetwork {
     
     private String countryName;
     private int id;
+    private float currencyMultiplier;
+    private String currency;
     private static int count = 0;
     private NetworkDirectory networkDirectory;
     
-    public ParentNetwork(){
+    public ParentNetwork(String currency, float currencyMultiplier){
         count++;
         id = count;
+        this.currency = currency;
+        this.currencyMultiplier = currencyMultiplier;
     }
 
     public int getId() {
@@ -41,6 +45,14 @@ public class ParentNetwork {
 
     public void setNetworkDirectory(NetworkDirectory networkDirectory) {
         this.networkDirectory = networkDirectory;
+    }
+
+    public float getCurrencyMultiplier() {
+        return currencyMultiplier;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
     
 }
