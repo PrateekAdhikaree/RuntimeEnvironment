@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.maintenancerole;
+package userinterface.adminrole;
+
+import userinterface.maintenancerole.*;
 
 /**
  *
  * @author soumiyaroy
  */
-public class ComplaintJPanel extends javax.swing.JPanel {
+public class AdminComplaintJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ComplaintJPanel
      */
-    public ComplaintJPanel() {
+    public AdminComplaintJPanel() {
         initComponents();
     }
 
