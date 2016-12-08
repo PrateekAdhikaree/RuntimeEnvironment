@@ -17,10 +17,10 @@ import business.person.employee.*;
  */
 public class Accounting extends Organization{
     
-    private float currentFunds;
+    private static float currentFunds;
     private MembershipDirectory membershipDirectory;
-    private String currency;
-    private float currencyMultiplier;
+    private static String currency;
+    private static float currencyMultiplier;
     
     public Accounting(ParentNetwork parentNetwork){
         super(organizationType.Account);
@@ -32,7 +32,7 @@ public class Accounting extends Organization{
         this.currencyMultiplier = parentNetwork.getCurrencyMultiplier();
     }
     
-    public float getCurrentFunds() {
+    public static float getCurrentFunds() {
         return currentFunds;
     }
     
@@ -48,9 +48,9 @@ public class Accounting extends Organization{
         this.membershipDirectory = membershipDirectory;
     }
 
-    public float calculateRevenue(int months) {
+    public static float calculateRevenue(int months) {
         float totalFunds = 0;
-        float totalEmployeeSalary = 0;
+        float totalEmployeeSalary = 0;        
         float totalCustomerFees = 0;
         for(Employee employee : employeeDirectory.getEmployeeList()){
             totalEmployeeSalary += employee.getRole().getSalary();
@@ -65,26 +65,27 @@ public class Accounting extends Organization{
         //Calculates revenue for required months
         totalFunds = totalFunds * months;
         
-        this.currentFunds = totalFunds;
+        currentFunds = totalFunds;
         
         return totalFunds;
     }
     
-    public float calculateCustomerFees(Customer customer){
+    public static float calculateCustomerFees(Customer customer){
         float price = 0;
         price = customer.getMembership().getPrice();
         price = (price / customer.getMembership().getDurationInDays()) * 30;
         if(customer.getMembership().getHasPersonalTraining()){
+            // personal training is $50 more per month
             price += 50;
         }
         return price;
     }
 
-    public String getCurrency() {
+    public static String getCurrency() {
         return currency;
     }
 
-    public float getCurrencyMultiplier() {
+    public static float getCurrencyMultiplier() {
         return currencyMultiplier;
     }
     
