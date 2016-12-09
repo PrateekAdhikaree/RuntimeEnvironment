@@ -35,6 +35,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField2" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextField4" alignment="0" min="-2" pref="371" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -143,8 +144,11 @@
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="jLabel18" min="-2" pref="102" max="-2" attributes="0"/>
               </Group>
@@ -454,6 +458,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Renew Plan"/>
       </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField8">
     </Component>

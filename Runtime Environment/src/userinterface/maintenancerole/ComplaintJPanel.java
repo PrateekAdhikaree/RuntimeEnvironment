@@ -48,7 +48,7 @@ public class ComplaintJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(102, 102, 255));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Yuppy SC", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Send Complaint");
 
@@ -65,7 +65,7 @@ public class ComplaintJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtAreaMessage);
 
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 204, 0));
+        jButton1.setForeground(new java.awt.Color(255, 153, 0));
         jButton1.setText("Back");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
@@ -73,7 +73,7 @@ public class ComplaintJPanel extends javax.swing.JPanel {
         jLabel2.setText("Send to Vendor:");
 
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 204, 0));
+        jButton2.setForeground(new java.awt.Color(255, 153, 0));
         jButton2.setText("Send");
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -165,7 +165,7 @@ public class ComplaintJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(comboUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel6)
@@ -175,7 +175,7 @@ public class ComplaintJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))

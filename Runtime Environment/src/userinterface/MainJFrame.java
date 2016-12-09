@@ -10,9 +10,11 @@ import business.DB4OUtil;
 import business.enterprise.Enterprise;
 import business.network.Network;
 import business.parentnetwork.ParentNetwork;
+import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import userinterface.customerrole.RegisterJPanel;
 
 /**
@@ -118,6 +120,10 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        passwordPassword = new javax.swing.JPasswordField();
         userProcessContainer = new javax.swing.JPanel();
         welcomeJPanel = new javax.swing.JPanel();
         btnGo = new javax.swing.JButton();
@@ -153,6 +159,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         upperJPanel.setBackground(new java.awt.Color(255, 204, 0));
+        upperJPanel.setPreferredSize(new java.awt.Dimension(800, 100));
+        upperJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnNewUser.setBackground(new java.awt.Color(255, 255, 255));
         btnNewUser.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -163,6 +171,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnNewUserActionPerformed(evt);
             }
         });
+        upperJPanel.add(btnNewUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(901, 44, 124, -1));
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
         btnLogin.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -173,15 +182,20 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
+        upperJPanel.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1034, 45, 92, -1));
+        upperJPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 22, -1, -1));
 
         lblMainHeader.setFont(new java.awt.Font("Yuppy SC", 3, 34)); // NOI18N
         lblMainHeader.setForeground(new java.awt.Color(51, 51, 255));
         lblMainHeader.setText("Runtime Environment");
+        upperJPanel.add(lblMainHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 22, 355, 44));
+        upperJPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 22, -1, -1));
 
         btnLogout.setBackground(new java.awt.Color(102, 102, 255));
         btnLogout.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(102, 102, 255));
         btnLogout.setText("Logout");
+        upperJPanel.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 44, 100, -1));
 
         btnProfile.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnProfile.setForeground(new java.awt.Color(102, 102, 255));
@@ -191,46 +205,24 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnProfileActionPerformed(evt);
             }
         });
+        upperJPanel.add(btnProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 44, -1, -1));
 
-        javax.swing.GroupLayout upperJPanelLayout = new javax.swing.GroupLayout(upperJPanel);
-        upperJPanel.setLayout(upperJPanelLayout);
-        upperJPanelLayout.setHorizontalGroup(
-            upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(upperJPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMainHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnProfile)
-                .addGap(12, 12, 12)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        upperJPanelLayout.setVerticalGroup(
-            upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, upperJPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNewUser)
-                        .addComponent(btnLogout)
-                        .addComponent(btnProfile))
-                    .addComponent(btnLogin))
-                .addContainerGap())
-            .addGroup(upperJPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(lblMainHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel4.setText("Username:");
+        upperJPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(729, 16, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel8.setText("Password:");
+        upperJPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(936, 16, -1, -1));
+
+        txtUsername.setForeground(new java.awt.Color(51, 51, 255));
+        upperJPanel.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(809, 12, 109, -1));
+
+        passwordPassword.setForeground(new java.awt.Color(51, 51, 255));
+        passwordPassword.setText("jPasswordField1");
+        upperJPanel.add(passwordPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(1014, 12, 106, -1));
 
         jSplitPane1.setTopComponent(upperJPanel);
 
@@ -321,7 +313,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(btnAboutUs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnContactUS)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 665, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -362,7 +354,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(btnGo))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         userProcessContainer.add(welcomeJPanel, "card14");
@@ -375,11 +367,57 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        LoginJPanel loginJPanel = new LoginJPanel(userProcessContainer, business, this);
-        userProcessContainer.add("loginJPanel", loginJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+    // TODO add your handling code here:
+        // Get user name
+        // business.setTxtUsername(txtUsername.getText());
+        String userName = txtUsername.getText().trim();
+        if (userName.length() == 0){
+            JOptionPane.showMessageDialog(null, "Username cannot be blank", "Error Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Get Password
+        char[] passwordCharArray = passwordPassword.getPassword();
+        String password = String.valueOf(passwordCharArray);
+        if (password.length() == 0  || password.length() < 6){
+            JOptionPane.showMessageDialog(null, "Password should be greater than 6 characters", "Error Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //Step 1: Check in the user account directory if you have the user
+        UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
+
+        Enterprise inEnterprise = null;
+
+        if (userAccount == null) {
+            //Step2:Go inside each parentnetwork and check each network
+            for (ParentNetwork parentnetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
+                //Step2.1:Check against each network
+                for (Network network : parentnetwork.getNetworkDirectory().getNetworkList()) {
+                    //Step3:Check against each enterprise inside each network
+                    for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                        userAccount = enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+                        if (userAccount != null) {
+                            inEnterprise = enterprise;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (userAccount == null) {
+            JOptionPane.showMessageDialog(this, "Invalid Username/Password");
+            return;
+        } else {
+            userProcessContainer.add("WorkArea", userAccount.getRole().createWorkArea(userProcessContainer, userAccount, inEnterprise, business));
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }
+
+        btnLogin.setEnabled(false);
+        //logoutJButton.setEnabled(true);
+        txtUsername.setEnabled(false);
+        passwordPassword.setEnabled(false);
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -483,9 +521,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -497,6 +537,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblMainHeader;
+    private javax.swing.JPasswordField passwordPassword;
+    private javax.swing.JTextField txtUsername;
     private javax.swing.JPanel upperJPanel;
     private javax.swing.JPanel userProcessContainer;
     private javax.swing.JPanel welcomeJPanel;
