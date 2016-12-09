@@ -101,4 +101,8 @@ public abstract class Enterprise extends Organization {
         this.membershipDirectory = membershipDirectory;
     }
     
+    @Override
+    public String toString(){
+        return branchName;
+    }
 }

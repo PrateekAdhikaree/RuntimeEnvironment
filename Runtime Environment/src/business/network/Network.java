@@ -61,4 +61,9 @@ public class Network {
     public void setEnterpriseDirectory(EnterpriseDirectory enterpriseDirectory) {
         this.enterpriseDirectory = enterpriseDirectory;
     }
+    
+    @Override
+    public String toString(){
+        return city;
+    }
 }

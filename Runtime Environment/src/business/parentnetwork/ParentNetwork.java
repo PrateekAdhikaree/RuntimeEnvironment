@@ -55,4 +55,8 @@ public class ParentNetwork {
         return currency;
     }
     
+    @Override
+    public String toString(){
+        return countryName;
+    }
 }

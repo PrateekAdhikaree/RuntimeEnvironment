@@ -17,10 +17,10 @@ import business.person.employee.*;
  */
 public class Accounting extends Organization{
     
-    private static float currentFunds;
+    private float currentFunds;
     private MembershipDirectory membershipDirectory;
-    private static String currency;
-    private static float currencyMultiplier;
+    private String currency;
+    private float currencyMultiplier;
     
     public Accounting(ParentNetwork parentNetwork){
         super(organizationType.Account);
@@ -32,7 +32,7 @@ public class Accounting extends Organization{
         this.currencyMultiplier = parentNetwork.getCurrencyMultiplier();
     }
     
-    public static float getCurrentFunds() {
+    public float getCurrentFunds() {
         return currentFunds;
     }
     
@@ -48,7 +48,7 @@ public class Accounting extends Organization{
         this.membershipDirectory = membershipDirectory;
     }
 
-    public static float calculateRevenue(int months) {
+    public float calculateRevenue(int months) {
         float totalFunds = 0;
         float totalEmployeeSalary = 0;        
         float totalCustomerFees = 0;
@@ -70,7 +70,7 @@ public class Accounting extends Organization{
         return totalFunds;
     }
     
-    public static float calculateCustomerFees(Customer customer){
+    public float calculateCustomerFees(Customer customer){
         float price = 0;
         price = customer.getMembership().getPrice();
         price = (price / customer.getMembership().getDurationInDays()) * 30;
@@ -81,11 +81,11 @@ public class Accounting extends Organization{
         return price;
     }
 
-    public static String getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public static float getCurrencyMultiplier() {
+    public float getCurrencyMultiplier() {
         return currencyMultiplier;
     }
     

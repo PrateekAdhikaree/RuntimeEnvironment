@@ -105,7 +105,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getParentNetworks()").log(Level.SEVERE, null, ex);
         }
@@ -135,7 +134,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getPromos()").log(Level.SEVERE, null, ex);
         }
@@ -170,7 +168,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getNetworks()").log(Level.SEVERE, null, ex);
         }
@@ -218,7 +215,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getEnterprises()").log(Level.SEVERE, null, ex);
         }
@@ -254,7 +250,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getMemberships()").log(Level.SEVERE, null, ex);
         }
@@ -304,7 +299,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getCustomers()").log(Level.SEVERE, null, ex);
         }
@@ -353,7 +347,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getEmployees()").log(Level.SEVERE, null, ex);
         }
@@ -396,7 +389,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getUserAccounts()").log(Level.SEVERE, null, ex);
         }
@@ -490,9 +482,19 @@ public final class Initialize {
                     if(b[1].equals(country)){
                         if(b[0].equals(city)){
                             if(b[2].equals(branch)){
+                                String desc = "";
+                                if(b.length > 9){
+                                    for(int i = 0; i < b.length-1; i++){
+                                        if(i >= 8)
+                                            desc += b[i] + ",";
+                                    }
+                                    desc = desc.substring(0, desc.length()-1);
+                                }else{
+                                    desc = b[8];
+                                }
                                 GroupClasses groupClasses = groupClassesDirectory.addGroupClasses();
                                 groupClasses.setTrainer(getEmployeeFromString(employeeDirectory, b[5]));
-                                groupClasses.setDescription(b[8]);
+                                groupClasses.setDescription(desc);
                                 groupClasses.setDuration(Integer.parseInt(b[6]));
                                 groupClasses.setTime(b[4]);
                                 groupClasses.setName(b[3]);
@@ -543,7 +545,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getMessages()").log(Level.SEVERE, null, ex);
         }
