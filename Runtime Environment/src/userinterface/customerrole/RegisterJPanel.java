@@ -15,6 +15,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -35,20 +36,62 @@ public class RegisterJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.business = business;
 
-        populateComboBox();
+        populateCountryCombo();
     }
-
+public void populateCountryCombo(){
+        JComboBox countryCombo = comboCountry;
+        countryCombo.removeAllItems();
+        int counter = 0;
+        for(ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(counter == 0){
+                populateCityCombo(parentNetwork);
+            }
+            countryCombo.addItem(parentNetwork);
+            counter++;
+        }
+        countryCombo.setEnabled(true);
+    }
+    
+    public void populateCityCombo(ParentNetwork parentNetwork){
+        JComboBox cityCombo = comboCity;
+        cityCombo.removeAllItems();
+        int counter = 0;
+        for(ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(parentNetwork.getId() == pn.getId()){
+                for(Network network : pn.getNetworkDirectory().getNetworkList()){
+                    if(counter == 0)
+                        populateBranchCombo(parentNetwork, network);
+                    cityCombo.addItem(network);
+                    counter++;
+                }
+                cityCombo.setEnabled(true);
+                break;
+            } 
+        }
+    }
+    
+    public void populateBranchCombo(ParentNetwork parentNetwork, Network network){
+        JComboBox branchCombo = comboBranch;
+        branchCombo.removeAllItems();
+        for(ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(parentNetwork.getId() == pn.getId()){
+                for(Network n : pn.getNetworkDirectory().getNetworkList()){
+                    if(network.getId() == n.getId()){
+                        for(Enterprise enterprise : n.getEnterpriseDirectory().getEnterpriseList()){
+                           branchCombo.addItem(enterprise);
+                        }
+                        comboBranch.setEnabled(true);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
     private void populateComboBox() {
         comboGender.removeAllItems();
-        comboCountry.removeAllItems();
-
         comboGender.addItem("Male");
         comboGender.addItem("Female");
-
-        for (ParentNetwork parentnetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
-            comboCountry.addItem(parentnetwork);
-        }
-
     }
 
     /**
@@ -112,7 +155,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         btnDetails6 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -195,11 +238,21 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         comboCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboCity.setEnabled(false);
+        comboCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCityActionPerformed(evt);
+            }
+        });
 
         comboBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBranch.setEnabled(false);
 
         comboCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCountry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCountryActionPerformed(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 204, 0));
@@ -381,7 +434,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(txtLastName)
-                                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                                    .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                                                     .addComponent(txtEmailID)))))
                                     .addComponent(jLabel17)
                                     .addGroup(layout.createSequentialGroup()
@@ -440,10 +493,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
                                         .addComponent(jLabel13)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(433, 433, 433)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel2))
+                                .addGap(11, 11, 11)))
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -569,7 +620,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel5))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel6)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -778,21 +829,21 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
     private void setFormData(Enterprise enterprise) {
 
-        Membership membership = new Membership(comboMembership.getSelectedItem());
-        Customer customer = enterprise.getCustomerDirectory().addCustomer(membership);
-        // bind user data
-
-        
-        customer.setName(txtFirstName.getText()+" "+txtLastName.getText());
-        if(comboGender.getSelectedItem().toString().equals(Person.genderType.Male))
-            customer.setGender(Person.genderType.Male);
-        else
-            customer.setGender(Person.genderType.Female);
-            //Add code for combo boxes
-            customer.setAddress(txtAddress.getText());
-            customer.setZip(txtZipCode.getText());
-            customer.setMobile(txtPhoneNo.getText());
-            customer.setEmail(txtEmailID.getText());
+//        Membership membership = new Membership(comboMembership.getSelectedItem());
+//        Customer customer = enterprise.getCustomerDirectory().addCustomer(membership);
+//        // bind user data
+//
+//        
+//        customer.setName(txtFirstName.getText()+" "+txtLastName.getText());
+//        if(comboGender.getSelectedItem().toString().equals(Person.genderType.Male))
+//            customer.setGender(Person.genderType.Male);
+//        else
+//            customer.setGender(Person.genderType.Female);
+//            //Add code for combo boxes
+//            customer.setAddress(txtAddress.getText());
+//            customer.setZip(txtZipCode.getText());
+//            customer.setMobile(txtPhoneNo.getText());
+//            customer.setEmail(txtEmailID.getText());
         
         try {
 
@@ -824,6 +875,27 @@ public class RegisterJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void comboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCountryActionPerformed
+        // TODO add your handling code here:
+        if(comboCountry.isEnabled()){
+            comboCity.setEnabled(false);
+            comboBranch.setEnabled(false);
+            ParentNetwork parentNetwork = (ParentNetwork)comboCountry.getSelectedItem();
+            populateCityCombo(parentNetwork);
+            comboCity.setEnabled(true);
+        }
+    }//GEN-LAST:event_comboCountryActionPerformed
+
+    private void comboCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCityActionPerformed
+        // TODO add your handling code here:
+        if(comboCity.isEnabled()){
+            ParentNetwork parentNetwork = (ParentNetwork)comboCountry.getSelectedItem();
+            Network network = (Network)comboCity.getSelectedItem();
+            populateBranchCombo(parentNetwork, network);
+            comboBranch.setEnabled(true);
+        }
+    }//GEN-LAST:event_comboCityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -840,7 +912,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox comboCountry;
     private javax.swing.JComboBox<String> comboGender;
     private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

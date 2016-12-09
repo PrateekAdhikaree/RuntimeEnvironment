@@ -7,7 +7,11 @@ package userinterface;
 
 import business.Business;
 import business.DB4OUtil;
+import business.enterprise.Enterprise;
+import business.network.Network;
+import business.parentnetwork.ParentNetwork;
 import java.awt.CardLayout;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import userinterface.customerrole.RegisterJPanel;
 
@@ -27,15 +31,66 @@ public class MainJFrame extends javax.swing.JFrame {
         btnProfile.setVisible(false);
         btnLogout.setVisible(false);
         business = DB4OUtil.getInstance().retrieveSystem();
+        populateCountryCombo();
     }
     
-    public void changeHeaderAfterLogin(String name){
-        btnProfile.setVisible(true);
-        btnLogout.setVisible(true);
-        btnNewUser.setVisible(false);
-        btnLogin.setVisible(false);
-        lblMainHeader.setText("Welcome, "+name);
+    public void populateCountryCombo(){
+        JComboBox countryCombo = comboCountry;
+        countryCombo.removeAllItems();
+        int counter = 0;
+        for(ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(counter == 0){
+                populateCityCombo(parentNetwork);
+            }
+            countryCombo.addItem(parentNetwork);
+            counter++;
+        }
+        countryCombo.setEnabled(true);
     }
+    
+    public void populateCityCombo(ParentNetwork parentNetwork){
+        JComboBox cityCombo = comboCity;
+        cityCombo.removeAllItems();
+        int counter = 0;
+        for(ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(parentNetwork.getId() == pn.getId()){
+                for(Network network : pn.getNetworkDirectory().getNetworkList()){
+                    if(counter == 0)
+                        populateBranchCombo(parentNetwork, network);
+                    cityCombo.addItem(network);
+                    counter++;
+                }
+                cityCombo.setEnabled(true);
+                break;
+            } 
+        }
+    }
+    
+    public void populateBranchCombo(ParentNetwork parentNetwork, Network network){
+        JComboBox branchCombo = comboBranch;
+        branchCombo.removeAllItems();
+        for(ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(parentNetwork.getId() == pn.getId()){
+                for(Network n : pn.getNetworkDirectory().getNetworkList()){
+                    if(network.getId() == n.getId()){
+                        for(Enterprise enterprise : n.getEnterpriseDirectory().getEnterpriseList()){
+                           branchCombo.addItem(enterprise);
+                        }
+                        comboBranch.setEnabled(true);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+//    public void changeHeaderAfterLogin(String name){
+//        btnProfile.setVisible(true);
+//        btnLogout.setVisible(true);
+//        btnNewUser.setVisible(false);
+//        btnLogin.setVisible(false);
+//        lblMainHeader.setText("Welcome, "+name);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,17 +120,17 @@ public class MainJFrame extends javax.swing.JFrame {
         btnProfile = new javax.swing.JButton();
         userProcessContainer = new javax.swing.JPanel();
         welcomeJPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnGo = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        comboCountry = new javax.swing.JComboBox<>();
+        comboCity = new javax.swing.JComboBox<>();
+        comboBranch = new javax.swing.JComboBox<>();
+        btnAboutUs = new javax.swing.JButton();
+        btnContactUS = new javax.swing.JButton();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -131,6 +186,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btnProfile.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnProfile.setForeground(new java.awt.Color(102, 102, 255));
         btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout upperJPanelLayout = new javax.swing.GroupLayout(upperJPanel);
         upperJPanel.setLayout(upperJPanelLayout);
@@ -180,11 +240,11 @@ public class MainJFrame extends javax.swing.JFrame {
         welcomeJPanel.setBackground(new java.awt.Color(102, 102, 255));
         welcomeJPanel.setForeground(new java.awt.Color(102, 102, 255));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 153, 0));
-        jButton1.setText("Go");
-        jButton1.setEnabled(false);
+        btnGo.setBackground(new java.awt.Color(255, 255, 255));
+        btnGo.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnGo.setForeground(new java.awt.Color(255, 153, 0));
+        btnGo.setText("Go");
+        btnGo.setEnabled(false);
 
         jSeparator1.setForeground(new java.awt.Color(255, 204, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -205,36 +265,52 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 204, 0));
         jLabel7.setText("View our services:");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 153, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(255, 153, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setEnabled(false);
-
-        jComboBox3.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox3.setForeground(new java.awt.Color(255, 153, 0));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setEnabled(false);
-
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 153, 0));
-        jButton2.setText("About Us");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        comboCountry.setBackground(new java.awt.Color(255, 255, 255));
+        comboCountry.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        comboCountry.setForeground(new java.awt.Color(255, 153, 0));
+        comboCountry.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCountry.setEnabled(false);
+        comboCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                comboCountryActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 153, 0));
-        jButton3.setText("Contact Us");
+        comboCity.setBackground(new java.awt.Color(255, 255, 255));
+        comboCity.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        comboCity.setForeground(new java.awt.Color(255, 153, 0));
+        comboCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCity.setEnabled(false);
+        comboCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCityActionPerformed(evt);
+            }
+        });
+
+        comboBranch.setBackground(new java.awt.Color(255, 255, 255));
+        comboBranch.setForeground(new java.awt.Color(255, 153, 0));
+        comboBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBranch.setEnabled(false);
+
+        btnAboutUs.setBackground(new java.awt.Color(255, 255, 255));
+        btnAboutUs.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnAboutUs.setForeground(new java.awt.Color(255, 153, 0));
+        btnAboutUs.setText("About Us");
+        btnAboutUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutUsActionPerformed(evt);
+            }
+        });
+
+        btnContactUS.setBackground(new java.awt.Color(255, 255, 255));
+        btnContactUS.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnContactUS.setForeground(new java.awt.Color(255, 153, 0));
+        btnContactUS.setText("Contact Us");
+        btnContactUS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContactUSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout welcomeJPanelLayout = new javax.swing.GroupLayout(welcomeJPanel);
         welcomeJPanel.setLayout(welcomeJPanelLayout);
@@ -242,9 +318,9 @@ public class MainJFrame extends javax.swing.JFrame {
             welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomeJPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnAboutUs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnContactUS)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -255,10 +331,10 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(welcomeJPanelLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jLabel6))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnGo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboCountry, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboBranch, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         welcomeJPanelLayout.setVerticalGroup(
@@ -267,24 +343,24 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3))
+                        .addComponent(btnAboutUs)
+                        .addComponent(btnContactUS))
                     .addGroup(welcomeJPanelLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(5, 5, 5)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(5, 5, 5)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17)
-                        .addComponent(jButton1))
+                        .addComponent(btnGo))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
@@ -300,7 +376,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        LoginJPanel loginJPanel = new LoginJPanel(userProcessContainer, business, upperJPanel);
+        LoginJPanel loginJPanel = new LoginJPanel(userProcessContainer, business, this);
         userProcessContainer.add("loginJPanel", loginJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -315,9 +391,46 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnNewUserActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutUsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        AboutUsJPanel aboutUsJPanel = new AboutUsJPanel(userProcessContainer);
+        userProcessContainer.add("AboutUsJPanel",aboutUsJPanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnAboutUsActionPerformed
+
+    private void btnContactUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactUSActionPerformed
+        // TODO add your handling code here:
+        ContactUsJPanel contactUsJPanel = new ContactUsJPanel(userProcessContainer);
+        userProcessContainer.add("ContactUsJPanel",contactUsJPanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnContactUSActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProfileActionPerformed
+
+    private void comboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCountryActionPerformed
+        // TODO add your handling code here:
+        if(comboCountry.isEnabled()){
+            comboCity.setEnabled(false);
+            comboBranch.setEnabled(false);
+            ParentNetwork parentNetwork = (ParentNetwork)comboCountry.getSelectedItem();
+            populateCityCombo(parentNetwork);
+            comboCity.setEnabled(true);
+        }
+    }//GEN-LAST:event_comboCountryActionPerformed
+
+    private void comboCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCityActionPerformed
+        // TODO add your handling code here:
+        if(comboCity.isEnabled()){
+            ParentNetwork parentNetwork = (ParentNetwork)comboCountry.getSelectedItem();
+            Network network = (Network)comboCity.getSelectedItem();
+            populateBranchCombo(parentNetwork, network);
+            comboBranch.setEnabled(true);
+        }
+    }//GEN-LAST:event_comboCityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,16 +470,16 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAboutUs;
+    private javax.swing.JButton btnContactUS;
+    private javax.swing.JButton btnGo;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnNewUser;
     private javax.swing.JButton btnProfile;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> comboBranch;
+    private javax.swing.JComboBox<String> comboCity;
+    private javax.swing.JComboBox<String> comboCountry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -5,19 +5,22 @@
  */
 package userinterface.adminrole;
 
-import userinterface.maintenancerole.*;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author soumiyaroy
  */
 public class AdminComplaintJPanel extends javax.swing.JPanel {
-
+    JPanel userProcessContainer;
+    
     /**
      * Creates new form ComplaintJPanel
      */
     public AdminComplaintJPanel() {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
     }
 
     /**
@@ -36,17 +39,17 @@ public class AdminComplaintJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaMessage = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnSend = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         comboDepartment = new javax.swing.JComboBox<>();
         comboUser = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        radioBtnSelf = new javax.swing.JRadioButton();
+        radioBtnOther = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(102, 102, 255));
 
@@ -66,17 +69,22 @@ public class AdminComplaintJPanel extends javax.swing.JPanel {
         txtAreaMessage.setRows(5);
         jScrollPane1.setViewportView(txtAreaMessage);
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 204, 0));
-        jButton1.setText("Back");
+        btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 204, 0));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setText("Send to Vendor:");
 
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 204, 0));
-        jButton2.setText("Send");
+        btnSend.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnSend.setForeground(new java.awt.Color(255, 204, 0));
+        btnSend.setText("Send");
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 204, 0));
@@ -96,13 +104,13 @@ public class AdminComplaintJPanel extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 204, 0));
         jLabel9.setText("Raised By:");
 
-        jRadioButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton1.setText("Self");
+        radioBtnSelf.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        radioBtnSelf.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnSelf.setText("Self");
 
-        jRadioButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton2.setText("Other");
+        radioBtnOther.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        radioBtnOther.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnOther.setText("Other");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,18 +132,18 @@ public class AdminComplaintJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addComponent(jLabel6)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButton1)
+                            .addComponent(btnBack)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2))
+                            .addComponent(btnSend))
                         .addComponent(jScrollPane1)
                         .addComponent(txtSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jRadioButton1))
+                            .addComponent(radioBtnSelf))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
+                            .addComponent(radioBtnOther)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -159,8 +167,8 @@ public class AdminComplaintJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel9)
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(radioBtnSelf)
+                            .addComponent(radioBtnOther))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,18 +187,25 @@ public class AdminComplaintJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnBack)
+                    .addComponent(btnSend))
                 .addGap(38, 38, 38))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSend;
     private javax.swing.JComboBox<String> comboDepartment;
     private javax.swing.JComboBox<String> comboUser;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -200,9 +215,9 @@ public class AdminComplaintJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton radioBtnOther;
+    private javax.swing.JRadioButton radioBtnSelf;
     private javax.swing.JTextArea txtAreaMessage;
     private javax.swing.JTextField txtSubject;
     // End of variables declaration//GEN-END:variables

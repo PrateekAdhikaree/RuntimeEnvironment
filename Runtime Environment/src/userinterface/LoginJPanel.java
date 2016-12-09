@@ -11,6 +11,8 @@ import business.network.Network;
 import business.parentnetwork.ParentNetwork;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.password.ForgotPasswordJPanel;
@@ -23,18 +25,18 @@ public class LoginJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Business business;
-    JPanel upperJPanel;
+    JFrame mainJFrame;
 
     /**
      * Creates new form LoginJPanel
      */
-    public LoginJPanel(JPanel userProcessContainer, Business business, JPanel upperJPanel) {
+    public LoginJPanel(JPanel userProcessContainer, Business business, JFrame mainJFrame) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
-        this.upperJPanel = upperJPanel;
+        this.mainJFrame = mainJFrame;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,7 +88,7 @@ public class LoginJPanel extends javax.swing.JPanel {
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 153, 0));
-        btnBack.setText("Back");
+        btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -168,10 +170,19 @@ public class LoginJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Get user name
         // business.setTxtUsername(txtUsername.getText());
-        String userName = txtUsername.getText();
+        String userName = txtUsername.getText().trim();
+        if (userName.length() == 0){
+            JOptionPane.showMessageDialog(null, "Username cannot be blank", "Error Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         // Get Password
         char[] passwordCharArray = passwordPassword.getPassword();
         String password = String.valueOf(passwordCharArray);
+        if (password.length() == 0  || password.length() < 6){
+            JOptionPane.showMessageDialog(null, "Password should be greater than 6 characters", "Error Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         //Step 1: Check in the user account directory if you have the user
         UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
@@ -195,14 +206,12 @@ public class LoginJPanel extends javax.swing.JPanel {
             }
         }
         if (userAccount == null) {
-            JOptionPane.showMessageDialog(this, "Invalid Credentials");
+            JOptionPane.showMessageDialog(this, "Invalid Username/Password");
             return;
         } else {
             userProcessContainer.add("WorkArea", userAccount.getRole().createWorkArea(userProcessContainer, userAccount, inEnterprise, business));
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
-            String name = null;
-//            upperJPanel.changeHeaderAfterLogin(name);
         }
 
         btnLogin.setEnabled(false);
