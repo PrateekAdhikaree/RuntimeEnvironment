@@ -501,16 +501,17 @@ public final class Initialize {
                         if(b[0].equals(city)){
                             if(b[2].equals(branch)){
                                 String desc = "";
-                                if(b.length > 9){
+                                if(b.length > 10){
                                     for(int i = 0; i < b.length-1; i++){
-                                        if(i >= 8)
+                                        if(i >= 9)
                                             desc += b[i] + ",";
                                     }
                                     desc = desc.substring(0, desc.length()-1);
                                 }else{
-                                    desc = b[8];
+                                    desc = b[9];
                                 }
-                                GroupClasses groupClasses = groupClassesDirectory.addGroupClasses();
+                                GroupClasses.classType type = b[8].equals(GroupClasses.classType.Customer.toString()) ? GroupClasses.classType.Customer : GroupClasses.classType.Trainer;
+                                GroupClasses groupClasses = groupClassesDirectory.addGroupClasses(type);
                                 groupClasses.setTrainer(getEmployeeFromString(employeeDirectory, b[5]));
                                 groupClasses.setDescription(desc);
                                 groupClasses.setDuration(Integer.parseInt(b[6]));
