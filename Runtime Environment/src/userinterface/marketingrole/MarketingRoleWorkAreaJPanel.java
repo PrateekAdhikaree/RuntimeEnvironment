@@ -5,6 +5,8 @@
  */
 package userinterface.marketingrole;
 
+import business.Business;
+import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -13,14 +15,17 @@ import javax.swing.JPanel;
  * @author raseswaridas
  */
 public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
-    JPanel userProcessContainer;
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
 
     /**
      * Creates new form Marketing
      */
-    public MarketingRoleWorkAreaJPanel() {
+    public MarketingRoleWorkAreaJPanel(JPanel userProcessContainer,UserAccount userAccount,Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.business = business;
     }
 
     /**
