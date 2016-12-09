@@ -22,7 +22,7 @@ public class Membership {
         Steel;
     };
     
-    private String name;
+    private membershipType name;
     private String description;
     private float price;
     private int durationInDays;
@@ -34,7 +34,7 @@ public class Membership {
     private int id;
     private static int count = 0;
 
-    public Membership(String type, ParentNetwork parentNetwork) {
+    public Membership(membershipType type, ParentNetwork parentNetwork) {
         count++;
         this.id = count;
         this.name = type;
@@ -54,7 +54,7 @@ public class Membership {
     }
 
     public String getName() {
-        return name;
+        return name.toString();
     }
 
     public String getDescription() {

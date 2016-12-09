@@ -24,7 +24,7 @@ public class MembershipDirectory {
         return membershipList;
     }
     
-    public Membership addMembership(String type, ParentNetwork parentNetwork){
+    public Membership addMembership(Membership.membershipType type, ParentNetwork parentNetwork){
         Membership membership = new Membership(type, parentNetwork);
         membershipList.add(membership);
         return membership;

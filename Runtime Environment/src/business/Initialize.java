@@ -238,7 +238,7 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    Membership membership = membershipDirectory.addMembership(b[0], parentNetwork);
+                    Membership membership = membershipDirectory.addMembership(getMembershipType(b[0]), parentNetwork);
                     membership.setDescription(b[1]);
                     membership.setPrice(Integer.parseInt(b[3]));
                     membership.setDurationInDays(Integer.parseInt(b[2]));
@@ -255,6 +255,24 @@ public final class Initialize {
         }
         
         return membershipDirectory;
+    }
+    
+    private Membership.membershipType getMembershipType(String str){
+        Membership.membershipType type = null;
+        if(str.equals(Membership.membershipType.Bronze.toString()))
+            type = Membership.membershipType.Bronze;
+        else if(str.equals(Membership.membershipType.Diamond.toString()))
+            type = Membership.membershipType.Diamond;
+        else if(str.equals(Membership.membershipType.Gold.toString()))
+            type = Membership.membershipType.Gold;
+        else if(str.equals(Membership.membershipType.Platinum.toString()))
+            type = Membership.membershipType.Platinum;
+        else if(str.equals(Membership.membershipType.Silver.toString()))
+            type = Membership.membershipType.Silver;
+        else if(str.equals(Membership.membershipType.Steel.toString()))
+            type = Membership.membershipType.Steel;
+        
+        return type;
     }
     
     private CustomerDirectory getCustomers(String branch, MembershipDirectory membershipDirectory){

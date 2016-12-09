@@ -19,12 +19,18 @@ public class GroupClasses extends Organization {
     private String description;
     private String time;
     private Employee trainer;
+    private classType type;
+    
+    public enum classType{
+        Trainer, Customer;
+    }
 
     private int id;
     private static int count = 0;
 
-    public GroupClasses() {
+    public GroupClasses(classType type) {
         super(organizationType.GroupClasses);
+        this.type = type;
         count++;
         id = count;
     }

@@ -23,8 +23,8 @@ public class GroupClassesDirectory {
         return groupClassesList;
     }
 
-    public GroupClasses addGroupClasses() {
-        GroupClasses groupClasses = new GroupClasses();
+    public GroupClasses addGroupClasses(GroupClasses.classType type) {
+        GroupClasses groupClasses = new GroupClasses(type);
         groupClassesList.add(groupClasses);
         return groupClasses;
     }
