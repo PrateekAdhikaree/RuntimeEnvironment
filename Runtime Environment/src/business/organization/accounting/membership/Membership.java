@@ -57,6 +57,10 @@ public class Membership {
         return name.toString();
     }
 
+    public void setName(membershipType name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
