@@ -17,6 +17,8 @@ import com.db4o.ta.TransparentPersistenceSupport;
  */
 public class DB4OUtil {
 
+    private ObjectContainer conn;
+    
     // For Windows systems
     private static final String FILENAME = "resources\\files\\DB\\DataBank.db4o"; // path to the data store
     // For Mac systems
@@ -58,20 +60,25 @@ public class DB4OUtil {
         return null;
     }
 
-    public synchronized void storeSystem(Business business, ObjectContainer conn) {
+    // flag: 0 is while system initialization; 1 is while logout
+    public synchronized void storeSystem(Business business, int flag) {
+        if(flag == 1)
+            conn = createConnection();
         conn.store(business);
         conn.commit();
+        if(flag == 1)
+            conn.close();
     }
 
     public Business retrieveSystem() {
-        ObjectContainer conn = createConnection();
+        conn = createConnection();
         ObjectSet<Business> system = conn.query(Business.class); // Change to the object you want to save
         Business business;
         if (system.size() == 0) {
             // If there's no Business in the record, create a new one
             Initialize initialize = new Initialize();
             business = initialize.configureBusiness();
-            storeSystem(business, conn.ext().openSession());
+            storeSystem(business, 0);
         } else {
             business = system.get(system.size() - 1);
         }

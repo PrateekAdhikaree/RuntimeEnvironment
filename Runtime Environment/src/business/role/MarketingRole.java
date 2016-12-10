@@ -9,6 +9,7 @@ import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.marketingrole.MarketingProfileJPanel;
 import userinterface.marketingrole.MarketingRoleWorkAreaJPanel;
 
 /**
@@ -24,6 +25,11 @@ public class MarketingRole extends Role {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new MarketingRoleWorkAreaJPanel(userProcessContainer, userAccount, business);
+    }
+    
+    @Override
+    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){
+        return new MarketingProfileJPanel(userProcessContainer, userAccount, business);
     }
     
 }

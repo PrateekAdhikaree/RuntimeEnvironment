@@ -9,6 +9,7 @@ import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.vendorrole.VendorProfileJPanel;
 import userinterface.vendorrole.VendorRoleWorkAreaJPanel;
 /**
  *
@@ -23,6 +24,10 @@ public class VendorRole extends Role {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {
         return new VendorRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);
+    }
+    @Override
+    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){
+        return new VendorProfileJPanel(userProcessContainer, userAccount, business);
     }
 
 }

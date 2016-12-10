@@ -5,23 +5,29 @@
  */
 package userinterface.adminrole;
 
+import business.Business;
+import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import userinterface.superadminrole.*;
+import userinterface.password.ChangePasswordJPanel;
 
 /**
  *
  * @author soumiyaroy
  */
 public class AdminProfileJPanel extends javax.swing.JPanel {
-    JPanel userProcessContainer;
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
 
     /**
      * Creates new form SuperAdminProfileJPanel
      */
-    public AdminProfileJPanel() {
+    public AdminProfileJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+                this.userAccount = userAccount;
+                this.business = business;
     }
 
     /**
@@ -94,6 +100,11 @@ public class AdminProfileJPanel extends javax.swing.JPanel {
         btnChangePassword.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnChangePassword.setForeground(new java.awt.Color(255, 204, 0));
         btnChangePassword.setText("Change Password");
+        btnChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePasswordActionPerformed(evt);
+            }
+        });
 
         passwordPassword.setForeground(new java.awt.Color(255, 153, 0));
         passwordPassword.setText("jPasswordField1");
@@ -346,6 +357,14 @@ public class AdminProfileJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
+        // TODO add your handling code here:
+        ChangePasswordJPanel changePasswordJPanel = new ChangePasswordJPanel(userProcessContainer, userAccount, business);
+        userProcessContainer.add("ChangePasswordJPanel",changePasswordJPanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnChangePasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

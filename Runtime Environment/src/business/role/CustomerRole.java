@@ -9,6 +9,7 @@ import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.adminrole.AdminProfileJPanel;
 import userinterface.customerrole.CustomerRoleWorkAreaJPanel;
 
 /**
@@ -23,7 +24,10 @@ public class CustomerRole extends Role {
     
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
-        return new CustomerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);
+        return new CustomerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise, business);
     }
-    
+    @Override
+    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){
+        return new AdminProfileJPanel(userProcessContainer, userAccount, business);
+    }
 }

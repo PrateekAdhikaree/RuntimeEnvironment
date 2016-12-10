@@ -9,6 +9,7 @@ import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.superadminrole.SuperAdminProfileJPanel;
 import userinterface.superadminrole.SuperAdminWorkAreaJPanel;
 
 /**
@@ -25,5 +26,8 @@ public class SuperAdminRole extends Role {
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new SuperAdminWorkAreaJPanel(userProcessContainer, userAccount, business);
     }
-    
+    @Override
+    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){
+        return new SuperAdminProfileJPanel(userProcessContainer, userAccount, business);
+    }
 }

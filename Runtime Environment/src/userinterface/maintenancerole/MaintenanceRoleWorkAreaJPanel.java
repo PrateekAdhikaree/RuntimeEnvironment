@@ -5,6 +5,7 @@
  */
 package userinterface.maintenancerole;
 
+import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
@@ -18,15 +19,17 @@ public class MaintenanceRoleWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Enterprise enterprise;
+    private Business business;
     
     /**
      * Creates new form MaintenanceRoleWorkAreaJPanel
      */
-    public MaintenanceRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise) {
+    public MaintenanceRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.enterprise = enterprise;
+        this.business = business;
     }
 
     /**

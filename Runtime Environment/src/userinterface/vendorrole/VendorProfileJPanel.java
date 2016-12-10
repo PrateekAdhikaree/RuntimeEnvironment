@@ -5,6 +5,9 @@
  */
 package userinterface.vendorrole;
 
+import business.Business;
+import business.useraccount.UserAccount;
+import javax.swing.JPanel;
 import userinterface.superadminrole.*;
 
 /**
@@ -12,12 +15,17 @@ import userinterface.superadminrole.*;
  * @author soumiyaroy
  */
 public class VendorProfileJPanel extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
     /**
      * Creates new form SuperAdminProfileJPanel
      */
-    public VendorProfileJPanel() {
+    public VendorProfileJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
+                this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.business = business;
     }
 
     /**

@@ -39,6 +39,10 @@ public abstract class Role {
             UserAccount account,
             Enterprise enterprise,
             Business business);
+    
+        public abstract JPanel createProfile(JPanel userProcessContainer, 
+            UserAccount account,
+            Business business);
 
     public abstract void setSalary();
     

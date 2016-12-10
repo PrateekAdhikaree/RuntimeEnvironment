@@ -15,6 +15,7 @@ import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import userinterface.customerrole.RegisterJPanel;
 
 /**
@@ -23,7 +24,9 @@ import userinterface.customerrole.RegisterJPanel;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
-    Business business;
+    private Business business;
+    private UserAccount userAccount;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
     /**
      * Creates new form MainJFrame
@@ -32,7 +35,7 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         btnProfile.setVisible(false);
         btnLogout.setVisible(false);
-        business = DB4OUtil.getInstance().retrieveSystem();
+        business = dB4OUtil.retrieveSystem();
         passwordPassword.setText(null);
         populateCountryCombo();
     }
@@ -192,10 +195,15 @@ public class MainJFrame extends javax.swing.JFrame {
         upperJPanel.add(lblMainHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 22, 355, 44));
         upperJPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 22, -1, -1));
 
-        btnLogout.setBackground(new java.awt.Color(102, 102, 255));
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(102, 102, 255));
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
         upperJPanel.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 44, 100, -1));
 
         btnProfile.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -410,13 +418,17 @@ public class MainJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid Username/Password");
             return;
         } else {
+            this.userAccount = userAccount;
             userProcessContainer.add("WorkArea", userAccount.getRole().createWorkArea(userProcessContainer, userAccount, inEnterprise, business));
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         }
 
-        btnLogin.setEnabled(false);
-        //logoutJButton.setEnabled(true);
+        btnLogin.setVisible(false);
+        btnNewUser.setVisible(false);
+        btnProfile.setVisible(true);
+        btnLogout.setVisible(true);
+        
         txtUsername.setEnabled(false);
         passwordPassword.setEnabled(false);
 
@@ -448,6 +460,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
+        userProcessContainer.add("Profile", userAccount.getRole().createProfile(userProcessContainer, userAccount, business));
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void comboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCountryActionPerformed
@@ -470,6 +486,24 @@ public class MainJFrame extends javax.swing.JFrame {
             comboBranch.setEnabled(true);
         }
     }//GEN-LAST:event_comboCityActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        btnLogout.setEnabled(false);
+       txtUsername.setEnabled(true);
+       passwordPassword.setEnabled(true);
+       btnLogin.setEnabled(true);
+
+       txtUsername.setText("");
+       passwordPassword.setText("");
+
+       userProcessContainer.removeAll();
+       JPanel blankJP = new JPanel();
+       userProcessContainer.add("blank", blankJP);
+       CardLayout crdLyt = (CardLayout) userProcessContainer.getLayout();
+       crdLyt.next(userProcessContainer);
+       dB4OUtil.storeSystem(business, 1);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments

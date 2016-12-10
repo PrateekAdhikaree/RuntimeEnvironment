@@ -5,17 +5,28 @@
  */
 package userinterface.password;
 
+import business.Business;
+import business.useraccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author soumiyaroy
  */
 public class ChangePasswordJPanel extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
+
     /**
      * Creates new form JPanelChangePassword
      */
-    public ChangePasswordJPanel() {
+    public ChangePasswordJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.business = business;
     }
 
     /**

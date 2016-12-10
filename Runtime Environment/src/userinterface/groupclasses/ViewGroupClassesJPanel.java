@@ -5,17 +5,23 @@
  */
 package userinterface.groupclasses;
 
+import business.enterprise.Enterprise;
+import javax.swing.JPanel;
+
 /**
  *
  * @author raseswaridas
  */
 public class ViewGroupClassesJPanel extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private Enterprise enterprise;
     /**
      * Creates new form ViewGroupClassesJPanel
      */
-    public ViewGroupClassesJPanel() {
+    public ViewGroupClassesJPanel(JPanel userProcessContainer, Enterprise enterprise) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+         this.enterprise = enterprise;
     }
 
     /**

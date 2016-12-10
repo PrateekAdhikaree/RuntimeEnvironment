@@ -5,23 +5,27 @@
  */
 package userinterface.marketingrole;
 
+import business.Business;
+import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import userinterface.superadminrole.*;
 
 /**
  *
  * @author soumiyaroy
  */
 public class MarketingProfileJPanel extends javax.swing.JPanel {
-    JPanel userProcessContainer;
-
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
     /**
      * Creates new form SuperAdminProfileJPanel
      */
-    public MarketingProfileJPanel() {
-        initComponents();
+    public MarketingProfileJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
+        initComponents();        
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.business = business;
     }
 
     /**

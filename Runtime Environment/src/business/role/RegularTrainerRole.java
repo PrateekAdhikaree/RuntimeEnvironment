@@ -9,6 +9,7 @@ import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.regulartrainerrole.RegularTrainerProfileJPanel;
 import userinterface.regulartrainerrole.RegularTrainerRoleWorkAreaJPanel;
 
 /**
@@ -24,6 +25,11 @@ public class RegularTrainerRole extends Role {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
         return new RegularTrainerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);
+    }
+    
+        @Override
+    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){
+        return new RegularTrainerProfileJPanel(userProcessContainer, userAccount, business);
     }
     
 }

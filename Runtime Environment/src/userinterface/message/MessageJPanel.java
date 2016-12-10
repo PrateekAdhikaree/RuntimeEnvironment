@@ -5,17 +5,23 @@
  */
 package userinterface.message;
 
+import business.Business;
+import javax.swing.JPanel;
+
 /**
  *
  * @author soumiyaroy
  */
 public class MessageJPanel extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private Business business;
     /**
      * Creates new form MessageJPanel
      */
-    public MessageJPanel() {
+    public MessageJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
     }
 
     /**
