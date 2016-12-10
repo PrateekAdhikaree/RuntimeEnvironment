@@ -27,6 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private Business business;
     private UserAccount userAccount;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private Enterprise selectedEnterprise = null;
 
     /**
      * Creates new form MainJFrame
@@ -383,8 +384,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        // Get user name
-        // business.setTxtUsername(txtUsername.getText());
+        
+        this.selectedEnterprise = null;
         String userName = txtUsername.getText().trim();
         if (userName.length() == 0) {
             JOptionPane.showMessageDialog(null, "Username cannot be blank", "Error Message", JOptionPane.ERROR_MESSAGE);
@@ -402,8 +403,6 @@ public class MainJFrame extends javax.swing.JFrame {
         //Step 1: Check in the user account directory if you have the user
         UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
 
-        Enterprise inEnterprise = null;
-
         if (userAccount == null) {
             //Step2:Go inside each parentnetwork and check each network
             for (ParentNetwork parentnetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
@@ -413,7 +412,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
                         userAccount = enterprise.getUserAccountDirectory().authenticateUser(userName, password);
                         if (userAccount != null) {
-                            inEnterprise = enterprise;
+                            this.selectedEnterprise = enterprise;
                             break;
                         }
                     }
@@ -432,7 +431,7 @@ public class MainJFrame extends javax.swing.JFrame {
             return;
         } else {
             this.userAccount = userAccount;
-            userProcessContainer.add("WorkArea", userAccount.getRole().createWorkArea(userProcessContainer, userAccount, inEnterprise, business));
+            userProcessContainer.add("WorkArea", userAccount.getRole().createWorkArea(userProcessContainer, userAccount, selectedEnterprise, business));
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         }
@@ -473,7 +472,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
-        userProcessContainer.add("Profile", userAccount.getRole().createProfile(userProcessContainer, userAccount, business));
+        userProcessContainer.add("Profile", userAccount.getRole().createProfile(userProcessContainer, userAccount, selectedEnterprise.getOrganizationDirectory().getAccounting(), business));
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
 
