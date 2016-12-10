@@ -7,6 +7,7 @@ package business.role;
 
 import business.Business;
 import business.enterprise.Enterprise;
+import business.organization.accounting.Accounting;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.accountantrole.AccountantProfileJPanel;
@@ -28,8 +29,8 @@ public class AccountantRole extends Role {
     }
         
     @Override
-    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){
-        return new AccountantProfileJPanel(userProcessContainer, userAccount, business);
+    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Accounting accounting, Business business){
+        return new AccountantProfileJPanel(userProcessContainer, userAccount, accounting, business);
     }
     
 }

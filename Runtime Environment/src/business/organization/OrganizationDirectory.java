@@ -20,7 +20,6 @@ public class OrganizationDirectory {
     private MessageDirectory workOrderDirectory;
     private GroupClassesDirectory groupClassesDirectory;
     private SpecialServiceDirectory sevicesDirectory;
-    private Vendor vendor;
     private Accounting accounting;
 
     public MessageDirectory getWorkOrderDirectory() {
@@ -45,14 +44,6 @@ public class OrganizationDirectory {
 
     public void setSevicesDirectory(SpecialServiceDirectory sevicesDirectory) {
         this.sevicesDirectory = sevicesDirectory;
-    }
-
-    public Vendor getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
     }
 
     public Accounting getAccounting() {

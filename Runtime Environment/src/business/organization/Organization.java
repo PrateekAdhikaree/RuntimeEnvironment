@@ -5,6 +5,7 @@
  */
 package business.organization;
 
+import business.organization.vendor.Vendor;
 import business.organization.message.MessageDirectory;
 import business.organization.promo.PromoDirectory;
 import business.person.customer.CustomerDirectory;
@@ -31,6 +32,8 @@ public abstract class Organization {
     protected MessageDirectory messageDirectory;
     protected PromoDirectory promoDirectory;
     protected organizationType type;
+    protected Vendor vendor;
+    
     
     public Organization(organizationType type){
         id = count;
@@ -93,6 +96,14 @@ public abstract class Organization {
 
     public void setPromoDirectory(PromoDirectory promoDirectory) {
         this.promoDirectory = promoDirectory;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
     
 }

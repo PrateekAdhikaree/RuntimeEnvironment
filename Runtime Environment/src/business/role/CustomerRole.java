@@ -7,9 +7,10 @@ package business.role;
 
 import business.Business;
 import business.enterprise.Enterprise;
+import business.organization.accounting.Accounting;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
-import userinterface.adminrole.AdminProfileJPanel;
+import userinterface.customerrole.CustomerProfileJPanel;
 import userinterface.customerrole.CustomerRoleWorkAreaJPanel;
 
 /**
@@ -27,7 +28,7 @@ public class CustomerRole extends Role {
         return new CustomerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise, business);
     }
     @Override
-    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){
-        return new AdminProfileJPanel(userProcessContainer, userAccount, business);
+    public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Accounting accounting, Business business){
+        return new CustomerProfileJPanel(userProcessContainer, userAccount, accounting, business);
     }
 }

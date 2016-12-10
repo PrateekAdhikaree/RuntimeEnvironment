@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import business.useraccount.UserAccount;
 import business.*;
 import business.enterprise.Enterprise;
+import business.organization.accounting.Accounting;
 
 /**
  *
@@ -36,12 +37,13 @@ public abstract class Role {
     }
     
     public abstract JPanel createWorkArea(JPanel userProcessContainer, 
-            UserAccount account,
+            UserAccount userAccount,
             Enterprise enterprise,
             Business business);
     
         public abstract JPanel createProfile(JPanel userProcessContainer, 
-            UserAccount account,
+            UserAccount userAccount,
+            Accounting accounting,
             Business business);
 
     public abstract void setSalary();
