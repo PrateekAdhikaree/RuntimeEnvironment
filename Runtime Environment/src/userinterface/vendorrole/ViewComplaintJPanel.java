@@ -5,17 +5,30 @@
  */
 package userinterface.vendorrole;
 
+import business.Business;
+import business.enterprise.Enterprise;
+import business.useraccount.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author soumiyaroy
  */
 public class ViewComplaintJPanel extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
+
     /**
      * Creates new form ViewComplaintJPanel
      */
-    public ViewComplaintJPanel() {
+    public ViewComplaintJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.business = business;
     }
 
     /**
@@ -54,20 +67,34 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("View Complaint");
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setText("Message ID:");
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 204, 0));
         jLabel3.setText("Date:");
 
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 204, 0));
         jLabel4.setText("Subject:");
 
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 204, 0));
         jLabel5.setText("Current Status:");
 
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 204, 0));
         jLabel6.setText("Sender:");
 
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 204, 0));
         jLabel7.setText("Raised By:");
 
         txtMessageID.setEditable(false);
 
+        btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 153, 0));
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,10 +109,16 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
         txtAreaDescription.setRows(5);
         jScrollPane1.setViewportView(txtAreaDescription);
 
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 204, 0));
         jLabel8.setText("Description:");
 
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 204, 0));
         jLabel9.setText("Change Status:");
 
+        btnSave.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 153, 0));
         btnSave.setText("Save ");
 
         txtSender.setEditable(false);
@@ -180,7 +213,7 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnSave))
@@ -190,7 +223,9 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
 

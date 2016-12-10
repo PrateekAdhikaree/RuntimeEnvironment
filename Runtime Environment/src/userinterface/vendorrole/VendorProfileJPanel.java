@@ -7,7 +7,9 @@ package userinterface.vendorrole;
 
 import business.Business;
 import business.useraccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
+import userinterface.password.ChangePasswordJPanel;
 import userinterface.superadminrole.*;
 
 /**
@@ -15,15 +17,17 @@ import userinterface.superadminrole.*;
  * @author soumiyaroy
  */
 public class VendorProfileJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
+
     /**
      * Creates new form SuperAdminProfileJPanel
      */
     public VendorProfileJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
-                this.userProcessContainer = userProcessContainer;
+        this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
     }
@@ -40,9 +44,9 @@ public class VendorProfileJPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnChangePassword = new javax.swing.JButton();
         passwordPassword = new javax.swing.JPasswordField();
         passwordConfirmPassword = new javax.swing.JPasswordField();
         txtEmailID = new javax.swing.JTextField();
@@ -80,20 +84,30 @@ public class VendorProfileJPanel extends javax.swing.JPanel {
         jSeparator2.setForeground(new java.awt.Color(255, 204, 0));
 
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 204, 0));
+        jButton1.setForeground(new java.awt.Color(255, 153, 0));
         jButton1.setText("Save");
 
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 204, 0));
-        jButton2.setText("Back");
+        btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 153, 0));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Yuppy SC", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Vendor Profile");
 
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 204, 0));
-        jButton3.setText("Change Password");
+        btnChangePassword.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnChangePassword.setForeground(new java.awt.Color(255, 153, 0));
+        btnChangePassword.setText("Change Password");
+        btnChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePasswordActionPerformed(evt);
+            }
+        });
 
         passwordPassword.setForeground(new java.awt.Color(255, 153, 0));
         passwordPassword.setText("jPasswordField1");
@@ -167,7 +181,7 @@ public class VendorProfileJPanel extends javax.swing.JPanel {
         jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 0)));
 
         jButton4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 204, 0));
+        jButton4.setForeground(new java.awt.Color(255, 153, 0));
         jButton4.setText("Upload");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
@@ -248,7 +262,7 @@ public class VendorProfileJPanel extends javax.swing.JPanel {
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addGroup(layout.createSequentialGroup()
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(jButton3))
+                                                                .addComponent(btnChangePassword))
                                                             .addGroup(layout.createSequentialGroup()
                                                                 .addGap(29, 29, 29)
                                                                 .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -256,7 +270,7 @@ public class VendorProfileJPanel extends javax.swing.JPanel {
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(176, 176, 176))
                                                     .addComponent(txtCompany, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,21 +355,36 @@ public class VendorProfileJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel14)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(btnChangePassword)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
+        // TODO add your handling code here:
+        ChangePasswordJPanel changePasswordJPanel = new ChangePasswordJPanel(userProcessContainer, userAccount, business);
+        userProcessContainer.add("ChangePasswordJPanel", changePasswordJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnChangePasswordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnChangePassword;
     private javax.swing.JComboBox<String> comboGender;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -24,7 +24,7 @@ public class RegularTrainerRole extends Role {
     
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business){
-        return new RegularTrainerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);
+        return new RegularTrainerRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise, business);
     }
     
         @Override

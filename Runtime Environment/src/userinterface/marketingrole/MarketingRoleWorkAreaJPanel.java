@@ -9,13 +9,14 @@ import business.Business;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import userinterface.AboutUsJPanel;
+import userinterface.message.MessageJPanel;
 
 /**
  *
  * @author raseswaridas
  */
 public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
@@ -23,7 +24,7 @@ public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form Marketing
      */
-    public MarketingRoleWorkAreaJPanel(JPanel userProcessContainer,UserAccount userAccount,Business business) {
+    public MarketingRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
@@ -39,7 +40,7 @@ public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnReadMessages = new javax.swing.JButton();
+        btnMessage = new javax.swing.JButton();
         btnAnalytics = new javax.swing.JButton();
         btnPromoCode = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
@@ -49,23 +50,29 @@ public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("My Work Area - Marketing Role");
+        jLabel1.setText("Marketing Dashboard");
 
-        btnReadMessages.setText("Read Messages >>");
-        btnReadMessages.addActionListener(new java.awt.event.ActionListener() {
+        btnMessage.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        btnMessage.setForeground(new java.awt.Color(255, 153, 0));
+        btnMessage.setText("Messages");
+        btnMessage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReadMessagesActionPerformed(evt);
+                btnMessageActionPerformed(evt);
             }
         });
 
-        btnAnalytics.setText("Analytics >>");
+        btnAnalytics.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        btnAnalytics.setForeground(new java.awt.Color(255, 153, 0));
+        btnAnalytics.setText("Analytics");
         btnAnalytics.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnalyticsActionPerformed(evt);
             }
         });
 
-        btnPromoCode.setText("Promo Code >>");
+        btnPromoCode.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        btnPromoCode.setForeground(new java.awt.Color(255, 153, 0));
+        btnPromoCode.setText("Promo Code ");
         btnPromoCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPromoCodeActionPerformed(evt);
@@ -74,7 +81,7 @@ public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 153, 0));
-        btnBack.setText("<< Back");
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -86,32 +93,33 @@ public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPromoCode, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnAnalytics, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnReadMessages, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(644, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(btnPromoCode, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(btnAnalytics, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(btnPromoCode, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btnReadMessages, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnAnalytics, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(btnBack)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAnalytics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPromoCode, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -122,27 +130,27 @@ public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnReadMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadMessagesActionPerformed
+    private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
         // TODO add your handling code here:
-        ReadMessagesJPanel readMessagesJPanel = new ReadMessagesJPanel(userProcessContainer, business);
-        userProcessContainer.add("ReadMessagesJPanel",readMessagesJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnReadMessagesActionPerformed
+    }//GEN-LAST:event_btnMessageActionPerformed
 
     private void btnPromoCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromoCodeActionPerformed
         // TODO add your handling code here:
         PromoCodeJPanel promoCodeJPanel = new PromoCodeJPanel(userProcessContainer, business);
-        userProcessContainer.add("PromoCodeJPanel",promoCodeJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        userProcessContainer.add("PromoCodeJPanel", promoCodeJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnPromoCodeActionPerformed
 
     private void btnAnalyticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyticsActionPerformed
         // TODO add your handling code here:
         AnalyticsJPanel analyticsJPanel = new AnalyticsJPanel(userProcessContainer, business);
-        userProcessContainer.add("AnalyticsJPanel",analyticsJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        userProcessContainer.add("AnalyticsJPanel", analyticsJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAnalyticsActionPerformed
 
@@ -150,8 +158,8 @@ public class MarketingRoleWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnalytics;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnMessage;
     private javax.swing.JButton btnPromoCode;
-    private javax.swing.JButton btnReadMessages;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

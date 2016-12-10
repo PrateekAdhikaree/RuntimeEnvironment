@@ -5,17 +5,24 @@
  */
 package userinterface.superadminrole;
 
+import business.Business;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author raseswaridas
  */
-public class ManageEmployeesJPanel extends javax.swing.JPanel {
-
+public class SAManageEmployeesJPanel extends javax.swing.JPanel {
+      private JPanel userProcessContainer;
+    private Business business;
     /**
      * Creates new form ManageTrainersJPanel
      */
-    public ManageEmployeesJPanel() {
+    public SAManageEmployeesJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
     }
 
     /**
@@ -55,6 +62,8 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
         btnCreate = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+
+        setForeground(new java.awt.Color(255, 153, 0));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 238));
 
@@ -105,6 +114,7 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        btnDelete.setForeground(new java.awt.Color(255, 153, 0));
         btnDelete.setText("Delete");
 
         jLabel3.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
@@ -135,17 +145,28 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
 
         txtCapacity.setForeground(new java.awt.Color(51, 51, 255));
 
+        btnView.setForeground(new java.awt.Color(255, 153, 0));
         btnView.setText("View");
 
+        btnEdit.setForeground(new java.awt.Color(255, 153, 0));
         btnEdit.setText("Edit");
 
+        btnSave.setForeground(new java.awt.Color(255, 153, 0));
         btnSave.setText("Save");
 
+        btnCreate.setForeground(new java.awt.Color(255, 153, 0));
         btnCreate.setText("Create");
 
+        btnClear.setForeground(new java.awt.Color(255, 153, 0));
         btnClear.setText("Clear");
 
-        btnBack.setText("<<Back");
+        btnBack.setForeground(new java.awt.Color(255, 153, 0));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,7 +239,7 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(btnDelete))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBack))
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -281,6 +302,13 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

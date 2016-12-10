@@ -5,17 +5,26 @@
  */
 package userinterface.superadminrole;
 
+import business.Business;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author raseswaridas
  */
-public class ManageGroupClassesJPanel extends javax.swing.JPanel {
+public class SAManageGroupClassesJPanel extends javax.swing.JPanel {
+
+    private JPanel userProcessContainer;
+    private Business business;
 
     /**
      * Creates new form ManageGroupClassesJPanel
      */
-    public ManageGroupClassesJPanel() {
+    public SAManageGroupClassesJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
     }
 
     /**
@@ -118,6 +127,8 @@ public class ManageGroupClassesJPanel extends javax.swing.JPanel {
 
         txtCapacity.setForeground(new java.awt.Color(51, 51, 255));
 
+        btnCreate.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnCreate.setForeground(new java.awt.Color(255, 153, 0));
         btnCreate.setText("Create");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,12 +156,20 @@ public class ManageGroupClassesJPanel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        btnView.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnView.setForeground(new java.awt.Color(255, 153, 0));
         btnView.setText("View");
 
+        btnDelete.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 153, 0));
         btnDelete.setText("Delete");
 
+        btnSave.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 153, 0));
         btnSave.setText("Save");
 
+        btnEdit.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 153, 0));
         btnEdit.setText("Edit");
 
         txtDescription.setColumns(20);
@@ -161,8 +180,17 @@ public class ManageGroupClassesJPanel extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 204, 0));
         jLabel6.setText("Description:");
 
-        btnBack.setText("<<Back");
+        btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 153, 0));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
+        btnClear.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 153, 0));
         btnClear.setText("Clear");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -232,16 +260,16 @@ public class ManageGroupClassesJPanel extends javax.swing.JPanel {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnBack))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                    .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(324, 324, 324)
                                 .addComponent(btnEdit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSave)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnCreate)))
-                        .addGap(0, 85, Short.MAX_VALUE))))
+                        .addGap(0, 78, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,6 +338,13 @@ public class ManageGroupClassesJPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

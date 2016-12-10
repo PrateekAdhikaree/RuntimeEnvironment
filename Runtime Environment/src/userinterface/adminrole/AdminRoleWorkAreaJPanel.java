@@ -11,6 +11,7 @@ import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import userinterface.customerrole.RegisterJPanel;
+import userinterface.message.MessageJPanel;
 
 /**
  *
@@ -47,6 +48,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         btnManageClasses = new javax.swing.JButton();
         btnManageTrainers = new javax.swing.JButton();
         btnManageCustomers = new javax.swing.JButton();
+        btnMessage = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 102, 255));
 
@@ -82,6 +84,15 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnMessage.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        btnMessage.setForeground(new java.awt.Color(255, 153, 0));
+        btnMessage.setText("Messages");
+        btnMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMessageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,6 +106,10 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnManageClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(283, 283, 283)
+                .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +120,9 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnManageCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                     .addComponent(btnManageTrainers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnManageClasses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(243, 243, 243))
+                .addGap(61, 61, 61)
+                .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,11 +150,20 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnManageTrainersActionPerformed
 
+    private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
+        // TODO add your handling code here:
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnMessageActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageClasses;
     private javax.swing.JButton btnManageCustomers;
     private javax.swing.JButton btnManageTrainers;
+    private javax.swing.JButton btnMessage;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

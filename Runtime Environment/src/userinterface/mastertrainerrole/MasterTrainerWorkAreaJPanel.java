@@ -8,7 +8,9 @@ package userinterface.mastertrainerrole;
 import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
+import userinterface.message.MessageJPanel;
 
 /**
  *
@@ -20,7 +22,7 @@ public class MasterTrainerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Enterprise enterprise;
     private Business business;
-            
+
     /**
      * Creates new form MasterTrainerWorkAreaJPanel
      */
@@ -42,8 +44,8 @@ public class MasterTrainerWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnTrainingClass = new javax.swing.JButton();
+        btnMessage = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -55,18 +57,23 @@ public class MasterTrainerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Master Trainer Dashboard");
 
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 153, 0));
-        jButton2.setText("Training Class");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnTrainingClass.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        btnTrainingClass.setForeground(new java.awt.Color(255, 153, 0));
+        btnTrainingClass.setText("Training Class");
+        btnTrainingClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnTrainingClassActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 153, 0));
-        jButton3.setText("Message");
+        btnMessage.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        btnMessage.setForeground(new java.awt.Color(255, 153, 0));
+        btnMessage.setText("Message");
+        btnMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMessageActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
@@ -112,9 +119,9 @@ public class MasterTrainerWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(295, 295, 295)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTrainingClass, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1))
                         .addGap(39, 39, 39))))
         );
@@ -129,20 +136,32 @@ public class MasterTrainerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTrainingClass, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(63, 63, 63))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnTrainingClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrainingClassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        TrainingClassJPanel trainingClassJPanel = new TrainingClassJPanel(userProcessContainer, enterprise);
+        userProcessContainer.add("TrainingClassJPanel",trainingClassJPanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnTrainingClassActionPerformed
+
+    private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
+        // TODO add your handling code here:
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnMessageActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnMessage;
+    private javax.swing.JButton btnTrainingClass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

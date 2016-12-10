@@ -44,7 +44,7 @@ public class AboutUsJPanel extends javax.swing.JPanel {
         jLabel1.setText("WHO WE ARE");
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btnBack.setText("<< Back");
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);

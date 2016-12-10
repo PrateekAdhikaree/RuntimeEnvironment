@@ -5,9 +5,12 @@
  */
 package userinterface.regulartrainerrole;
 
+import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
+import userinterface.message.MessageJPanel;
 
 /**
  *
@@ -18,15 +21,17 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Enterprise enterprise;
-    
+    private Business business;
+
     /**
      * Creates new form RegularTrainerRoleWorkAreaJPanel
      */
-    public RegularTrainerRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise) {
+    public RegularTrainerRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.enterprise = enterprise;
+        this.business = business;
     }
 
     /**
@@ -38,7 +43,7 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton3 = new javax.swing.JButton();
+        btnMessage = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -46,9 +51,14 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(102, 102, 255));
 
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 153, 0));
-        jButton3.setText("Message");
+        btnMessage.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        btnMessage.setForeground(new java.awt.Color(255, 153, 0));
+        btnMessage.setText("Message");
+        btnMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMessageActionPerformed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -94,7 +104,7 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(481, 481, 481)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1))
                         .addGap(39, 39, 39))))
         );
@@ -108,14 +118,22 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
+        // TODO add your handling code here:
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnMessageActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

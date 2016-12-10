@@ -147,7 +147,7 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnGroupClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGroupClassesActionPerformed
         // TODO add your handling code here:
-        ViewGroupClassesJPanel viewGroupClassesJPanel = new ViewGroupClassesJPanel(userProcessContainer, enterprise);
+        ViewGroupClassesJPanel viewGroupClassesJPanel = new ViewGroupClassesJPanel(userProcessContainer, business);
         userProcessContainer.add("ViewGroupClassesJPanel",viewGroupClassesJPanel);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -156,7 +156,7 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
         // TODO add your handling code here:
                 MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
-        userProcessContainer.add("ContactUsJPanel",messageJPanel);
+        userProcessContainer.add("MessageJPanel",messageJPanel);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnMessageActionPerformed

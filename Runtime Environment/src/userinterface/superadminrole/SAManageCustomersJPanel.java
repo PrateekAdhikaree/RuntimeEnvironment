@@ -5,17 +5,24 @@
  */
 package userinterface.superadminrole;
 
+import business.Business;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author raseswaridas
  */
-public class ManageCustomersJPanel extends javax.swing.JPanel {
-
+public class SAManageCustomersJPanel extends javax.swing.JPanel {
+      private JPanel userProcessContainer;
+    private Business business;
     /**
      * Creates new form ManageCustomersJPanel
      */
-    public ManageCustomersJPanel() {
+    public SAManageCustomersJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
+         this.userProcessContainer = userProcessContainer;
+        this.business = business;
     }
 
     /**
@@ -38,7 +45,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         comboBranch = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 238));
 
@@ -89,7 +97,18 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Delete");
+        btnDelete.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 153, 0));
+        btnDelete.setText("Delete");
+
+        btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 153, 0));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,7 +140,10 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -142,7 +164,9 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete)
+                    .addComponent(btnBack))
                 .addContainerGap(311, Short.MAX_VALUE))
         );
 
@@ -160,12 +184,20 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JComboBox<String> comboCity;
     private javax.swing.JComboBox comboCountry;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

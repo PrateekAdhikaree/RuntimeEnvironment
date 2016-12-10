@@ -179,7 +179,7 @@ public class ManageEmployeesJPanel extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(btnDelete))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnBack))
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );

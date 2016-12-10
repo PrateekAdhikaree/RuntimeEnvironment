@@ -23,7 +23,7 @@ public class VendorRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {
-        return new VendorRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise);
+        return new VendorRoleWorkAreaJPanel(userProcessContainer, userAccount, enterprise, business);
     }
     @Override
     public JPanel createProfile(JPanel userProcessContainer, UserAccount userAccount, Business business){

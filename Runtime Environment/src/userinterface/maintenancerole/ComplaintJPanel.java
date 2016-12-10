@@ -5,17 +5,27 @@
  */
 package userinterface.maintenancerole;
 
+import business.Business;
+import business.useraccount.UserAccount;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author soumiyaroy
  */
 public class ComplaintJPanel extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Business business;
     /**
      * Creates new form ComplaintJPanel
      */
-    public ComplaintJPanel() {
+    public ComplaintJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
+         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.business =  business;
     }
 
     /**
@@ -34,9 +44,9 @@ public class ComplaintJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaMessage = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         comboDepartment = new javax.swing.JComboBox<>();
@@ -64,17 +74,22 @@ public class ComplaintJPanel extends javax.swing.JPanel {
         txtAreaMessage.setRows(5);
         jScrollPane1.setViewportView(txtAreaMessage);
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 153, 0));
-        jButton1.setText("Back");
+        btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(255, 153, 0));
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setText("Send to Vendor:");
 
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 153, 0));
-        jButton2.setText("Send");
+        btnSave.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 153, 0));
+        btnSave.setText("Send");
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 204, 0));
@@ -122,9 +137,9 @@ public class ComplaintJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addComponent(jLabel6)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButton1)
+                            .addComponent(btnBack)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2))
+                            .addComponent(btnSave))
                         .addComponent(jScrollPane1)
                         .addComponent(txtSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -177,18 +192,26 @@ public class ComplaintJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnBack)
+                    .addComponent(btnSave))
                 .addGap(38, 38, 38))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+        
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> comboDepartment;
     private javax.swing.JComboBox<String> comboUser;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

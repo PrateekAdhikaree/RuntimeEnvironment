@@ -39,8 +39,8 @@
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton2" min="-2" pref="177" max="-2" attributes="0"/>
-                              <Component id="jButton4" max="32767" attributes="0"/>
+                              <Component id="btnSendComplaint" min="-2" pref="177" max="-2" attributes="0"/>
+                              <Component id="btnMessage" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -68,7 +68,7 @@
               <Component id="jScrollPane1" min="-2" pref="223" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton2" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="btnSendComplaint" min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton4" min="-2" pref="42" max="-2" attributes="0"/>
+              <Component id="btnMessage" min="-2" pref="42" max="-2" attributes="0"/>
               <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -95,7 +95,7 @@
         <Property name="text" type="java.lang.String" value="Maintenance Dashboard"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnSendComplaint">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -108,6 +108,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Send Complaints"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSendComplaintActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -217,7 +220,7 @@
         <Property name="text" type="java.lang.String" value="&lt;number&gt;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="btnMessage">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Grande" size="18" style="3"/>
@@ -227,6 +230,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Messages"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMessageActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

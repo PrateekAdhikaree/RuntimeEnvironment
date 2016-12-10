@@ -9,6 +9,8 @@ import business.Business;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import userinterface.marketingrole.AnalyticsJPanel;
+import userinterface.message.MessageJPanel;
 
 /**
  *
@@ -19,7 +21,7 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
-    
+
     /**
      * Creates new form SuperAdminJPanel
      */
@@ -43,12 +45,12 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
         menu1 = new java.awt.Menu();
         menu2 = new java.awt.Menu();
         jMenu1 = new javax.swing.JMenu();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        btnManageTrainers = new javax.swing.JButton();
         btnManageCustomers = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         btnManageClasses = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
+        btnManageTrainers = new javax.swing.JButton();
+        btnAnalytics = new javax.swing.JButton();
+        btnMessage = new javax.swing.JButton();
 
         menu1.setLabel("File");
         menuBar1.add(menu1);
@@ -58,124 +60,143 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jMenu1.setText("jMenu1");
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 238));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("My Work Area - Super Admin Role");
-
-        btnManageTrainers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnManageTrainers.setForeground(new java.awt.Color(255, 204, 0));
-        btnManageTrainers.setText("Manage Employees >>");
-        btnManageTrainers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageTrainersActionPerformed(evt);
-            }
-        });
+        setBackground(new java.awt.Color(102, 102, 255));
 
         btnManageCustomers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnManageCustomers.setForeground(new java.awt.Color(255, 204, 0));
-        btnManageCustomers.setText("Manage Customers >>");
+        btnManageCustomers.setForeground(new java.awt.Color(255, 153, 0));
+        btnManageCustomers.setText("Manage Customers");
         btnManageCustomers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageCustomersActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("SuperAdmin Dashboard");
+
         btnManageClasses.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnManageClasses.setForeground(new java.awt.Color(255, 204, 0));
-        btnManageClasses.setText("Manage Classes >>");
+        btnManageClasses.setForeground(new java.awt.Color(255, 153, 0));
+        btnManageClasses.setText("Manage Classes");
         btnManageClasses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageClassesActionPerformed(evt);
             }
         });
 
-        btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btnBack.setForeground(new java.awt.Color(255, 153, 0));
-        btnBack.setText("<< Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        btnManageTrainers.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnManageTrainers.setForeground(new java.awt.Color(255, 153, 0));
+        btnManageTrainers.setText("Manage Employees");
+        btnManageTrainers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                btnManageTrainersActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManageTrainers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnManageClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnManageCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnManageClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnManageCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(btnManageTrainers, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBack)
-                .addContainerGap(337, Short.MAX_VALUE))
-        );
+        btnAnalytics.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        btnAnalytics.setForeground(new java.awt.Color(255, 153, 0));
+        btnAnalytics.setText("Analytics");
+        btnAnalytics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalyticsActionPerformed(evt);
+            }
+        });
+
+        btnMessage.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        btnMessage.setForeground(new java.awt.Color(255, 153, 0));
+        btnMessage.setText("Messages");
+        btnMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMessageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 35, Short.MAX_VALUE)
+                .addComponent(btnManageTrainers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnManageCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnManageClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addComponent(btnAnalytics, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnManageCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                    .addComponent(btnManageTrainers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnManageClasses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAnalytics, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                    .addComponent(btnMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManageTrainersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTrainersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnManageTrainersActionPerformed
-
     private void btnManageCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomersActionPerformed
         // TODO add your handling code here:
+        SAManageCustomersJPanel sAManageCustomersJPanel = new SAManageCustomersJPanel(userProcessContainer, business);
+        userProcessContainer.add("ManageCustomersJPanel", sAManageCustomersJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageCustomersActionPerformed
 
     private void btnManageClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageClassesActionPerformed
-        //        ManageSuppliers ms = new ManageSuppliers(userProcessContainer, supplierDirectory);
-        //        userProcessContainer.add("ManageSupplierAdministrative", ms);
-        //        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        //        layout.next(userProcessContainer);
+        SAManageGroupClassesJPanel sAManageGroupClassesJPanel = new SAManageGroupClassesJPanel(userProcessContainer, business);
+        userProcessContainer.add("ManageGroupClassesJPanel", sAManageGroupClassesJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageClassesActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void btnManageTrainersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageTrainersActionPerformed
         // TODO add your handling code here:
-        userProcessContainer.remove(this);
+        SAManageEmployeesJPanel sAManageEmployeesJPanel = new SAManageEmployeesJPanel(userProcessContainer, business);
+        userProcessContainer.add("ManageEmployeesJPanel", sAManageEmployeesJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageTrainersActionPerformed
+
+    private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
+        // TODO add your handling code here:
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnMessageActionPerformed
+
+    private void btnAnalyticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyticsActionPerformed
+        // TODO add your handling code here:
+        AnalyticsJPanel analyticsJPanel = new AnalyticsJPanel(userProcessContainer, business);
+        userProcessContainer.add("AnalyticsJPanel", analyticsJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnAnalyticsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnAnalytics;
     private javax.swing.JButton btnManageClasses;
     private javax.swing.JButton btnManageCustomers;
     private javax.swing.JButton btnManageTrainers;
+    private javax.swing.JButton btnMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPanel jPanel1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;

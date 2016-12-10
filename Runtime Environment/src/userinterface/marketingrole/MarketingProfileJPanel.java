@@ -9,6 +9,7 @@ import business.Business;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import userinterface.password.ChangePasswordJPanel;
 
 /**
  *
@@ -42,7 +43,7 @@ public class MarketingProfileJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnChangePassword = new javax.swing.JButton();
         passwordPassword = new javax.swing.JPasswordField();
         passwordConfirmPassword = new javax.swing.JPasswordField();
         txtEmailID = new javax.swing.JTextField();
@@ -83,7 +84,7 @@ public class MarketingProfileJPanel extends javax.swing.JPanel {
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 204, 0));
-        btnBack.setText("<< Back");
+        btnBack.setText(" Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -95,9 +96,14 @@ public class MarketingProfileJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Marketing Manager Profile");
 
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 204, 0));
-        jButton3.setText("Change Password");
+        btnChangePassword.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnChangePassword.setForeground(new java.awt.Color(255, 204, 0));
+        btnChangePassword.setText("Change Password");
+        btnChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePasswordActionPerformed(evt);
+            }
+        });
 
         passwordPassword.setForeground(new java.awt.Color(255, 153, 0));
         passwordPassword.setText("jPasswordField1");
@@ -246,7 +252,7 @@ public class MarketingProfileJPanel extends javax.swing.JPanel {
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addGroup(layout.createSequentialGroup()
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(jButton3))
+                                                                .addComponent(btnChangePassword))
                                                             .addGroup(layout.createSequentialGroup()
                                                                 .addGap(29, 29, 29)
                                                                 .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -334,7 +340,7 @@ public class MarketingProfileJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel14)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(btnChangePassword)
                     .addComponent(jButton1)
                     .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -350,12 +356,21 @@ public class MarketingProfileJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
+        // TODO add your handling code here:
+                ChangePasswordJPanel changePasswordJPanel = new ChangePasswordJPanel(userProcessContainer, userAccount, business);
+        userProcessContainer.add("ChangePasswordJPanel",changePasswordJPanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
+    }//GEN-LAST:event_btnChangePasswordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnChangePassword;
     private javax.swing.JComboBox<String> comboGender;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
