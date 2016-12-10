@@ -307,7 +307,8 @@ public final class Initialize {
                         customer.setEmail(b[7]);
                         customer.setGender(getGenderFromCsv(b[4]));
                         customer.setMobile(b[6]);
-                        customer.setName(b[1]+" "+b[2]);
+                        customer.setFirstName(b[1]);
+                        customer.setLastName(b[2]);
                         customer.setZip(b[11]);
                         Boolean hasPersonalTraining = false;
                         if(b[14].equals("Yes"))
@@ -359,7 +360,8 @@ public final class Initialize {
                         employee.setEmail(b[9]);
                         employee.setGender(getGenderFromCsv(b[6]));
                         employee.setMobile(b[8]);
-                        employee.setName(b[3]+" "+b[4]);
+                        employee.setFirstName(b[3]);
+                        employee.setLastName(b[4]);
                         employee.setZip(b[13]);
                     }
                 }

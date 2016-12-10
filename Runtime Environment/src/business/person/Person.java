@@ -13,12 +13,17 @@ import java.util.Date;
  */
 public abstract class Person {
     
-    private String name;
+    private String firstName;
+    private String lastName;
     private String address;
     private String email;
     private String mobile;
     private Date dob;
     private String zip;
+    private String city;
+    private String state;
+    private String country;
+    
     public enum genderType{
         Male, Female;
     };
@@ -47,13 +52,21 @@ public abstract class Person {
     public void setGender(genderType gender) {
         this.gender = gender;
     }
-    
-    public String getName() {
-        return name;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -78,6 +91,30 @@ public abstract class Person {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
             
 }

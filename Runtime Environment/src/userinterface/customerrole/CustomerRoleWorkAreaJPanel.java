@@ -5,13 +5,9 @@
  */
 package userinterface.customerrole;
 
-import business.Business;
 import business.enterprise.Enterprise;
 import business.useraccount.UserAccount;
-import java.awt.CardLayout;
 import javax.swing.JPanel;
-import userinterface.groupclasses.ViewGroupClassesJPanel;
-import userinterface.message.MessageJPanel;
 
 /**
  *
@@ -22,17 +18,15 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Enterprise enterprise;
-    private Business business;
     
     /**
      * Creates new form CustomerRoleWorkAreaJPanel
      */
-    public CustomerRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, Business business) {
+    public CustomerRoleWorkAreaJPanel(JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.enterprise = enterprise;
-        this.business = business;
     }
 
     /**
@@ -45,8 +39,8 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnGroupClasses = new javax.swing.JButton();
-        btnMessage = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -58,23 +52,13 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Member Dashboard");
 
-        btnGroupClasses.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
-        btnGroupClasses.setForeground(new java.awt.Color(255, 153, 0));
-        btnGroupClasses.setText("Group Classes");
-        btnGroupClasses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGroupClassesActionPerformed(evt);
-            }
-        });
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 153, 0));
+        jButton1.setText("Group Classes");
 
-        btnMessage.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
-        btnMessage.setForeground(new java.awt.Color(255, 153, 0));
-        btnMessage.setText("Message");
-        btnMessage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMessageActionPerformed(evt);
-            }
-        });
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 153, 0));
+        jButton2.setText("Message");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
@@ -123,9 +107,9 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(170, 170, 170)
-                .addComponent(btnGroupClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
@@ -139,32 +123,16 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGroupClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGroupClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGroupClassesActionPerformed
-        // TODO add your handling code here:
-        ViewGroupClassesJPanel viewGroupClassesJPanel = new ViewGroupClassesJPanel(userProcessContainer, business);
-        userProcessContainer.add("ViewGroupClassesJPanel",viewGroupClassesJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnGroupClassesActionPerformed
-
-    private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
-        // TODO add your handling code here:
-                MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
-        userProcessContainer.add("MessageJPanel",messageJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnMessageActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGroupClasses;
-    private javax.swing.JButton btnMessage;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

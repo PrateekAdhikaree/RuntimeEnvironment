@@ -6,8 +6,15 @@
 package userinterface.customerrole;
 
 import business.Business;
+import business.organization.accounting.Accounting;
+import business.organization.accounting.membership.Membership;
+import business.organization.accounting.membership.MembershipDirectory;
+import business.useraccount.UserAccount;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -15,16 +22,28 @@ import javax.swing.JPanel;
  */
 public class MembershipJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessContainer;
-    Business business;
+    private JPanel userProcessContainer;
+    private UserAccount userAccount;
+    private Accounting accounting;
+    private Business business;
+    private ArrayList<Membership> membershipList;
 
     /**
      * Creates new form MembershipJPanel
      */
-    public MembershipJPanel(JPanel userProcessContainer, Business business) {
+    public MembershipJPanel(JPanel userProcessContainer, UserAccount userAccount, Accounting accounting, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.accounting = accounting;
         this.business = business;
+        
+        populateMembershipData();
+        
+        if(userAccount.getCustomer().getMembership().getHasPersonalTraining())
+            radioBtnYes.setSelected(true);
+        else
+            radioBtnNo.setSelected(true);
     }
 
     /**
@@ -38,6 +57,8 @@ public class MembershipJPanel extends javax.swing.JPanel {
 
         jLabel9 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
+        buttonGroupMembership = new javax.swing.ButtonGroup();
+        buttonGroupHasPersonalTraining = new javax.swing.ButtonGroup();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnRegister = new javax.swing.JButton();
@@ -45,30 +66,31 @@ public class MembershipJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        radioBtnPlan1 = new javax.swing.JRadioButton();
+        radioBtnPlan2 = new javax.swing.JRadioButton();
+        radioBtnPlan3 = new javax.swing.JRadioButton();
+        radioBtnPlan4 = new javax.swing.JRadioButton();
+        radioBtnPlan5 = new javax.swing.JRadioButton();
+        radioBtnPlan6 = new javax.swing.JRadioButton();
+        lblPrice2 = new javax.swing.JLabel();
+        lblPrice4 = new javax.swing.JLabel();
+        lblPrice3 = new javax.swing.JLabel();
+        lblPrice5 = new javax.swing.JLabel();
+        lblPrice6 = new javax.swing.JLabel();
+        lblPrice1 = new javax.swing.JLabel();
+        btnDetails3 = new javax.swing.JButton();
+        btnDetails1 = new javax.swing.JButton();
+        btnDetails2 = new javax.swing.JButton();
+        btnDetails4 = new javax.swing.JButton();
+        btnDetails5 = new javax.swing.JButton();
+        btnDetails6 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        radioBtnYes = new javax.swing.JRadioButton();
+        radioBtnNo = new javax.swing.JRadioButton();
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 204, 0));
@@ -108,73 +130,107 @@ public class MembershipJPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 204, 0));
         jLabel3.setText("Choose Membership Plan:");
 
-        jRadioButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton1.setText("Weekly Gym Membership- ");
+        buttonGroupMembership.add(radioBtnPlan1);
+        radioBtnPlan1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        radioBtnPlan1.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnPlan1.setText("Weekly Gym Membership- ");
 
-        jRadioButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton2.setText("Monthly Gym Membership-");
+        buttonGroupMembership.add(radioBtnPlan2);
+        radioBtnPlan2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        radioBtnPlan2.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnPlan2.setText("Monthly Gym Membership-");
 
-        jRadioButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton3.setText("Yearly Gym Membership-");
+        buttonGroupMembership.add(radioBtnPlan3);
+        radioBtnPlan3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        radioBtnPlan3.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnPlan3.setText("Yearly Gym Membership-");
 
-        jRadioButton4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jRadioButton4.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton4.setText("Weekly Gym Membership with Special Classes-");
+        buttonGroupMembership.add(radioBtnPlan4);
+        radioBtnPlan4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        radioBtnPlan4.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnPlan4.setText("Weekly Gym Membership with Special Classes-");
 
-        jRadioButton5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jRadioButton5.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton5.setText("Monthly Gym Membership with Special Classes-");
+        buttonGroupMembership.add(radioBtnPlan5);
+        radioBtnPlan5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        radioBtnPlan5.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnPlan5.setText("Monthly Gym Membership with Special Classes-");
 
-        jRadioButton6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jRadioButton6.setForeground(new java.awt.Color(255, 204, 0));
-        jRadioButton6.setText("Yearly Gym Membership with Special Classes-");
+        buttonGroupMembership.add(radioBtnPlan6);
+        radioBtnPlan6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        radioBtnPlan6.setForeground(new java.awt.Color(255, 204, 0));
+        radioBtnPlan6.setText("Yearly Gym Membership with Special Classes-");
 
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel4.setText("$150");
+        lblPrice2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblPrice2.setForeground(new java.awt.Color(255, 204, 0));
+        lblPrice2.setText("$150");
 
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel5.setText("$150");
+        lblPrice4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblPrice4.setForeground(new java.awt.Color(255, 204, 0));
+        lblPrice4.setText("$150");
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel6.setText("$150");
+        lblPrice3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblPrice3.setForeground(new java.awt.Color(255, 204, 0));
+        lblPrice3.setText("$150");
 
-        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel7.setText("$150");
+        lblPrice5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblPrice5.setForeground(new java.awt.Color(255, 204, 0));
+        lblPrice5.setText("$150");
 
-        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel8.setText("$150");
+        lblPrice6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblPrice6.setForeground(new java.awt.Color(255, 204, 0));
+        lblPrice6.setText("$150");
 
-        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel10.setText("$150");
+        lblPrice1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblPrice1.setForeground(new java.awt.Color(255, 204, 0));
+        lblPrice1.setText("$150");
 
-        jButton3.setForeground(new java.awt.Color(102, 102, 255));
-        jButton3.setText("Details");
+        btnDetails3.setForeground(new java.awt.Color(102, 102, 255));
+        btnDetails3.setText("Details");
+        btnDetails3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setForeground(new java.awt.Color(102, 102, 255));
-        jButton4.setText("Details");
+        btnDetails1.setForeground(new java.awt.Color(102, 102, 255));
+        btnDetails1.setText("Details");
+        btnDetails1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails1ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setForeground(new java.awt.Color(102, 102, 255));
-        jButton6.setText("Details");
+        btnDetails2.setForeground(new java.awt.Color(102, 102, 255));
+        btnDetails2.setText("Details");
+        btnDetails2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails2ActionPerformed(evt);
+            }
+        });
 
-        jButton7.setForeground(new java.awt.Color(102, 102, 255));
-        jButton7.setText("Details");
+        btnDetails4.setForeground(new java.awt.Color(102, 102, 255));
+        btnDetails4.setText("Details");
+        btnDetails4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails4ActionPerformed(evt);
+            }
+        });
 
-        jButton8.setForeground(new java.awt.Color(102, 102, 255));
-        jButton8.setText("Details");
+        btnDetails5.setForeground(new java.awt.Color(102, 102, 255));
+        btnDetails5.setText("Details");
+        btnDetails5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails5ActionPerformed(evt);
+            }
+        });
 
-        jButton9.setForeground(new java.awt.Color(102, 102, 255));
-        jButton9.setText("Details");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnDetails6.setForeground(new java.awt.Color(102, 102, 255));
+        btnDetails6.setText("Details");
+        btnDetails6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails6ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 204, 0));
@@ -191,6 +247,15 @@ public class MembershipJPanel extends javax.swing.JPanel {
         jLabel21.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 204, 0));
         jLabel21.setText("$");
+
+        jTextField1.setEditable(false);
+        jTextField1.setEnabled(false);
+
+        buttonGroupHasPersonalTraining.add(radioBtnYes);
+        radioBtnYes.setText("Yes");
+
+        buttonGroupHasPersonalTraining.add(radioBtnNo);
+        radioBtnNo.setText("No");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -222,39 +287,39 @@ public class MembershipJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(radioBtnPlan3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioBtnPlan2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioBtnPlan1, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblPrice3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPrice2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPrice1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jRadioButton4)
+                                .addComponent(radioBtnPlan4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lblPrice4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnDetails3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDetails4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDetails2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton6)
-                            .addComponent(jRadioButton5))
+                            .addComponent(radioBtnPlan6)
+                            .addComponent(radioBtnPlan5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblPrice5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnDetails5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblPrice6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnDetails6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -266,11 +331,15 @@ public class MembershipJPanel extends javax.swing.JPanel {
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89)
-                                .addComponent(jLabel18)
-                                .addGap(18, 18, 18)))
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(radioBtnYes)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioBtnNo)
+                                .addGap(84, 84, 84)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel18)))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -289,40 +358,41 @@ public class MembershipJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(radioBtnPlan1)
+                    .addComponent(lblPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetails1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(radioBtnPlan2)
+                    .addComponent(lblPrice2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetails2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(radioBtnPlan3)
+                    .addComponent(lblPrice3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetails3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
+                    .addComponent(radioBtnPlan4)
+                    .addComponent(lblPrice4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetails4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
+                    .addComponent(radioBtnPlan5)
+                    .addComponent(lblPrice5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetails5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton6)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9))
+                    .addComponent(radioBtnPlan6)
+                    .addComponent(lblPrice6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetails6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel18))
-                .addGap(11, 11, 11)
+                    .addComponent(jLabel18)
+                    .addComponent(radioBtnYes)
+                    .addComponent(radioBtnNo))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jLabel21)
@@ -336,7 +406,65 @@ public class MembershipJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+        
+    public void populateMembershipData(){
+        this.membershipList = accounting.getMembershipDirectory().getMembershipList();
+        for(int i = 0; i < membershipList.size(); i++){
+            Membership membership = membershipList.get(i);
+            int price = 0;
+            switch(i){
+                case 0:
+                    if(userAccount.getCustomer().getMembership().getName().equals(membership.getName()))
+                        radioBtnPlan1.setSelected(true);
+                    radioBtnPlan1.setText(membership.getName());
+                    radioBtnPlan1.setActionCommand(membership.getName());
+                    price = Math.round(membership.getPrice() * membership.getCurrencyMultiplier());
+                    lblPrice1.setText(membership.getCurrency()+" "+String.valueOf(price));
+                    break;
+                case 1:
+                    if(userAccount.getCustomer().getMembership().getName().equals(membership.getName()))
+                        radioBtnPlan2.setSelected(true);
+                    radioBtnPlan2.setText(membership.getName());
+                    radioBtnPlan2.setActionCommand(membership.getName());
+                    price = Math.round(membership.getPrice() * membership.getCurrencyMultiplier());
+                    lblPrice2.setText(membership.getCurrency()+" "+String.valueOf(price));
+                    break;
+                case 2:
+                    if(userAccount.getCustomer().getMembership().getName().equals(membership.getName()))
+                        radioBtnPlan3.setSelected(true);
+                    radioBtnPlan3.setText(membership.getName());
+                    radioBtnPlan3.setActionCommand(membership.getName());
+                    price = Math.round(membership.getPrice() * membership.getCurrencyMultiplier());
+                    lblPrice3.setText(membership.getCurrency()+" "+String.valueOf(price));
+                    break;
+                case 3:
+                    if(userAccount.getCustomer().getMembership().getName().equals(membership.getName()))
+                        radioBtnPlan4.setSelected(true);
+                    radioBtnPlan4.setText(membership.getName());
+                    radioBtnPlan4.setActionCommand(membership.getName());
+                    price = Math.round(membership.getPrice() * membership.getCurrencyMultiplier());
+                    lblPrice4.setText(membership.getCurrency()+" "+String.valueOf(price));
+                    break;
+                case 4:
+                    if(userAccount.getCustomer().getMembership().getName().equals(membership.getName()))
+                        radioBtnPlan5.setSelected(true);
+                    radioBtnPlan5.setText(membership.getName());
+                    radioBtnPlan5.setActionCommand(membership.getName());
+                    price = Math.round(membership.getPrice() * membership.getCurrencyMultiplier());
+                    lblPrice5.setText(membership.getCurrency()+" "+String.valueOf(price));
+                    break;
+                case 5:
+                    if(userAccount.getCustomer().getMembership().getName().equals(membership.getName()))
+                        radioBtnPlan6.setSelected(true);
+                    radioBtnPlan6.setText(membership.getName());
+                    radioBtnPlan6.setActionCommand(membership.getName());
+                    price = Math.round(membership.getPrice() * membership.getCurrencyMultiplier());
+                    lblPrice6.setText(membership.getCurrency()+" "+String.valueOf(price));
+                    break;
+            }
+        }
+    }
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
@@ -346,43 +474,127 @@ public class MembershipJPanel extends javax.swing.JPanel {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
+        JRadioButton selectedPlan = (JRadioButton)buttonGroupMembership.getSelection();
+        Membership.membershipType type = getMembershipType(selectedPlan.getText());
         
+        MembershipDirectory membershipDirectory = accounting.getMembershipDirectory();
+        Membership parentMembership = null;
+        for(Membership membership: membershipDirectory.getMembershipList()){
+            if(membership.getName().equals(type.toString())){
+                parentMembership = membership;
+                break;
+            }
+        }
+        
+        userAccount.getCustomer().getMembership().setName(type);
+        userAccount.getCustomer().getMembership().setPrice(parentMembership.getPrice());
+        userAccount.getCustomer().getMembership().setDescription(parentMembership.getDescription());
+        userAccount.getCustomer().getMembership().setDurationInDays(parentMembership.getDurationInDays());
+        userAccount.getCustomer().getMembership().setHasSpecialServicesAccess(parentMembership.getHasSpecialServicesAccess());
+
+        if(radioBtnYes.isSelected())
+            userAccount.getCustomer().getMembership().setHasPersonalTraining(Boolean.TRUE);
+        else if(radioBtnNo.isSelected())
+            userAccount.getCustomer().getMembership().setHasPersonalTraining(Boolean.FALSE);
+        
+        JOptionPane.showMessageDialog(null, "Congratulations, your membership is renewed!", "Info", JOptionPane.INFORMATION_MESSAGE);    
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private Membership.membershipType getMembershipType(String str){
+        Membership.membershipType type = null;
+        if(str.equals(Membership.membershipType.Bronze.toString()))
+            type = Membership.membershipType.Bronze;
+        else if(str.equals(Membership.membershipType.Diamond.toString()))
+            type = Membership.membershipType.Diamond;
+        else if(str.equals(Membership.membershipType.Gold.toString()))
+            type = Membership.membershipType.Gold;
+        else if(str.equals(Membership.membershipType.Platinum.toString()))
+            type = Membership.membershipType.Platinum;
+        else if(str.equals(Membership.membershipType.Silver.toString()))
+            type = Membership.membershipType.Silver;
+        else if(str.equals(Membership.membershipType.Steel.toString()))
+            type = Membership.membershipType.Steel;
+        
+        return type;
+    }
+    
+    private String getDescriptionFromMembershipList(int index){
+        int count = 1;
+        for(Membership membership: membershipList){
+            if(count == index){
+                return membership.getDescription();
+            }
+            count++;
+        }
+        return null;
+    }
+    
+    private void btnDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails1ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(1), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails1ActionPerformed
+
+    private void btnDetails2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails2ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(2), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails2ActionPerformed
+
+    private void btnDetails3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails3ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(3), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails3ActionPerformed
+
+    private void btnDetails4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails4ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(4), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails4ActionPerformed
+
+    private void btnDetails5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails5ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(5), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails5ActionPerformed
+
+    private void btnDetails6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails6ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(6), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails6ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDetails1;
+    private javax.swing.JButton btnDetails2;
+    private javax.swing.JButton btnDetails3;
+    private javax.swing.JButton btnDetails4;
+    private javax.swing.JButton btnDetails5;
+    private javax.swing.JButton btnDetails6;
     private javax.swing.JButton btnRegister;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.ButtonGroup buttonGroupHasPersonalTraining;
+    private javax.swing.ButtonGroup buttonGroupMembership;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblPrice1;
+    private javax.swing.JLabel lblPrice2;
+    private javax.swing.JLabel lblPrice3;
+    private javax.swing.JLabel lblPrice4;
+    private javax.swing.JLabel lblPrice5;
+    private javax.swing.JLabel lblPrice6;
+    private javax.swing.JRadioButton radioBtnNo;
+    private javax.swing.JRadioButton radioBtnPlan1;
+    private javax.swing.JRadioButton radioBtnPlan2;
+    private javax.swing.JRadioButton radioBtnPlan3;
+    private javax.swing.JRadioButton radioBtnPlan4;
+    private javax.swing.JRadioButton radioBtnPlan5;
+    private javax.swing.JRadioButton radioBtnPlan6;
+    private javax.swing.JRadioButton radioBtnYes;
     // End of variables declaration//GEN-END:variables
 }

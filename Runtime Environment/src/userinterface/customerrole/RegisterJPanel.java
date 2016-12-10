@@ -14,14 +14,12 @@ import business.person.Person;
 import business.person.customer.Customer;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import userinterface.MainJFrame;
 
 /**
  *
@@ -44,6 +42,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         populateCountryCombo();
         passPassword.setText(null);
         passConfirmPassword.setText(null);
+        
     }
     
     public void populateMembershipData(ParentNetwork selectedParentNetwork){
@@ -233,7 +232,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         radioBtnFemale = new javax.swing.JRadioButton();
         radioBtnYes = new javax.swing.JRadioButton();
         radioBtnNo = new javax.swing.JRadioButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(102, 102, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -431,22 +430,47 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         btnDetails3.setForeground(new java.awt.Color(102, 102, 255));
         btnDetails3.setText("Details");
+        btnDetails3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails3ActionPerformed(evt);
+            }
+        });
         add(btnDetails3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1065, 201, 96, -1));
 
         btnDetails1.setForeground(new java.awt.Color(102, 102, 255));
         btnDetails1.setText("Details");
+        btnDetails1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails1ActionPerformed(evt);
+            }
+        });
         add(btnDetails1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1065, 119, 96, -1));
 
         btnDetails2.setForeground(new java.awt.Color(102, 102, 255));
         btnDetails2.setText("Details");
+        btnDetails2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails2ActionPerformed(evt);
+            }
+        });
         add(btnDetails2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1065, 160, 96, -1));
 
         btnDetails4.setForeground(new java.awt.Color(102, 102, 255));
         btnDetails4.setText("Details");
+        btnDetails4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails4ActionPerformed(evt);
+            }
+        });
         add(btnDetails4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1065, 242, 96, -1));
 
         btnDetails5.setForeground(new java.awt.Color(102, 102, 255));
         btnDetails5.setText("Details");
+        btnDetails5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails5ActionPerformed(evt);
+            }
+        });
         add(btnDetails5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1066, 283, 96, -1));
 
         btnRegister.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -461,6 +485,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         btnDetails6.setForeground(new java.awt.Color(102, 102, 255));
         btnDetails6.setText("Details");
+        btnDetails6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails6ActionPerformed(evt);
+            }
+        });
         add(btnDetails6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1066, 324, 96, -1));
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -499,6 +528,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1034, 440, -1, -1));
 
         jTextField1.setEditable(false);
+        jTextField1.setEnabled(false);
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1049, 436, 113, -1));
 
         jLabel22.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
@@ -544,7 +574,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         buttonGroupHasPersonalTraining.add(radioBtnNo);
         radioBtnNo.setText("No");
         add(radioBtnNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 384, -1, -1));
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 135, 142, -1));
+        add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 135, 142, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private Boolean validateRegisterForm() {
@@ -653,6 +683,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
             passConfirmPassword.setBackground(Color.PINK);
         }
         
+        if(jDateChooser.getDate() == null){
+            if (dialogShown <= 0) {
+                dialogShown = 16;
+            }
+        }   
 
         if (dialogShown == 0) {
             return true;
@@ -719,8 +754,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 
             case 15:
                 errMessage = "Passwords do not match!";
-                break;   
+                break; 
                 
+            case 16:
+                errMessage = "Date of birth not entered!";
+                break; 
                 
         }
 
@@ -800,7 +838,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
         Customer customer = enterprise.getCustomerDirectory().addCustomer(membership);
         // bind user data
         
-        customer.setName(txtFirstName.getText()+" "+txtLastName.getText());
+        customer.setFirstName(txtFirstName.getText());
+        customer.setLastName(txtLastName.getText());
         
         if(radioBtnMale.isSelected())
             customer.setGender(Person.genderType.Male);
@@ -808,6 +847,9 @@ public class RegisterJPanel extends javax.swing.JPanel {
             customer.setGender(Person.genderType.Female);
         
         customer.setAddress(txtAddress.getText());
+        customer.setCity(txtCity.getText());
+        customer.setState(txtState.getText());
+        customer.setCountry(txtCountry.getText());
         customer.setZip(txtZipCode.getText());
         customer.setMobile(txtPhoneNo.getText());
         customer.setEmail(txtEmailID.getText());
@@ -822,13 +864,15 @@ public class RegisterJPanel extends javax.swing.JPanel {
         radioBtnMale.setSelected(false);
         radioBtnFemale.setSelected(false);
         txtAddress.setText(null);
+        txtCity.setText(null);
+        txtState.setText(null);
+        txtCountry.setText(null);
         comboCity.setSelectedItem(false);
         comboBranch.setSelectedItem(false);
-        comboCountry.setSelectedItem(false);
+        comboCountry.setSelectedItem(false);  
         txtZipCode.setText(null);
         txtPhoneNo.setText(null);
         txtEmailID.setText(null);
-        txtState.setText(null);
         radioBtnYes.setSelected(false);
         radioBtnNo.setSelected(false);
     }
@@ -849,6 +893,17 @@ public class RegisterJPanel extends javax.swing.JPanel {
             type = Membership.membershipType.Steel;
         
         return type;
+    }
+    
+    private String getDescriptionFromMembershipList(int index){
+        int count = 1;
+        for(Membership membership: membershipList){
+            if(count == index){
+                return membership.getDescription();
+            }
+            count++;
+        }
+        return null;
     }
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -879,6 +934,36 @@ public class RegisterJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_comboCityActionPerformed
 
+    private void btnDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails1ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(1), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails1ActionPerformed
+
+    private void btnDetails2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails2ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(2), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails2ActionPerformed
+
+    private void btnDetails3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails3ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(3), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails3ActionPerformed
+
+    private void btnDetails4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails4ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(4), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails4ActionPerformed
+
+    private void btnDetails5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails5ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(5), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails5ActionPerformed
+
+    private void btnDetails6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails6ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(6), "Info", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnDetails6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDetails1;
@@ -895,7 +980,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JComboBox<String> comboCity;
     private javax.swing.JComboBox comboCountry;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

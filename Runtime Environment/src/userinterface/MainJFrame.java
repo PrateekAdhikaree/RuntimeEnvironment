@@ -15,7 +15,6 @@ import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import userinterface.customerrole.RegisterJPanel;
 
 /**
@@ -24,9 +23,7 @@ import userinterface.customerrole.RegisterJPanel;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
-    private Business business;
-    private UserAccount userAccount;
-    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    Business business;
 
     /**
      * Creates new form MainJFrame
@@ -35,17 +32,17 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         btnProfile.setVisible(false);
         btnLogout.setVisible(false);
-        business = dB4OUtil.retrieveSystem();
+        business = DB4OUtil.getInstance().retrieveSystem();
         passwordPassword.setText(null);
         populateCountryCombo();
     }
-
-    public void populateCountryCombo() {
+    
+    public void populateCountryCombo(){
         JComboBox countryCombo = comboCountry;
         countryCombo.removeAllItems();
         int counter = 0;
-        for (ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
-            if (counter == 0) {
+        for(ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(counter == 0){
                 populateCityCombo(parentNetwork);
             }
             countryCombo.addItem(parentNetwork);
@@ -53,35 +50,34 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         countryCombo.setEnabled(true);
     }
-
-    public void populateCityCombo(ParentNetwork parentNetwork) {
+    
+    public void populateCityCombo(ParentNetwork parentNetwork){
         JComboBox cityCombo = comboCity;
         cityCombo.removeAllItems();
         int counter = 0;
-        for (ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()) {
-            if (parentNetwork.getId() == pn.getId()) {
-                for (Network network : pn.getNetworkDirectory().getNetworkList()) {
-                    if (counter == 0) {
+        for(ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(parentNetwork.getId() == pn.getId()){
+                for(Network network : pn.getNetworkDirectory().getNetworkList()){
+                    if(counter == 0)
                         populateBranchCombo(parentNetwork, network);
-                    }
                     cityCombo.addItem(network);
                     counter++;
                 }
                 cityCombo.setEnabled(true);
                 break;
-            }
+            } 
         }
     }
-
-    public void populateBranchCombo(ParentNetwork parentNetwork, Network network) {
+    
+    public void populateBranchCombo(ParentNetwork parentNetwork, Network network){
         JComboBox branchCombo = comboBranch;
         branchCombo.removeAllItems();
-        for (ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()) {
-            if (parentNetwork.getId() == pn.getId()) {
-                for (Network n : pn.getNetworkDirectory().getNetworkList()) {
-                    if (network.getId() == n.getId()) {
-                        for (Enterprise enterprise : n.getEnterpriseDirectory().getEnterpriseList()) {
-                            branchCombo.addItem(enterprise);
+        for(ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(parentNetwork.getId() == pn.getId()){
+                for(Network n : pn.getNetworkDirectory().getNetworkList()){
+                    if(network.getId() == n.getId()){
+                        for(Enterprise enterprise : n.getEnterpriseDirectory().getEnterpriseList()){
+                           branchCombo.addItem(enterprise);
                         }
                         comboBranch.setEnabled(true);
                         break;
@@ -91,6 +87,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }
     }
+    
 //    public void changeHeaderAfterLogin(String name){
 //        btnProfile.setVisible(true);
 //        btnLogout.setVisible(true);
@@ -196,15 +193,10 @@ public class MainJFrame extends javax.swing.JFrame {
         upperJPanel.add(lblMainHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 22, 355, 44));
         upperJPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 22, -1, -1));
 
-        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogout.setBackground(new java.awt.Color(102, 102, 255));
         btnLogout.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(102, 102, 255));
         btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
-            }
-        });
         upperJPanel.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 44, 100, -1));
 
         btnProfile.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -247,11 +239,6 @@ public class MainJFrame extends javax.swing.JFrame {
         btnGo.setForeground(new java.awt.Color(255, 153, 0));
         btnGo.setText("Go");
         btnGo.setEnabled(false);
-        btnGo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGoActionPerformed(evt);
-            }
-        });
 
         jSeparator1.setForeground(new java.awt.Color(255, 204, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -382,19 +369,19 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+    // TODO add your handling code here:
         // Get user name
         // business.setTxtUsername(txtUsername.getText());
         String userName = txtUsername.getText().trim();
-        if (userName.length() == 0) {
+        if (userName.length() == 0){
             JOptionPane.showMessageDialog(null, "Username cannot be blank", "Error Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
         // Get Password
         char[] passwordCharArray = passwordPassword.getPassword();
         String password = String.valueOf(passwordCharArray);
-        if (password.length() == 0 || password.length() < 6) {
+        if (password.length() == 0  || password.length() < 6){
             JOptionPane.showMessageDialog(null, "Password should be greater than 6 characters", "Error Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -424,17 +411,13 @@ public class MainJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid Username/Password");
             return;
         } else {
-            this.userAccount = userAccount;
             userProcessContainer.add("WorkArea", userAccount.getRole().createWorkArea(userProcessContainer, userAccount, inEnterprise, business));
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         }
 
-        btnLogin.setVisible(false);
-        btnNewUser.setVisible(false);
-        btnProfile.setVisible(true);
-        btnLogout.setVisible(true);
-
+        btnLogin.setEnabled(false);
+        //logoutJButton.setEnabled(true);
         txtUsername.setEnabled(false);
         passwordPassword.setEnabled(false);
 
@@ -451,33 +434,29 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutUsActionPerformed
         // TODO add your handling code here:
         AboutUsJPanel aboutUsJPanel = new AboutUsJPanel(userProcessContainer);
-        userProcessContainer.add("AboutUsJPanel", aboutUsJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("AboutUsJPanel",aboutUsJPanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAboutUsActionPerformed
 
     private void btnContactUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactUSActionPerformed
         // TODO add your handling code here:
         ContactUsJPanel contactUsJPanel = new ContactUsJPanel(userProcessContainer);
-        userProcessContainer.add("ContactUsJPanel", contactUsJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("ContactUsJPanel",contactUsJPanel);
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnContactUSActionPerformed
 
     private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
-        userProcessContainer.add("Profile", userAccount.getRole().createProfile(userProcessContainer, userAccount, business));
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-
     }//GEN-LAST:event_btnProfileActionPerformed
 
     private void comboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCountryActionPerformed
         // TODO add your handling code here:
-        if (comboCountry.isEnabled()) {
+        if(comboCountry.isEnabled()){
             comboCity.setEnabled(false);
             comboBranch.setEnabled(false);
-            ParentNetwork parentNetwork = (ParentNetwork) comboCountry.getSelectedItem();
+            ParentNetwork parentNetwork = (ParentNetwork)comboCountry.getSelectedItem();
             populateCityCombo(parentNetwork);
             comboCity.setEnabled(true);
         }
@@ -485,40 +464,13 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void comboCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCityActionPerformed
         // TODO add your handling code here:
-        if (comboCity.isEnabled()) {
-            ParentNetwork parentNetwork = (ParentNetwork) comboCountry.getSelectedItem();
-            Network network = (Network) comboCity.getSelectedItem();
+        if(comboCity.isEnabled()){
+            ParentNetwork parentNetwork = (ParentNetwork)comboCountry.getSelectedItem();
+            Network network = (Network)comboCity.getSelectedItem();
             populateBranchCombo(parentNetwork, network);
             comboBranch.setEnabled(true);
         }
     }//GEN-LAST:event_comboCityActionPerformed
-
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
-        btnLogout.setEnabled(false);
-        txtUsername.setEnabled(true);
-        passwordPassword.setEnabled(true);
-        btnLogin.setEnabled(true);
-
-        txtUsername.setText("");
-        passwordPassword.setText("");
-
-        userProcessContainer.removeAll();
-        JPanel blankJP = new JPanel();
-        userProcessContainer.add("blank", blankJP);
-        CardLayout crdLyt = (CardLayout) userProcessContainer.getLayout();
-        crdLyt.next(userProcessContainer);
-        dB4OUtil.storeSystem(business, 1);
-    }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void btnGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoActionPerformed
-        // TODO add your handling code here:
-        OurServicesJPanel ourServicesJPanel = new OurServicesJPanel(userProcessContainer);
-        userProcessContainer.add("OurServicesJPanel", ourServicesJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-
-    }//GEN-LAST:event_btnGoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,8 +6,17 @@
 package userinterface.password;
 
 import business.Business;
+import business.enterprise.Enterprise;
+import business.network.Network;
+import business.parentnetwork.ParentNetwork;
+import business.useraccount.PasswordHash;
 import business.useraccount.UserAccount;
+import business.useraccount.UserAccountDirectory;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -15,7 +24,6 @@ import javax.swing.JPanel;
  * @author soumiyaroy
  */
 public class ChangePasswordJPanel extends javax.swing.JPanel {
-
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Business business;
@@ -28,6 +36,9 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.business = business;
+        passPassword.setText(null);
+        passNewPassword.setText(null);
+        passConfirmPassword.setText(null);
     }
 
     /**
@@ -42,15 +53,15 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        passPassword = new javax.swing.JPasswordField();
+        passNewPassword = new javax.swing.JPasswordField();
+        passConfirmPassword = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(102, 102, 255));
 
@@ -62,9 +73,14 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
 
         jSeparator2.setForeground(new java.awt.Color(255, 204, 0));
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 153, 51));
-        jButton1.setText("Save");
+        btnSave.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(255, 153, 51));
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 153, 51));
@@ -87,14 +103,14 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 204, 0));
         jLabel5.setText("Confirm Password:");
 
-        jPasswordField1.setForeground(new java.awt.Color(255, 153, 51));
-        jPasswordField1.setText("jPasswordField1");
+        passPassword.setForeground(new java.awt.Color(255, 153, 51));
+        passPassword.setText("jPasswordField1");
 
-        jPasswordField2.setForeground(new java.awt.Color(255, 153, 51));
-        jPasswordField2.setText("jPasswordField2");
+        passNewPassword.setForeground(new java.awt.Color(255, 153, 51));
+        passNewPassword.setText("jPasswordField2");
 
-        jPasswordField3.setForeground(new java.awt.Color(255, 153, 51));
-        jPasswordField3.setText("jPasswordField3");
+        passConfirmPassword.setForeground(new java.awt.Color(255, 153, 51));
+        passConfirmPassword.setText("jPasswordField3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -120,7 +136,7 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
                                         .addGap(202, 202, 202)
                                         .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,9 +144,9 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
                                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                            .addComponent(jPasswordField2)
-                                            .addComponent(jPasswordField3))))
+                                            .addComponent(passPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                            .addComponent(passNewPassword)
+                                            .addComponent(passConfirmPassword))))
                                 .addGap(19, 19, 19)))))
                 .addGap(139, 139, 139))
         );
@@ -147,45 +163,140 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(jButton1))
+                    .addComponent(btnSave))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private Boolean validatePasswordForm() {
+        int dialogShown = 0;
+        
+        if (passNewPassword.getPassword().length < 6) {
+            if (dialogShown <= 0) {
+                dialogShown = 2;
+            }
+            passNewPassword.setBackground(Color.PINK);
+            passConfirmPassword.setBackground(Color.PINK);
+        }
+        
+        if (passConfirmPassword.getPassword().toString().equals(passNewPassword.getPassword().toString())) {
+            if (dialogShown <= 0) {
+                dialogShown = 3;
+            }
+            passNewPassword.setBackground(Color.PINK);
+            passConfirmPassword.setBackground(Color.PINK);
+        }
+        
+        if (dialogShown != 0) {
+            showValidationDialog(dialogShown);
+            return false;
+        }
+
+        //Step 1: Check in the user account directory if you have the user
+        UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(this.userAccount.getUsername(), this.userAccount.getPassword());
+
+
+        if (userAccount == null) {
+            //Step2:Go inside each parentnetwork and check each network
+            for (ParentNetwork parentnetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
+                //Step2.1:Check against each network
+                for (Network network : parentnetwork.getNetworkDirectory().getNetworkList()) {
+                    //Step3:Check against each enterprise inside each network
+                    for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                        userAccount = enterprise.getUserAccountDirectory().authenticateUser(this.userAccount.getUsername(), this.userAccount.getPassword());
+                        if (userAccount != null) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (userAccount == null) {
+            JOptionPane.showMessageDialog(this, "Invalid password");
+            return false;
+        }
+        return true;
+    }
+    
+    private void showValidationDialog(int flag) {
+        String errMessage = "";
+        switch (flag) {
+            
+            case 2:
+                errMessage = "Invalid Password!";
+                break;
+
+            case 3:
+                errMessage = "Passwords do not match";
+                break;
+        }
+                
+            JOptionPane.showMessageDialog(null, errMessage, "Error Message", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void removeValidationDisplay() {
+        
+        passPassword.setBackground(Color.white);
+        passNewPassword.setBackground(Color.white);
+        passConfirmPassword.setBackground(Color.white);
+    }
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-                userProcessContainer.remove(this);
+        userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        removeValidationDisplay();
+        Boolean isValid = validatePasswordForm();
+        if (isValid) {
+            setFormData();
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void setFormData() {
+        
+        char[] pass = passNewPassword.getPassword();
+        String newPassword = String.valueOf(pass);
+        this.userAccount.setPassword(newPassword);
+        
+        // prompt user data bind success
+        JOptionPane.showMessageDialog(null, "Congratulations, you have successfully changed your password!", "Info", JOptionPane.INFORMATION_MESSAGE);
+
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPasswordField passConfirmPassword;
+    private javax.swing.JPasswordField passNewPassword;
+    private javax.swing.JPasswordField passPassword;
     // End of variables declaration//GEN-END:variables
 }
