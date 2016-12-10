@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -29,6 +30,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Business business;
+    private Enterprise selectedEnterprise;
+    private float totalPrice = 0;
+    private float currencyMultiplier = 0;
+    private Membership.membershipType selectedType;
+    private Boolean selectedTraining = false;
     private ArrayList<Membership> membershipList;
 
     /**
@@ -42,7 +48,15 @@ public class RegisterJPanel extends javax.swing.JPanel {
         populateCountryCombo();
         passPassword.setText(null);
         passConfirmPassword.setText(null);
-        
+        txtTotalPrice.setText(String.valueOf(Math.round(totalPrice)));
+    }
+    
+    private void setTotalCurrencyLabel(String str){
+        jLabel21.setText(str);
+    }
+    
+    private void setPersonalTrainerPerMonthLabel(String str){
+        jLabel18.setText(str + String.valueOf(Math.round(50*currencyMultiplier)) + "/month");
     }
     
     public void populateMembershipData(ParentNetwork selectedParentNetwork){
@@ -53,6 +67,9 @@ public class RegisterJPanel extends javax.swing.JPanel {
                        this.membershipList = enterprise.getOrganizationDirectory().getAccounting().getMembershipDirectory().getMembershipList();
                        for(int i = 0; i < membershipList.size(); i++){
                            Membership membership = membershipList.get(i);
+                           setTotalCurrencyLabel(membership.getCurrency());
+                           setPersonalTrainerPerMonthLabel(membership.getCurrency());
+                           this.currencyMultiplier = membership.getCurrencyMultiplier();
                            int price = 0;
                            switch(i){
                                case 0:
@@ -139,8 +156,12 @@ public class RegisterJPanel extends javax.swing.JPanel {
             if(parentNetwork.getId() == pn.getId()){
                 for(Network n : pn.getNetworkDirectory().getNetworkList()){
                     if(network.getId() == n.getId()){
+                        int counter = 0;
                         for(Enterprise enterprise : n.getEnterpriseDirectory().getEnterpriseList()){
+                            if(counter == 0)
+                                this.selectedEnterprise = enterprise;
                            branchCombo.addItem(enterprise);
+                           counter++;
                         }
                         populateMembershipData(parentNetwork);
                         comboBranch.setEnabled(true);
@@ -218,7 +239,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTotalPrice = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
         txtState = new javax.swing.JTextField();
@@ -232,7 +253,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         radioBtnFemale = new javax.swing.JRadioButton();
         radioBtnYes = new javax.swing.JRadioButton();
         radioBtnNo = new javax.swing.JRadioButton();
-        jDateChooser = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(102, 102, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -323,6 +344,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         comboBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBranch.setEnabled(false);
+        comboBranch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBranchActionPerformed(evt);
+            }
+        });
         add(comboBranch, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 398, 121, -1));
 
         comboCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -366,36 +392,66 @@ public class RegisterJPanel extends javax.swing.JPanel {
         radioBtnPlan1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         radioBtnPlan1.setForeground(new java.awt.Color(255, 204, 0));
         radioBtnPlan1.setText("Membership1 ");
+        radioBtnPlan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPlan1ActionPerformed(evt);
+            }
+        });
         add(radioBtnPlan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 120, -1, -1));
 
         buttonGroupMembership.add(radioBtnPlan2);
         radioBtnPlan2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         radioBtnPlan2.setForeground(new java.awt.Color(255, 204, 0));
         radioBtnPlan2.setText("Membership2");
+        radioBtnPlan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPlan2ActionPerformed(evt);
+            }
+        });
         add(radioBtnPlan2, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 161, -1, -1));
 
         buttonGroupMembership.add(radioBtnPlan3);
         radioBtnPlan3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         radioBtnPlan3.setForeground(new java.awt.Color(255, 204, 0));
         radioBtnPlan3.setText("Membership3");
+        radioBtnPlan3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPlan3ActionPerformed(evt);
+            }
+        });
         add(radioBtnPlan3, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 202, -1, -1));
 
         buttonGroupMembership.add(radioBtnPlan4);
         radioBtnPlan4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         radioBtnPlan4.setForeground(new java.awt.Color(255, 204, 0));
         radioBtnPlan4.setText("Membership4");
+        radioBtnPlan4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPlan4ActionPerformed(evt);
+            }
+        });
         add(radioBtnPlan4, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 243, -1, -1));
 
         buttonGroupMembership.add(radioBtnPlan5);
         radioBtnPlan5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         radioBtnPlan5.setForeground(new java.awt.Color(255, 204, 0));
         radioBtnPlan5.setText("Membership5");
+        radioBtnPlan5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPlan5ActionPerformed(evt);
+            }
+        });
         add(radioBtnPlan5, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 284, -1, -1));
 
         buttonGroupMembership.add(radioBtnPlan6);
         radioBtnPlan6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         radioBtnPlan6.setForeground(new java.awt.Color(255, 204, 0));
         radioBtnPlan6.setText("Membership6");
+        radioBtnPlan6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnPlan6ActionPerformed(evt);
+            }
+        });
         add(radioBtnPlan6, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 325, -1, -1));
 
         lblPrice2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -514,7 +570,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         jLabel18.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel18.setText("$50/day");
+        jLabel18.setText("$50/month");
         add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(969, 387, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -525,11 +581,10 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel21.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 204, 0));
         jLabel21.setText("$");
-        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1034, 440, -1, -1));
+        add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 440, -1, -1));
 
-        jTextField1.setEditable(false);
-        jTextField1.setEnabled(false);
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1049, 436, 113, -1));
+        txtTotalPrice.setEditable(false);
+        add(txtTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(1049, 436, 113, -1));
 
         jLabel22.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 204, 0));
@@ -569,12 +624,22 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         buttonGroupHasPersonalTraining.add(radioBtnYes);
         radioBtnYes.setText("Yes");
+        radioBtnYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnYesActionPerformed(evt);
+            }
+        });
         add(radioBtnYes, new org.netbeans.lib.awtextra.AbsoluteConstraints(742, 384, -1, -1));
 
         buttonGroupHasPersonalTraining.add(radioBtnNo);
         radioBtnNo.setText("No");
+        radioBtnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBtnNoActionPerformed(evt);
+            }
+        });
         add(radioBtnNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 384, -1, -1));
-        add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 135, 142, -1));
+        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 135, 142, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private Boolean validateRegisterForm() {
@@ -683,11 +748,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
             passConfirmPassword.setBackground(Color.PINK);
         }
         
-        if(jDateChooser.getDate() == null){
-            if (dialogShown <= 0) {
-                dialogShown = 16;
-            }
-        }   
 
         if (dialogShown == 0) {
             return true;
@@ -754,11 +814,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 
             case 15:
                 errMessage = "Passwords do not match!";
-                break; 
+                break;   
                 
-            case 16:
-                errMessage = "Date of birth not entered!";
-                break; 
                 
         }
 
@@ -841,15 +898,13 @@ public class RegisterJPanel extends javax.swing.JPanel {
         customer.setFirstName(txtFirstName.getText());
         customer.setLastName(txtLastName.getText());
         
+        
         if(radioBtnMale.isSelected())
             customer.setGender(Person.genderType.Male);
         else if(radioBtnFemale.isSelected())
             customer.setGender(Person.genderType.Female);
         
         customer.setAddress(txtAddress.getText());
-        customer.setCity(txtCity.getText());
-        customer.setState(txtState.getText());
-        customer.setCountry(txtCountry.getText());
         customer.setZip(txtZipCode.getText());
         customer.setMobile(txtPhoneNo.getText());
         customer.setEmail(txtEmailID.getText());
@@ -864,15 +919,13 @@ public class RegisterJPanel extends javax.swing.JPanel {
         radioBtnMale.setSelected(false);
         radioBtnFemale.setSelected(false);
         txtAddress.setText(null);
-        txtCity.setText(null);
-        txtState.setText(null);
-        txtCountry.setText(null);
         comboCity.setSelectedItem(false);
         comboBranch.setSelectedItem(false);
-        comboCountry.setSelectedItem(false);  
+        comboCountry.setSelectedItem(false);
         txtZipCode.setText(null);
         txtPhoneNo.setText(null);
         txtEmailID.setText(null);
+        txtState.setText(null);
         radioBtnYes.setSelected(false);
         radioBtnNo.setSelected(false);
     }
@@ -895,15 +948,36 @@ public class RegisterJPanel extends javax.swing.JPanel {
         return type;
     }
     
-    private String getDescriptionFromMembershipList(int index){
-        int count = 1;
-        for(Membership membership: membershipList){
-            if(count == index){
-                return membership.getDescription();
+    private void displayTotalPrice(float price, Membership.membershipType type){
+        if(selectedType != null){
+            if(!type.toString().equals(selectedType.toString())){
+                float oldPrice = 0;
+                for(Membership m: membershipList){
+                    if(m.getName().equals(selectedType.toString())){
+                        oldPrice = m.getPrice();
+                        break;
+                    }
+                }
+                totalPrice -= oldPrice*currencyMultiplier;
             }
-            count++;
         }
-        return null;
+            
+        totalPrice += price*currencyMultiplier;
+        this.selectedType = type;
+        
+        txtTotalPrice.setText(String.valueOf(Math.round(totalPrice)));
+    }
+    
+    private void membershipRadioButtonClicked(JRadioButton button){
+        Membership.membershipType type = getMembershipType(button.getText());
+        if(type != selectedType){
+            for(Membership membership: selectedEnterprise.getOrganizationDirectory().getAccounting().getMembershipDirectory().getMembershipList()){
+                if(membership.getName().equals(type.toString())){
+                    displayTotalPrice(membership.getPrice(), type);
+                    break;
+                }
+            }
+        }
     }
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -921,6 +995,12 @@ public class RegisterJPanel extends javax.swing.JPanel {
             ParentNetwork parentNetwork = (ParentNetwork)comboCountry.getSelectedItem();
             populateCityCombo(parentNetwork);
             comboCity.setEnabled(true);
+            selectedTraining = false;
+            selectedType = null;
+            totalPrice = 0;
+            txtTotalPrice.setText(String.valueOf(Math.round(totalPrice)));
+            buttonGroupMembership.clearSelection();
+            buttonGroupHasPersonalTraining.clearSelection();
         }
     }//GEN-LAST:event_comboCountryActionPerformed
 
@@ -934,6 +1014,72 @@ public class RegisterJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_comboCityActionPerformed
 
+    private void radioBtnPlan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPlan1ActionPerformed
+        // TODO add your handling code here:
+        membershipRadioButtonClicked(radioBtnPlan1);
+    }//GEN-LAST:event_radioBtnPlan1ActionPerformed
+
+    private void comboBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBranchActionPerformed
+        // TODO add your handling code here:
+        if(comboBranch.isEnabled()){
+            this.selectedEnterprise = (Enterprise)comboBranch.getSelectedItem();
+        }
+    }//GEN-LAST:event_comboBranchActionPerformed
+
+    private void radioBtnPlan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPlan2ActionPerformed
+        // TODO add your handling code here:
+        membershipRadioButtonClicked(radioBtnPlan2);
+    }//GEN-LAST:event_radioBtnPlan2ActionPerformed
+
+    private void radioBtnPlan3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPlan3ActionPerformed
+        // TODO add your handling code here:
+        membershipRadioButtonClicked(radioBtnPlan3);
+    }//GEN-LAST:event_radioBtnPlan3ActionPerformed
+
+    private void radioBtnPlan4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPlan4ActionPerformed
+        // TODO add your handling code here:
+        membershipRadioButtonClicked(radioBtnPlan4);
+    }//GEN-LAST:event_radioBtnPlan4ActionPerformed
+
+    private void radioBtnPlan5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPlan5ActionPerformed
+        // TODO add your handling code here:
+        membershipRadioButtonClicked(radioBtnPlan5);
+    }//GEN-LAST:event_radioBtnPlan5ActionPerformed
+
+    private void radioBtnPlan6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnPlan6ActionPerformed
+        // TODO add your handling code here:
+        membershipRadioButtonClicked(radioBtnPlan6);
+    }//GEN-LAST:event_radioBtnPlan6ActionPerformed
+
+    private void radioBtnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnYesActionPerformed
+        // TODO add your handling code here:
+        if(!selectedTraining){
+            totalPrice += 50*currencyMultiplier;
+            txtTotalPrice.setText(String.valueOf(Math.round(totalPrice)));
+            selectedTraining = true;
+        }
+    }//GEN-LAST:event_radioBtnYesActionPerformed
+
+    private void radioBtnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnNoActionPerformed
+        // TODO add your handling code here:
+        if(selectedTraining){
+            totalPrice -= 50*currencyMultiplier;
+            txtTotalPrice.setText(String.valueOf(Math.round(totalPrice)));
+            selectedTraining = false;
+        }
+    }//GEN-LAST:event_radioBtnNoActionPerformed
+
+    private String getDescriptionFromMembershipList(int index){
+        int count = 1;
+        for(Membership membership: membershipList){
+            if(count == index){
+                return membership.getDescription();
+            }
+            count++;
+        }
+        return null;
+    }
+    
     private void btnDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails1ActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(1), "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -980,7 +1126,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JComboBox<String> comboCity;
     private javax.swing.JComboBox comboCountry;
-    private com.toedter.calendar.JDateChooser jDateChooser;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1008,7 +1154,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblPrice1;
     private javax.swing.JLabel lblPrice2;
     private javax.swing.JLabel lblPrice3;
@@ -1036,6 +1181,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtPhoneNo;
     private javax.swing.JTextField txtPromoCode;
     private javax.swing.JTextField txtState;
+    private javax.swing.JTextField txtTotalPrice;
     private javax.swing.JTextField txtZipCode;
     // End of variables declaration//GEN-END:variables
 }
