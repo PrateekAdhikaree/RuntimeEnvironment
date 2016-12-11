@@ -75,6 +75,7 @@ public class WelcomeJPanel extends javax.swing.JPanel {
                         for (Enterprise enterprise : n.getEnterpriseDirectory().getEnterpriseList()) {
                             branchCombo.addItem(enterprise);
                         }
+                        btnGo.setEnabled(true);
                         comboBranch.setEnabled(true);
                         break;
                     }
