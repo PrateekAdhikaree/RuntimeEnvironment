@@ -8,6 +8,7 @@ package userinterface.regulartrainerrole;
 import business.Business;
 import business.organization.accounting.Accounting;
 import business.person.Person;
+import business.person.customer.Customer;
 import business.person.employee.Employee;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
@@ -17,6 +18,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.message.MessageJPanel;
+import userinterface.superadminrole.*;
 
 /**
  *
@@ -38,6 +40,8 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.accounting = accounting;
         this.business = business;
+        
+        setRegularTrainerProfileToForm();
     }
 
     /**
@@ -57,7 +61,7 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnChangePassword = new javax.swing.JButton();
         txtLastName = new javax.swing.JTextField();
-        txtEmailID = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -65,11 +69,11 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         btnUpload = new javax.swing.JButton();
         jDateChooser = new com.toedter.calendar.JDateChooser();
-        txtZipCode = new javax.swing.JTextField();
+        txtZip = new javax.swing.JTextField();
         txtCity = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtPhoneNo = new javax.swing.JTextField();
+        txtMobile = new javax.swing.JTextField();
         txtState = new javax.swing.JTextField();
         radioBtnMale = new javax.swing.JRadioButton();
         jLabel16 = new javax.swing.JLabel();
@@ -119,8 +123,6 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
                 btnChangePasswordActionPerformed(evt);
             }
         });
-
-        txtEmailID.setForeground(new java.awt.Color(255, 204, 0));
 
         jLabel13.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 204, 0));
@@ -186,28 +188,33 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(311, 311, 311)
-                                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(183, 183, 183))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(405, 405, 405)
-                                        .addComponent(btnChangePassword)
-                                        .addGap(12, 12, 12)))
-                                .addComponent(btnSave)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(311, 311, 311)
+                                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(183, 183, 183))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(405, 405, 405)
+                                            .addComponent(btnChangePassword)
+                                            .addGap(12, 12, 12)))
+                                    .addComponent(btnSave))))
                         .addGap(0, 22, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(radioBtnFemale)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(35, 35, 35)
@@ -232,29 +239,21 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel16)
                                     .addGap(40, 40, 40)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtPhoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(188, 188, 188)
                             .addComponent(btnUpload))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel11)
                                 .addComponent(jLabel5))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(radioBtnFemale)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel6)
-                                    .addGap(190, 190, 190))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(52, 52, 52)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGap(52, 52, 52)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(45, 45, 45)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,12 +280,16 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioBtnFemale)
+                    .addComponent(jLabel6))
+                .addGap(183, 183, 183)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChangePassword)
                     .addComponent(btnSave)
                     .addComponent(btnBack))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,9 +306,7 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(radioBtnMale)
-                                    .addComponent(radioBtnFemale)
-                                    .addComponent(jLabel6))
+                                    .addComponent(radioBtnMale))
                                 .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -325,15 +326,15 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel14)
                                 .addComponent(jLabel15)
-                                .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel16)
-                                .addComponent(txtPhoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7)
-                                .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addContainerGap(126, Short.MAX_VALUE)))
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addContainerGap(132, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -396,25 +397,25 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
             }
             txtCountry.setBackground(Color.PINK);
         }
-        if (txtZipCode.getText().trim().length() == 0) {
+        if (txtZip.getText().trim().length() == 0) {
             if (dialogShown <= 0) {
                 dialogShown = 9;
             }
-            txtZipCode.setBackground(Color.PINK);
+            txtZip.setBackground(Color.PINK);
         }
-        if (!validatePhoneNumber(txtPhoneNo.getText())) {
+        if (!validatePhoneNumber(txtMobile.getText())) {
             if (dialogShown <= 0) {
                 dialogShown = 10;
             }
-            txtPhoneNo.setBackground(Color.PINK);
+            txtMobile.setBackground(Color.PINK);
         }
         pattern = Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
-        matcher = pattern.matcher(txtEmailID.getText());
+        matcher = pattern.matcher(txtEmail.getText());
         if (!matcher.matches()) {
             if (dialogShown <= 0) {
                 dialogShown = 11;
             }
-            txtEmailID.setBackground(Color.PINK);
+            txtEmail.setBackground(Color.PINK);
         }
         if (dialogShown == 0) {
             return true;
@@ -458,9 +459,11 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
 
             case 3:
                 errMessage = "Gender not Selected!";
+                break;
 
             case 4:
                 errMessage = "Date of birth not entered!";
+                break;
 
             case 5:
                 errMessage = "Invalid Address!";
@@ -502,50 +505,58 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
         txtCity.setBackground(Color.white);
         txtState.setBackground(Color.white);
         txtCountry.setBackground(Color.white);
-        txtZipCode.setBackground(Color.white);
-        txtPhoneNo.setBackground(Color.white);
-        txtEmailID.setBackground(Color.white);
+        txtZip.setBackground(Color.white);
+        txtMobile.setBackground(Color.white);
+        txtEmail.setBackground(Color.white);
     }
 
-    private void setRegularTrainerProfile() {
+    private void setRegularTrainerProfileToObj() {
         Employee employee = userAccount.getEmployee();
+        
         // bind user data
+        employee.setFirstName(txtFirstName.getText());
+        employee.setLastName(txtLastName.getText());
+        
+        if(radioBtnMale.isSelected())
+            employee.setGender(Person.genderType.Male);
+        else if(radioBtnFemale.isSelected())
+            employee.setGender(Person.genderType.Female);
+        
+        employee.setDob(jDateChooser.getDate());
+        employee.setAddress(txtAddress.getText());
+        employee.setCity(txtCity.getText());
+        employee.setState(txtState.getText());
+        employee.setCountry(txtCountry.getText());
+        employee.setZip(txtZip.getText());
+        employee.setMobile(txtMobile.getText());
+        employee.setEmail(txtEmail.getText());
 
+        // prompt user data bind success
+        JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);    
+    }
+    
+    public void setRegularTrainerProfileToForm(){
+        Employee employee = userAccount.getEmployee();
+        
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
-
-        if (radioBtnMale.isSelected()) {
-            employee.setGender(Person.genderType.Male);
-        } else if (radioBtnFemale.isSelected()) {
-            employee.setGender(Person.genderType.Female);
-        }
-
+        
+        if(employee.getGender().toString().equals("Male"))
+            radioBtnMale.setSelected(true);
+        else if(employee.getGender().toString().equals("Female"))
+            radioBtnFemale.setSelected(true);
+        
+        jDateChooser.setDate(employee.getDob());
+        
         txtAddress.setText(employee.getAddress());
         txtCity.setText(employee.getCity());
         txtState.setText(employee.getState());
         txtCountry.setText(employee.getCountry());
-        txtZipCode.setText(employee.getZip());
-        txtPhoneNo.setText(employee.getMobile());
-        txtEmailID.setText(employee.getEmail());
-
-        // prompt user data bind success
-        JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);
-
-        // remove all field values
-        txtFirstName.setText(null);
-        txtLastName.setText(null);
-        radioBtnMale.setSelected(false);
-        radioBtnFemale.setSelected(false);
-        txtAddress.setText(null);
-        txtCity.setText(null);
-        txtState.setText(null);
-        txtCountry.setText(null);
-        txtZipCode.setText(null);
-        txtPhoneNo.setText(null);
-        txtEmailID.setText(null);
-        radioBtnMale.setSelected(false);
-        radioBtnFemale.setSelected(false);
+        txtZip.setText(employee.getZip());
+        txtMobile.setText(employee.getMobile());
+        txtEmail.setText(employee.getEmail());
     }
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
@@ -563,10 +574,10 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        removeValidationDisplay();
+                removeValidationDisplay();
         Boolean isValid = validateRegularTrainerProfile();
         if (isValid) {
-            setRegularTrainerProfile();
+            setRegularTrainerProfileToObj();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -598,11 +609,11 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCountry;
-    private javax.swing.JTextField txtEmailID;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
-    private javax.swing.JTextField txtPhoneNo;
+    private javax.swing.JTextField txtMobile;
     private javax.swing.JTextField txtState;
-    private javax.swing.JTextField txtZipCode;
+    private javax.swing.JTextField txtZip;
     // End of variables declaration//GEN-END:variables
 }

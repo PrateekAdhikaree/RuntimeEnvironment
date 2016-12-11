@@ -74,7 +74,6 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         jSeparator2.setForeground(new java.awt.Color(255, 204, 0));
 
         btnSave.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btnSave.setForeground(new java.awt.Color(255, 153, 51));
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +82,6 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         });
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        btnBack.setForeground(new java.awt.Color(255, 153, 51));
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,13 +101,10 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 204, 0));
         jLabel5.setText("Confirm Password:");
 
-        passPassword.setForeground(new java.awt.Color(255, 153, 51));
         passPassword.setText("jPasswordField1");
 
-        passNewPassword.setForeground(new java.awt.Color(255, 153, 51));
         passNewPassword.setText("jPasswordField2");
 
-        passConfirmPassword.setForeground(new java.awt.Color(255, 153, 51));
         passConfirmPassword.setText("jPasswordField3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -225,8 +220,9 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
                 }
             }
         }
+        
         if (userAccount == null) {
-            JOptionPane.showMessageDialog(this, "Invalid password");
+            JOptionPane.showMessageDialog(this, "Invalid old password");
             return false;
         }
         return true;
@@ -237,7 +233,7 @@ public class ChangePasswordJPanel extends javax.swing.JPanel {
         switch (flag) {
             
             case 2:
-                errMessage = "Invalid Password!";
+                errMessage = "Password needs to be more than 6 characters!";
                 break;
 
             case 3:

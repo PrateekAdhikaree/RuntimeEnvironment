@@ -662,18 +662,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
             txtLastName.setBackground(Color.PINK);
         }
-        if (txtAddress.getText().trim().length() == 0) {
-            if (dialogShown <= 0) {
-                dialogShown = 4;
-            }
-            txtAddress.setBackground(Color.PINK);
-        }
-        if (txtZipCode.getText().trim().length() == 0) {
-            if (dialogShown <= 0) {
-                dialogShown = 5;
-            }
-            txtZipCode.setBackground(Color.PINK);
-        }
         if (!validatePhoneNumber(txtPhoneNo.getText())) {
             if (dialogShown <= 0) {
                 dialogShown = 6;
@@ -688,50 +676,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
             txtEmailID.setBackground(Color.PINK);
         }
-        
-        if(buttonGroupMembership.getSelection() == null){
-            if (dialogShown <= 0) {
-                dialogShown = 8;
-            }
-        }
-        
-        if(buttonGroupGender.getSelection() == null){
-            if (dialogShown <= 0) {
-                dialogShown = 9;
-            }
-        }
-        
-        if(buttonGroupHasPersonalTraining.getSelection() == null){
-            if (dialogShown <= 0) {
-                dialogShown = 10;
-            }
-        }
-        
-        pattern = Pattern.compile("^[a-zA-Z]+$");
-        matcher = pattern.matcher(txtCity.getText().trim());
-        if (!matcher.matches()) {
-            if (dialogShown <= 0) {
-                dialogShown = 11;
-            }
-            txtCity.setBackground(Color.PINK);
-        }
-            
-        matcher = pattern.matcher(txtState.getText().trim());
-        if (!matcher.matches()) {
-            if (dialogShown <= 0) {
-                dialogShown = 12;
-            }
-            txtState.setBackground(Color.PINK);
-        }
-            
-        matcher = pattern.matcher(txtCountry.getText().trim());
-        if (!matcher.matches()) {
-            if (dialogShown <= 0) {
-                dialogShown = 13;
-            }
-            txtCountry.setBackground(Color.PINK);
-        }
-        
         if (passPassword.getPassword().length == 0 || passPassword.getPassword().length < 6) {
             if (dialogShown <= 0) {
                 dialogShown = 14;
@@ -747,15 +691,61 @@ public class RegisterJPanel extends javax.swing.JPanel {
             passPassword.setBackground(Color.PINK);
             passConfirmPassword.setBackground(Color.PINK);
         }
-        
-
+        if (txtAddress.getText().trim().length() == 0) {
+            if (dialogShown <= 0) {
+                dialogShown = 4;
+            }
+            txtAddress.setBackground(Color.PINK);
+        }
+        pattern = Pattern.compile("^[a-zA-Z]+$");
+        matcher = pattern.matcher(txtCity.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 11;
+            }
+            txtCity.setBackground(Color.PINK);
+        }
+        matcher = pattern.matcher(txtState.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 12;
+            }
+            txtState.setBackground(Color.PINK);
+        }
+        matcher = pattern.matcher(txtCountry.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 13;
+            }
+            txtCountry.setBackground(Color.PINK);
+        }
+        if (txtZipCode.getText().trim().length() == 0) {
+            if (dialogShown <= 0) {
+                dialogShown = 5;
+            }
+            txtZipCode.setBackground(Color.PINK);
+        }
+        if(buttonGroupMembership.getSelection() == null){
+            if (dialogShown <= 0) {
+                dialogShown = 8;
+            }
+        }
+        if(buttonGroupGender.getSelection() == null){
+            if (dialogShown <= 0) {
+                dialogShown = 9;
+            }
+        }
+        if(buttonGroupHasPersonalTraining.getSelection() == null){
+            if (dialogShown <= 0) {
+                dialogShown = 10;
+            }
+        }
         if (dialogShown == 0) {
             return true;
         } else {
             showValidationDialog(dialogShown);
             return false;
         }
-    
     }
     
     private void showValidationDialog(int flag) {
@@ -772,9 +762,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
             case 4:
                 errMessage = "Invalid Address";
+                break;
 
             case 5:
                 errMessage = "Invalid Zip Code";
+                break;
 
             case 6:
                 errMessage = "Invalid Mobile number!";
@@ -898,7 +890,6 @@ public class RegisterJPanel extends javax.swing.JPanel {
         customer.setFirstName(txtFirstName.getText());
         customer.setLastName(txtLastName.getText());
         
-        
         if(radioBtnMale.isSelected())
             customer.setGender(Person.genderType.Male);
         else if(radioBtnFemale.isSelected())
@@ -971,7 +962,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private void membershipRadioButtonClicked(JRadioButton button){
         Membership.membershipType type = getMembershipType(button.getText());
         if(type != selectedType){
-            for(Membership membership: selectedEnterprise.getOrganizationDirectory().getAccounting().getMembershipDirectory().getMembershipList()){
+            for(Membership membership: membershipList){
                 if(membership.getName().equals(type.toString())){
                     displayTotalPrice(membership.getPrice(), type);
                     break;
@@ -1069,11 +1060,14 @@ public class RegisterJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_radioBtnNoActionPerformed
 
-    private String getDescriptionFromMembershipList(int index){
+    private String getDescriptionFromMembershipList(int index, String flag){
         int count = 1;
         for(Membership membership: membershipList){
             if(count == index){
-                return membership.getDescription();
+                if(flag.equals("Desc"))
+                    return membership.getDescription();
+                if(flag.equals("Header"))
+                    return membership.getName() + " Membership";
             }
             count++;
         }
@@ -1082,32 +1076,32 @@ public class RegisterJPanel extends javax.swing.JPanel {
     
     private void btnDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(1), "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(1,"Desc"), getDescriptionFromMembershipList(1,"Header"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDetails1ActionPerformed
 
     private void btnDetails2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails2ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(2), "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(2,"Desc"), getDescriptionFromMembershipList(2,"Header"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDetails2ActionPerformed
 
     private void btnDetails3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails3ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(3), "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(3,"Desc"), getDescriptionFromMembershipList(3,"Header"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDetails3ActionPerformed
 
     private void btnDetails4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails4ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(4), "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(4,"Desc"), getDescriptionFromMembershipList(4,"Header"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDetails4ActionPerformed
 
     private void btnDetails5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails5ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(5), "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(5,"Desc"), getDescriptionFromMembershipList(5,"Header"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDetails5ActionPerformed
 
     private void btnDetails6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails6ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(6), "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, getDescriptionFromMembershipList(6,"Desc"), getDescriptionFromMembershipList(6,"Header"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDetails6ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
