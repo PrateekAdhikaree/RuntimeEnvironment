@@ -8,7 +8,6 @@ package userinterface.maintenancerole;
 import business.Business;
 import business.organization.accounting.Accounting;
 import business.person.Person;
-import business.person.customer.Customer;
 import business.person.employee.Employee;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
@@ -521,13 +520,13 @@ private Boolean validateMaintenanceProfile() {
             employee.setGender(Person.genderType.Female);
         }
 
-        employee.setAddress(txtAddress.getText());
-        employee.setCity(txtCity.getText());
-        employee.setState(txtState.getText());
-        employee.setCountry(txtCountry.getText());
-        employee.setZip(txtZipCode.getText());
-        employee.setMobile(txtPhoneNo.getText());
-        employee.setEmail(txtEmailID.getText());
+        txtAddress.setText(employee.getAddress());
+        txtCity.setText(employee.getCity());
+        txtState.setText(employee.getState());
+        txtCountry.setText(employee.getCountry());
+        txtZipCode.setText(employee.getZip());
+        txtPhoneNo.setText(employee.getMobile());
+        txtEmailID.setText(employee.getEmail());
 
         // prompt user data bind success
         JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);

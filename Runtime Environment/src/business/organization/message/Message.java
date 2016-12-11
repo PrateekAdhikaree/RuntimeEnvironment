@@ -19,6 +19,7 @@ public class Message extends Organization {
     
     public enum messageType{
         Message,
+        Query,
         WorkOrder;
     };
     
@@ -33,12 +34,13 @@ public class Message extends Organization {
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
+    private String subject;
     private statusType status;
     private Date requestDate;
     private Date resolveDate;
     private messageType type;
     
-    public Message(messageType type, UserAccount sender, UserAccount receiver, statusType status, String message){
+    public Message(messageType type, UserAccount sender, UserAccount receiver, statusType status, String message, String subject, Date created){
         super(organizationType.Message);
         count++;
         id = count;
@@ -48,6 +50,8 @@ public class Message extends Organization {
         this.receiver = receiver;
         this.status = status;
         this.message = message;
+        this.subject = subject;
+        this.requestDate = created;
     }
 
     public String getMessage() {
@@ -60,10 +64,6 @@ public class Message extends Organization {
 
     public UserAccount getSender() {
         return sender;
-    }
-
-    public void setSender(UserAccount sender) {
-        this.sender = sender;
     }
 
     public UserAccount getReceiver() {
@@ -100,5 +100,14 @@ public class Message extends Organization {
 
     public int getId() {
         return id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+    
+    @Override
+    public String toString(){
+        return Integer.toString(id);
     }
 }

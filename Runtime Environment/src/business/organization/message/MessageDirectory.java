@@ -7,6 +7,7 @@ package business.organization.message;
 
 import business.useraccount.UserAccount;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -24,8 +25,8 @@ public class MessageDirectory {
         return messageList;
     }
     
-    public Message addMessage(Message.messageType type, UserAccount sender, UserAccount receiver, Message.statusType status, String message){
-        Message m =  new Message(type,sender,receiver, status, message);
+    public Message addMessage(Message.messageType type, UserAccount sender, UserAccount receiver, Message.statusType status, String message, String subject, Date created){
+        Message m =  new Message(type,sender,receiver, status, message, subject, created);
         messageList.add(m);
         return m;
     }

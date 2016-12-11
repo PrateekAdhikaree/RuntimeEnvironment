@@ -519,13 +519,13 @@ public class CustomerProfileJPanel extends javax.swing.JPanel {
         else if(radioBtnFemale.isSelected())
             customer.setGender(Person.genderType.Female);
         
-        customer.setAddress(txtAddress.getText());
-        customer.setCity(txtCity.getText());
-        customer.setState(txtState.getText());
-        customer.setCountry(txtCountry.getText());
-        customer.setZip(txtZipCode.getText());
-        customer.setMobile(txtPhoneNo.getText());
-        customer.setEmail(txtEmailID.getText());
+        txtAddress.setText(customer.getAddress());
+       txtCity.setText(customer.getCity());
+       txtState.setText(customer.getState());
+       txtCountry.setText(customer.getCountry());
+       txtZipCode.setText(customer.getZip());
+       txtPhoneNo.setText(customer.getMobile());
+       txtEmailID.setText(customer.getEmail());
 
         // prompt user data bind success
         JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);

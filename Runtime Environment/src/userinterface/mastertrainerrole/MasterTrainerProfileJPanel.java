@@ -521,13 +521,13 @@ private Boolean validateMasterTrainerProfile() {
             employee.setGender(Person.genderType.Female);
         }
 
-        employee.setAddress(txtAddress.getText());
-        employee.setCity(txtCity.getText());
-        employee.setState(txtState.getText());
-        employee.setCountry(txtCountry.getText());
-        employee.setZip(txtZipCode.getText());
-        employee.setMobile(txtPhoneNo.getText());
-        employee.setEmail(txtEmailID.getText());
+        txtAddress.setText(employee.getAddress());
+        txtCity.setText(employee.getCity());
+        txtState.setText(employee.getState());
+        txtCountry.setText(employee.getCountry());
+        txtZipCode.setText(employee.getZip());
+        txtPhoneNo.setText(employee.getMobile());
+        txtEmailID.setText(employee.getEmail());
 
         // prompt user data bind success
         JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);

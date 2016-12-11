@@ -11,6 +11,7 @@ import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import userinterface.groupclasses.ViewGroupClassesJPanel;
+import userinterface.message.MessageJPanel;
 
 /**
  *
@@ -22,7 +23,7 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Enterprise enterprise;
     private Business business;
-    
+
     /**
      * Creates new form CustomerRoleWorkAreaJPanel
      */
@@ -146,18 +147,19 @@ public class CustomerRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnGroupClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGroupClassActionPerformed
         // TODO add your handling code here:
-                ViewGroupClassesJPanel viewGroupClassesJPanel = new ViewGroupClassesJPanel(userProcessContainer, business);
-        userProcessContainer.add("ViewGroupClassesJPanel",viewGroupClassesJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        ViewGroupClassesJPanel viewGroupClassesJPanel = new ViewGroupClassesJPanel(userProcessContainer, business);
+        userProcessContainer.add("ViewGroupClassesJPanel", viewGroupClassesJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        
+
     }//GEN-LAST:event_btnGroupClassActionPerformed
 
     private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
         // TODO add your handling code here:
-                userProcessContainer.remove(this);
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnMessageActionPerformed
 
 

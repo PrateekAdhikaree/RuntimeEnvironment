@@ -28,10 +28,11 @@ public class UserAccountDirectory {
         return userAccountlist;
     }
     
-    public Boolean createNewUserAccount(String username, String password, Employee employee, Customer customer, Role role) {
+    public Boolean createNewUserAccount(String username, String password, Employee employee, Customer customer, Role role, String email) {
         if(checkIfUsernameIsUnique(username)){
             UserAccount userAccount = new UserAccount(role);
             userAccount.setUsername(username);
+            userAccount.setEmail(email);
             userAccount.setPassword(password);
             userAccount.setEmployee(employee);
             userAccount.setCustomer(customer);

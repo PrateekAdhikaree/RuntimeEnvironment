@@ -6,11 +6,9 @@
 package userinterface.vendorrole;
 
 import business.Business;
-import static business.organization.Organization.organizationType.Vendor;
 import business.organization.accounting.Accounting;
 import business.organization.vendor.Vendor;
 import business.person.Person;
-import static business.role.Role.RoleType.Vendor;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -521,13 +519,13 @@ private Boolean validateVendorProfile() {
             vendor.setGender(Person.genderType.Female);
         }
 
-        vendor.setAddress(txtAddress.getText());
-        vendor.setCity(txtCity.getText());
-        vendor.setState(txtState.getText());
-        vendor.setCountry(txtCountry.getText());
-        vendor.setZip(txtZipCode.getText());
-        vendor.setMobile(txtPhoneNo.getText());
-        vendor.setEmail(txtEmailID.getText());
+        txtAddress.setText(vendor.getAddress());
+        txtCity.setText(vendor.getCity());
+        txtState.setText(vendor.getState());
+        txtCountry.setText(vendor.getCountry());
+        txtZipCode.setText(vendor.getZip());
+        txtPhoneNo.setText(vendor.getMobile());
+        txtEmailID.setText(vendor.getEmail());
 
         // prompt user data bind success
         JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);

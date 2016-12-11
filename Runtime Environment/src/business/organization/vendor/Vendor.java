@@ -5,7 +5,6 @@
  */
 package business.organization.vendor;
 
-import business.organization.Organization;
 import business.person.Person;
 import java.util.Date;
 
@@ -13,7 +12,7 @@ import java.util.Date;
  *
  * @author raseswaridas
  */
-public class Vendor extends Organization {
+public class Vendor{
     
     private String firstName;
     private String lastName;
@@ -30,7 +29,6 @@ public class Vendor extends Organization {
     private static int count = 0;
     
     public Vendor(){
-        super(organizationType.Vendor);
         count++;
         vendorId = count;
     }

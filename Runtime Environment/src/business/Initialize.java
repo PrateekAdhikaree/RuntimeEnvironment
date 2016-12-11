@@ -25,6 +25,8 @@ import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import business.organization.vendor.Vendor;
+import java.text.ParseException;
 
 /**
  *
@@ -43,17 +45,69 @@ public final class Initialize {
     }
     
     private void createGlobalUsers(Business business){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Role role = new SuperAdminRole();
         Employee employee = business.getEmployeeDirectory().addEmployee(role);
-        Boolean accountCreated = business.getUserAccountDirectory().createNewUserAccount("sysadmin", "sysadmin", employee, null, new SuperAdminRole());
+        employee.setFirstName("Patricia");
+        employee.setLastName("Keith");
+        employee.setGender(Person.genderType.Female);
+           try {
+            employee.setDob(sdf.parse("12/12/1990"));
+        } catch (ParseException ex) {
+            Logger.getLogger(Initialize.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        employee.setEmail("superadmin@re.com");
+        employee.setMobile("7816245167");
+        employee.setAddress("41 Huntington Ave");
+        employee.setCity("Boston");
+        employee.setCountry("United States");
+        employee.setZip("78192");
+        Boolean accountCreated = business.getUserAccountDirectory().createNewUserAccount("sysadmin", "sysadmin", employee, null, role, "superadmin@re.com");
         if(!accountCreated)
             Logger.getLogger(Initialize.class.getName()+" in createGlobalUsers()").log(Level.SEVERE, null, "SuperAdmin Account not created!");
         
+        
         role = new MarketingRole();
         employee = business.getEmployeeDirectory().addEmployee(role);
-        accountCreated = business.getUserAccountDirectory().createNewUserAccount("marketadmin", "marketadmin", employee, null, new MarketingRole());
+        employee.setFirstName("James");
+        employee.setLastName("Clinton");
+        employee.setGender(Person.genderType.Male);
+           try {
+            employee.setDob(sdf.parse("12/12/1990"));
+        } catch (ParseException ex) {
+            Logger.getLogger(Initialize.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        employee.setEmail("marketing@re.com");
+        employee.setMobile("7816729817");
+        employee.setAddress("89 Boylston");
+        employee.setCity("Boston");
+        employee.setState("MA");
+        employee.setCountry("Unites States");
+        employee.setZip("12389");
+        accountCreated = business.getUserAccountDirectory().createNewUserAccount("marketadmin", "marketadmin", employee, null, role, "marketing@re.com");
         if(!accountCreated)
             Logger.getLogger(Initialize.class.getName()+" in createGlobalUsers()").log(Level.SEVERE, null, "MarketAdmin Account not created!");    
+        
+        role = new VendorRole();
+        Vendor vendor = new Vendor();
+        vendor.setFirstName("Adam");
+        vendor.setLastName("Brian");
+        vendor.setEmail("vendor@re.com");
+        vendor.setGender(Person.genderType.Male);
+        try {
+            vendor.setDob(sdf.parse("12/12/1990"));
+        } catch (ParseException ex) {
+            Logger.getLogger(Initialize.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        vendor.setAddress("121 Jill");
+        vendor.setCity("Boston");
+        vendor.setCountry("United States");
+        vendor.setState("MA");
+        vendor.setZip("02910");
+        vendor.setMobile("8989898989");
+        accountCreated = business.getUserAccountDirectory().createNewUserAccount("vendor", "vendor", employee, null, role, "vendor@re.com");
+        if(!accountCreated)
+            Logger.getLogger(Initialize.class.getName()+" in createGlobalUsers()").log(Level.SEVERE, null, "Vendor Account not created!");
     }
     
     private Business readFromCSV(Business business){
@@ -77,8 +131,11 @@ public final class Initialize {
                 }
             }
         }
-        
         business.setParentNetworkDirectory(parentNetworkDirectory);
+        
+        MessageDirectory messageDirectory = getMessages(business);
+        business.setMessageDirectory(messageDirectory);
+        
         return business;
     }
     
@@ -307,6 +364,8 @@ public final class Initialize {
                         customer.setEmail(b[7]);
                         customer.setGender(getGenderFromCsv(b[4]));
                         customer.setMobile(b[6]);
+                        customer.setCity(b[9]);
+                        customer.setCountry(b[10]);
                         customer.setFirstName(b[1]);
                         customer.setLastName(b[2]);
                         customer.setZip(b[11]);
@@ -358,6 +417,8 @@ public final class Initialize {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         employee.setDob(sdf.parse(b[7]));
                         employee.setEmail(b[9]);
+                        employee.setCity(b[11]);
+                        employee.setCountry(b[12]);
                         employee.setGender(getGenderFromCsv(b[6]));
                         employee.setMobile(b[8]);
                         employee.setFirstName(b[3]);
@@ -394,14 +455,17 @@ public final class Initialize {
                     if(b[0].equals(branch)){
                         Role role = getRoleFromString(b[5]);
                         Employee employee = null;
+                        String email = "";
                         if(!b[3].equals("~")){
                             employee = getEmployeeFromString(employeeDirectory, b[3]);
+                            email = employee.getEmail();
                         }
                         Customer customer = null;
                         if(!b[4].equals("~")){
                             customer = getCustomerFromString(customerDirectory, b[4]);
+                            email = customer.getEmail();
                         }
-                        Boolean userAccountCreated = userAccountDirectory.createNewUserAccount(b[1], b[2], employee, customer, role);
+                        Boolean userAccountCreated = userAccountDirectory.createNewUserAccount(b[1], b[2], employee, customer, role, email);
                         if(!userAccountCreated){
                             Logger.getLogger(Initialize.class.getName()+" in getUserAccounts(): Error in reading file");
                         }
@@ -476,8 +540,6 @@ public final class Initialize {
         GroupClassesDirectory groupClassesDirectory = getGroupClasses(country, city, branch, employeeDirectory);
         organizationDirectory.setGroupClassesDirectory(groupClassesDirectory);
         
-//        MessageDiretory messageDirectory = getMessages(country, city, branch);
-        
         return organizationDirectory;
     }
     
@@ -533,7 +595,7 @@ public final class Initialize {
         return groupClassesDirectory;
     }
     
-    private MessageDirectory getMessages(String country, String city, String branch){
+    private MessageDirectory getMessages(Business business){
         MessageDirectory messageDirectory = new MessageDirectory();
         
         try {
@@ -550,19 +612,31 @@ public final class Initialize {
                 
                 String[] b = line.split(",");
                 if(row != 0){
-                    if(b[1].equals(country)){
-                        if(b[0].equals(city)){
-                            if(b[2].equals(branch)){
-                                Message.messageType type;
-                                if(b[3].equals(Message.messageType.Message))
-                                    type = Message.messageType.Message;
-                                else
-                                    type = Message.messageType.WorkOrder;
-                                
-//                                messageDirectory.addMessage(type, sender, receiver, Message.statusType.Open, line);
-                            }
-                        }
-                    }
+                    Message.messageType type = null;
+                    if(b[4].equals(Message.messageType.Message.toString()))
+                        type = Message.messageType.Message;
+                    else if(b[4].equals(Message.messageType.WorkOrder.toString()))
+                        type = Message.messageType.WorkOrder;
+                    else if(b[4].equals(Message.messageType.Query.toString()))
+                        type = Message.messageType.Query;
+                    
+                    Message.statusType status = null;
+                    if(b[8].equals(Message.statusType.Completed))
+                        status = Message.statusType.Completed;
+                    else if(b[8].equals(Message.statusType.Delivered))
+                        status = Message.statusType.Delivered;
+                    else if(b[8].equals(Message.statusType.InProgressWithMaintenance))
+                        status = Message.statusType.InProgressWithMaintenance;
+                    else if(b[8].equals(Message.statusType.InProgressWithVendor))
+                        status = Message.statusType.InProgressWithVendor;
+                    else if(b[8].equals(Message.statusType.Open))
+                        status = Message.statusType.Open;
+                    
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                    Message message = messageDirectory.addMessage(type, getUserAccountFromString(business, b[6]), getUserAccountFromString(business, b[7]), status, b[5], b[11], sdf.parse(b[9]));
+                    if(!b[10].equals(""))
+                        message.setResolveDate(sdf.parse(b[10]));
                 }
                 row++;
             }
@@ -571,6 +645,42 @@ public final class Initialize {
         }
         
         return messageDirectory;
+    }
+    
+    private UserAccount getUserAccountFromString(Business business, String email){
+        UserAccount userAccount = null;
+        
+        for(UserAccount ua :business.getUserAccountDirectory().getUserAccountlist()){
+            if(ua.getEmail().equals(email)){
+                userAccount = ua;
+            }
+        }
+
+        if (userAccount == null) {
+            for (ParentNetwork parentnetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
+                for (Network network : parentnetwork.getNetworkDirectory().getNetworkList()) {
+                    for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                        for(UserAccount ua :enterprise.getUserAccountDirectory().getUserAccountlist()){
+                            if(ua.getEmail().equals(email)){
+                                userAccount = ua;
+                            }
+                        }
+                    }
+                    if (userAccount != null) {
+                        break;
+                    }
+                }
+                if (userAccount != null) {
+                    break;
+                }
+            }
+        }
+        
+        if (userAccount == null) {
+            return null;
+        } else {
+            return userAccount;
+        }
     }
     
 }

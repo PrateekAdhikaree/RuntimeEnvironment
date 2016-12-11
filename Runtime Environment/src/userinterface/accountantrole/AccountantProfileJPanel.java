@@ -8,7 +8,6 @@ package userinterface.accountantrole;
 import business.Business;
 import business.organization.accounting.Accounting;
 import business.person.Person;
-import business.person.customer.Customer;
 import business.person.employee.Employee;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
@@ -342,7 +341,7 @@ public class AccountantProfileJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-      private Boolean validateAccountantProfile() {
+    private Boolean validateAccountantProfile() {
         int dialogShown = 0;
         Pattern pattern;
         Matcher matcher;
@@ -500,7 +499,7 @@ public class AccountantProfileJPanel extends javax.swing.JPanel {
     }
 
     private void removeValidationDisplay() {
-        
+
         txtFirstName.setBackground(Color.white);
         txtLastName.setBackground(Color.white);
         txtAddress.setBackground(Color.white);
@@ -509,34 +508,34 @@ public class AccountantProfileJPanel extends javax.swing.JPanel {
         txtCountry.setBackground(Color.white);
         txtZipCode.setBackground(Color.white);
         txtPhoneNo.setBackground(Color.white);
-        txtEmailID.setBackground(Color.white);  
+        txtEmailID.setBackground(Color.white);
     }
-    
-    private void setAccountantProfile(){
+
+    private void setAccountantProfile() {
         Employee employee = userAccount.getEmployee();
         // bind user data
-        
+
         txtFirstName.setText(employee.getFirstName());
         txtLastName.setText(employee.getLastName());
-        
-        if(radioBtnMale.isSelected())
+
+        if (radioBtnMale.isSelected()) {
             employee.setGender(Person.genderType.Male);
-        else if(radioBtnFemale.isSelected())
+        } else if (radioBtnFemale.isSelected()) {
             employee.setGender(Person.genderType.Female);
-        
-        employee.setAddress(txtAddress.getText());
-        employee.setCity(txtCity.getText());
-        employee.setState(txtState.getText());
-        employee.setCountry(txtCountry.getText());
-        employee.setZip(txtZipCode.getText());
-        employee.setMobile(txtPhoneNo.getText());
-        employee.setEmail(txtEmailID.getText());
+        }
+
+        txtAddress.setText(employee.getAddress());
+        txtCity.setText(employee.getCity());
+        txtState.setText(employee.getState());
+        txtCountry.setText(employee.getCountry());
+        txtZipCode.setText(employee.getZip());
+        txtPhoneNo.setText(employee.getMobile());
+        txtEmailID.setText(employee.getEmail());
 
         // prompt user data bind success
         JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);
 
         // remove all field values
-        
         txtFirstName.setText(null);
         txtLastName.setText(null);
         radioBtnMale.setSelected(false);
@@ -551,7 +550,7 @@ public class AccountantProfileJPanel extends javax.swing.JPanel {
         radioBtnMale.setSelected(false);
         radioBtnFemale.setSelected(false);
     }
-    
+
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
@@ -569,7 +568,7 @@ public class AccountantProfileJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-                removeValidationDisplay();
+        removeValidationDisplay();
         Boolean isValid = validateAccountantProfile();
         if (isValid) {
             setAccountantProfile();

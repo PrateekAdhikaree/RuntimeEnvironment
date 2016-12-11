@@ -8,7 +8,6 @@ package userinterface.marketingrole;
 import business.Business;
 import business.organization.accounting.Accounting;
 import business.person.Person;
-import business.person.customer.Customer;
 import business.person.employee.Employee;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
@@ -24,15 +23,17 @@ import userinterface.password.ChangePasswordJPanel;
  * @author soumiyaroy
  */
 public class MarketingProfileJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Accounting accounting;
     private Business business;
+
     /**
      * Creates new form SuperAdminProfileJPanel
      */
     public MarketingProfileJPanel(JPanel userProcessContainer, UserAccount userAccount, Accounting accounting, Business business) {
-        initComponents();        
+        initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.accounting = accounting;
@@ -519,13 +520,13 @@ private Boolean validateMarketingProfile() {
             employee.setGender(Person.genderType.Female);
         }
 
-        employee.setAddress(txtAddress.getText());
-        employee.setCity(txtCity.getText());
-        employee.setState(txtState.getText());
-        employee.setCountry(txtCountry.getText());
-        employee.setZip(txtZipCode.getText());
-        employee.setMobile(txtPhoneNo.getText());
-        employee.setEmail(txtEmailID.getText());
+        txtAddress.setText(employee.getAddress());
+        txtCity.setText(employee.getCity());
+        txtState.setText(employee.getState());
+        txtCountry.setText(employee.getCountry());
+        txtZipCode.setText(employee.getZip());
+        txtPhoneNo.setText(employee.getMobile());
+        txtEmailID.setText(employee.getEmail());
 
         // prompt user data bind success
         JOptionPane.showMessageDialog(null, "Congratulations, your profile is updated successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);
@@ -555,16 +556,16 @@ private Boolean validateMarketingProfile() {
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
         // TODO add your handling code here:
-                ChangePasswordJPanel changePasswordJPanel = new ChangePasswordJPanel(userProcessContainer, userAccount, business);
-        userProcessContainer.add("ChangePasswordJPanel",changePasswordJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        ChangePasswordJPanel changePasswordJPanel = new ChangePasswordJPanel(userProcessContainer, userAccount, business);
+        userProcessContainer.add("ChangePasswordJPanel", changePasswordJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        
+
     }//GEN-LAST:event_btnChangePasswordActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-                removeValidationDisplay();
+        removeValidationDisplay();
         Boolean isValid = validateMarketingProfile();
         if (isValid) {
             setMarketingProfile();
