@@ -12,10 +12,8 @@ import business.network.Network;
 import business.parentnetwork.ParentNetwork;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import userinterface.customerrole.RegisterJPanel;
 
 /**
@@ -102,12 +100,13 @@ public class MainJFrame extends javax.swing.JFrame {
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         upperJPanel.setBackground(new java.awt.Color(255, 204, 0));
-        upperJPanel.setPreferredSize(new java.awt.Dimension(800, 100));
+        upperJPanel.setPreferredSize(new java.awt.Dimension(800, 120));
 
         btnNewUser.setBackground(new java.awt.Color(255, 255, 255));
-        btnNewUser.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnNewUser.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         btnNewUser.setForeground(new java.awt.Color(102, 102, 255));
         btnNewUser.setText("New User");
+        btnNewUser.setBorder(null);
         btnNewUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewUserActionPerformed(evt);
@@ -115,9 +114,10 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnLogin.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(102, 102, 255));
         btnLogin.setText("Login");
+        btnLogin.setBorder(null);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -129,18 +129,21 @@ public class MainJFrame extends javax.swing.JFrame {
         lblMainHeader.setText("Runtime Environment");
 
         btnLogout.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogout.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnLogout.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(102, 102, 255));
         btnLogout.setText("Logout");
+        btnLogout.setBorder(null);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
             }
         });
 
-        btnProfile.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnProfile.setBackground(new java.awt.Color(255, 255, 255));
+        btnProfile.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         btnProfile.setForeground(new java.awt.Color(102, 102, 255));
         btnProfile.setText("Profile");
+        btnProfile.setBorder(null);
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProfileActionPerformed(evt);
@@ -174,7 +177,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(6, 6, 6)
                 .addComponent(lblMainHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(upperJPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -186,7 +189,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addComponent(passwordPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21))
                     .addGroup(upperJPanelLayout.createSequentialGroup()
-                        .addComponent(btnProfile)
+                        .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,25 +207,24 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(upperJPanelLayout.createSequentialGroup()
+                        .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1)
+                            .addComponent(lblMainHeader))
+                        .addGap(19, 19, 19))
+                    .addGroup(upperJPanelLayout.createSequentialGroup()
                         .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passwordPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(10, 10, 10)
-                        .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnProfile)
-                                .addComponent(btnLogout))
-                            .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnNewUser)
-                                .addGroup(upperJPanelLayout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addComponent(btnLogin)))))
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel1)
-                    .addComponent(lblMainHeader))
-                .addGap(19, 19, 19))
+                        .addGap(11, 11, 11)
+                        .addGroup(upperJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(btnNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
 
         upperJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel4, jLabel8});
