@@ -39,22 +39,57 @@ public class VendorRoleWorkAreaJPanel extends javax.swing.JPanel {
         
         complaintsList = new ArrayList<Message>();
         
+        int openMessages = 0;
+        int totalMessages = 0;
         for(Message message:business.getMessageDirectory().getMessageList()){
-            if(message.getType() == Message.messageType.WorkOrder)
-                complaintsList.add(message);
+            if(message.getType() == Message.messageType.WorkOrder){
+                if(message.getReceiver().getEmail().equals(userAccount.getEmail())){
+                    complaintsList.add(message);
+                    totalMessages++;
+                    if((message.getStatus().toString().equals(Message.statusType.Open.toString())) || (message.getStatus().toString().equals(Message.statusType.InProgressWithMaintenance.toString()))){
+                        openMessages++;
+                    }
+                }
+            }
         }
         
+        labelNewComplaintCount.setText(String.valueOf(openMessages));
+        labelTotalComplaintCount.setText(String.valueOf(totalMessages));
         
         populateTable();
     }
+    
+    public void refreshTable(){
+        
+        complaintsList = new ArrayList<Message>();
+        int openMessages = 0;
+        int totalMessages = 0;
+        for(Message message:business.getMessageDirectory().getMessageList()){
+            if(message.getType() == Message.messageType.WorkOrder){
+                if(message.getReceiver().getEmail().equals(userAccount.getEmail())){
+                    complaintsList.add(message);
+                    totalMessages++;
+                    if((message.getStatus().toString().equals(Message.statusType.Open.toString())) || (message.getStatus().toString().equals(Message.statusType.InProgressWithMaintenance.toString()))){
+                        openMessages++;
+                    }
+                }
+            }
+        }
+        
+        labelNewComplaintCount.setText(String.valueOf(openMessages));
+        labelTotalComplaintCount.setText(String.valueOf(totalMessages));
+        
+        populateTable();
+        
+    }
 
-    public void populateTable() {
+    private void populateTable() {
         DefaultTableModel dtm = (DefaultTableModel) tableVendorComplaint.getModel();
         dtm.setRowCount(0);
         
         for(Message message: complaintsList){
             Object row[] = new Object[5];
-            row[0] = message.getId();
+            row[0] = message;
             row[1] = message.getRequestDate();
             row[2] = message.getSender();
             row[3] = message.getSubject();
@@ -80,8 +115,6 @@ public class VendorRoleWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         labelNewComplaintCount = new javax.swing.JLabel();
         labelTotalComplaintCount = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        comboStatus = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(102, 102, 255));
         setForeground(new java.awt.Color(255, 204, 0));
@@ -96,7 +129,7 @@ public class VendorRoleWorkAreaJPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tableVendorComplaint);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Yuppy SC", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Vendor Dashboard");
@@ -126,12 +159,6 @@ public class VendorRoleWorkAreaJPanel extends javax.swing.JPanel {
         labelTotalComplaintCount.setForeground(new java.awt.Color(255, 204, 0));
         labelTotalComplaintCount.setText("<Number>");
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel6.setText("Filter By Status:");
-
-        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,23 +167,23 @@ public class VendorRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnViewComplaint)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(16, 16, 16)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel6))
-                                    .addGap(40, 40, 40)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(labelNewComplaintCount)
-                                        .addComponent(labelTotalComplaintCount)
-                                        .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnViewComplaint)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGap(40, 40, 40)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelNewComplaintCount)
+                                            .addComponent(labelTotalComplaintCount))
+                                        .addGap(499, 499, 499)))))
                         .addGap(0, 31, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -173,40 +200,35 @@ public class VendorRoleWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(labelTotalComplaintCount))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(btnViewComplaint)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addGap(111, 111, 111))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewComplaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewComplaintActionPerformed
         // TODO add your handling code here:
-//        int row = tableVendorComplaint.getSelectedRow();
-//        if (row < 0) {
-//            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
-//            return;
-//        }
-//        Supplier s = (Supplier) tableVendorComplaint.getValueAt(row, 0);
-//        ViewComplaintJPanel viewComplaintJPanel = new ViewComplaintJPanel(userProcessContainer, business);
-//        userProcessContainer.add("ViewComplaintJPanel", viewComplaintJPanel);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
+        int row = tableVendorComplaint.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Message message = (Message) tableVendorComplaint.getValueAt(row, 0);
+        ViewComplaintJPanel viewComplaintJPanel = new ViewComplaintJPanel(userProcessContainer, business, message);
+        userProcessContainer.add("ViewComplaintJPanel", viewComplaintJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewComplaintActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnViewComplaint;
-    private javax.swing.JComboBox<String> comboStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelNewComplaintCount;
     private javax.swing.JLabel labelTotalComplaintCount;

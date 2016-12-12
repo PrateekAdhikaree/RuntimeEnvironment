@@ -7,10 +7,15 @@ package userinterface.regulartrainerrole;
 
 import business.Business;
 import business.enterprise.Enterprise;
+import static business.organization.Organization.organizationType.GroupClasses;
+import business.organization.message.Message;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import userinterface.message.MessageJPanel;
+import business.organization.groupclasses.GroupClasses;
 
 /**
  *
@@ -22,6 +27,7 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Enterprise enterprise;
     private Business business;
+    private ArrayList<GroupClasses> classList;
 
     /**
      * Creates new form RegularTrainerRoleWorkAreaJPanel
@@ -32,6 +38,28 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
         this.userAccount = userAccount;
         this.enterprise = enterprise;
         this.business = business;
+
+        classList = new ArrayList<GroupClasses>();
+        for(GroupClasses groupClasses: enterprise.getOrganizationDirectory().getGroupClassesDirectory().getGroupClassesList()){
+            if(groupClasses.getTrainer().getEmail().equals(userAccount.getEmail())){
+                classList.add(groupClasses);
+            }
+        }
+
+        populateTable();
+    }
+
+    public void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tableViewTrainerSchedule.getModel();
+        dtm.setRowCount(0);
+
+        for(GroupClasses groupClasses: classList){
+            Object row[] = new Object[3];
+            row[0] = groupClasses;
+            row[1] = groupClasses.getName();
+            row[2] = groupClasses.getTime();
+            dtm.addRow(row);
+        }
     }
 
     /**
@@ -45,7 +73,7 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
 
         btnMessage = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableViewTrainerSchedule = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -60,8 +88,8 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableViewTrainerSchedule.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
+        tableViewTrainerSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -77,7 +105,7 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableViewTrainerSchedule);
 
         jLabel1.setFont(new java.awt.Font("Yuppy SC", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -137,6 +165,6 @@ public class RegularTrainerRoleWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableViewTrainerSchedule;
     // End of variables declaration//GEN-END:variables
 }

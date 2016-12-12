@@ -1,12 +1,12 @@
 MessageId,Country,City Name	,BranchName,Message Type,Message,Sender(UAid),Receiver(UAid),Status,Request Date,Resolve Date,Subject
 1,The United States,Boston	,RE-Huntington,WorkOrder,Need to fix equipment,s-dq@os1032fl3.com,6-kcg8e5s5od@sea7lh-k.com,Open,05/12/2016,,Equipment Issue
-2,The United States,Boston	,RE- Downtown,WorkOrder,Machine 2 is broken,o7ztppalt.j2k-@9wrncaft.com,ahqnw@em6p6ri2ui.com,Open,06/12/2016,,Equipment Issue
-3,The United States,Boston	,RE-Huntington,WorkOrder,Need to fix equipment,pxec@5orf-os.com,s-dq@os1032fl3.com,InProgressWithVendor,19/12/2016,,Equipment Issue
-4,The United States,Boston	,RE- Downtown,WorkOrder,Machine 5 is broken,q6_@rme6cqz.com,2jdwksr.44-0@fxc1e-4.com,InProgressWithVendor,20/12/2016,,Equipment Issue
+2,The United States,Boston	,RE- Downtown,WorkOrder,Machine 2 is broken,o7ztppalt.j2k-@9wrncaft.com,vendor@re.com,Open,06/12/2016,,Equipment Issue
+3,The United States,Boston	,RE-Huntington,WorkOrder,Need to fix equipment,pxec@5orf-os.com,vendor@re.com,InProgressWithVendor,19/12/2016,,Equipment Issue
+4,The United States,Boston	,RE- Downtown,WorkOrder,Machine 5 is broken,q6_@rme6cqz.com,vendor@re.com,InProgressWithVendor,20/12/2016,,Equipment Issue
 5,The United States,Boston	,RE-Huntington,WorkOrder,Machine 6 is broken,pxec@5orf-os.com,6-kcg8e5s5od@sea7lh-k.com,InProgressWithMaintenance,16/12/2017,,Equipment Issue
 6,The United States,Boston	,RE- Downtown,WorkOrder,Have to take leave,ahqnw@em6p6ri2ui.com,2jdwksr.44-0@fxc1e-4.com,InProgressWithMaintenance,17/12/2017,,Leave 
 7,The United States,Boston	,RE-Huntington,WorkOrder,Need to fix equipment,9hq9jc@2o-7kjtzv.com,pxec@5orf-os.com,Completed,14/12/2018,14/12/2018,Equipment Issue
-8,The United States,Boston	,RE- Downtown,WorkOrder,Machine 10 is broken,ahqnw@em6p6ri2ui.com,q6_@rme6cqz.com,Completed,15/12/2018,15/12/2018,Equipment Issue
+8,The United States,Boston	,RE- Downtown,WorkOrder,Machine 10 is broken,ahqnw@em6p6ri2ui.com,vendor@re.com,Completed,15/12/2018,15/12/2018,Equipment Issue
 9,The United States,Boston	,RE-Huntington,Message,"Hey, when is the next yoga class?",s-dq@os1032fl3.com,9hq9jc@2o-7kjtzv.com,Open,12/12/2018,,Class
 10,The United States,Boston	,RE- Downtown,Message,Please shift my training session,o7ztppalt.j2k-@9wrncaft.com,q6_@rme6cqz.com,Open,13/12/2019,,Sessions
 11,The United States,Boston	,RE-Huntington,Message,"Hey, when is the next yoga class?",6-kcg8e5s5od@sea7lh-k.com,s-dq@os1032fl3.com,Delivered,05/12/2016,,Class

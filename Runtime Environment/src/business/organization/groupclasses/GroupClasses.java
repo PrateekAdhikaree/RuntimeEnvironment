@@ -78,5 +78,10 @@ public class GroupClasses extends Organization {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    @Override
+    public String toString(){
+        return String.valueOf(id);
+    }
 
 }

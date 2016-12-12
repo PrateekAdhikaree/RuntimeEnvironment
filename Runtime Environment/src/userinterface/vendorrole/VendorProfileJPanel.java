@@ -6,12 +6,9 @@
 package userinterface.vendorrole;
 
 import business.Business;
-import static business.organization.Organization.organizationType.Vendor;
 import business.organization.accounting.Accounting;
 import business.organization.vendor.Vendor;
 import business.person.Person;
-import business.person.employee.Employee;
-import static business.role.Role.RoleType.Vendor;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;

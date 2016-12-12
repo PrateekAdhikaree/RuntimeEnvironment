@@ -6,9 +6,11 @@
 package userinterface.vendorrole;
 
 import business.Business;
-import business.enterprise.Enterprise;
-import business.useraccount.UserAccount;
+import business.organization.message.Message;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,17 +20,39 @@ import javax.swing.JPanel;
 public class ViewComplaintJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private UserAccount userAccount;
+    private Message message;
     private Business business;
 
     /**
      * Creates new form ViewComplaintJPanel
      */
-    public ViewComplaintJPanel(JPanel userProcessContainer, Business business) {
+    public ViewComplaintJPanel(JPanel userProcessContainer, Business business, Message message) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.userAccount = userAccount;
+        this.message = message;
         this.business = business;
+        
+        populateStatusCombo();
+        setDataToComplaintForm();
+    }
+    
+    public void populateStatusCombo(){
+        comboStatus.removeAllItems();
+        for(Message.statusType type: Message.statusType.values()){
+            comboStatus.addItem(type);
+        }
+    }
+    
+    public void setDataToComplaintForm() {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        txtMessageID.setText(String.valueOf(message.getId()));
+        txtDate.setText(sdf.format(message.getRequestDate()));
+        txtSender.setText(String.valueOf(message.getSender()));
+        txtSubject.setText(message.getSubject());
+        txtCurrentStatus.setText(String.valueOf(message.getStatus()));
+        comboStatus.setSelectedItem(message.getStatus());
+        txtAreaDescription.setText(message.getMessage());
     }
 
     /**
@@ -46,25 +70,24 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txtMessageID = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
-        comboStatus = new javax.swing.JComboBox<>();
+        comboStatus = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaDescription = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        btnSave = new javax.swing.JButton();
+        btnUpdateStatus = new javax.swing.JButton();
         txtSender = new javax.swing.JTextField();
         txtCurrentStatus = new javax.swing.JTextField();
         txtDate = new javax.swing.JTextField();
-        txtRaisedBy = new javax.swing.JTextField();
         txtSubject = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(102, 102, 255));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("View Complaint");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -87,10 +110,6 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 204, 0));
         jLabel6.setText("Sender:");
 
-        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel7.setText("Raised By:");
-
         txtMessageID.setEditable(false);
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -102,7 +121,7 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
             }
         });
 
-        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtAreaDescription.setEditable(false);
         txtAreaDescription.setColumns(20);
@@ -117,17 +136,20 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 204, 0));
         jLabel9.setText("Change Status:");
 
-        btnSave.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btnSave.setForeground(new java.awt.Color(255, 153, 0));
-        btnSave.setText("Save ");
+        btnUpdateStatus.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        btnUpdateStatus.setForeground(new java.awt.Color(255, 153, 0));
+        btnUpdateStatus.setText("Update Status");
+        btnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateStatusActionPerformed(evt);
+            }
+        });
 
         txtSender.setEditable(false);
 
         txtCurrentStatus.setEditable(false);
 
         txtDate.setEditable(false);
-
-        txtRaisedBy.setEditable(false);
 
         txtSubject.setEditable(false);
 
@@ -136,51 +158,49 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(253, 253, 253))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSave)
-                        .addGap(39, 39, 39))))
+                .addContainerGap(463, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUpdateStatus)
+                .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCurrentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSubject))))
+                        .addComponent(jLabel4)
+                        .addGap(70, 70, 70)
+                        .addComponent(txtSubject))
                     .addComponent(jLabel8)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMessageID)
-                            .addComponent(txtSender, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMessageID)
+                                    .addComponent(txtSender, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(84, 84, 84)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDate)
-                            .addComponent(txtRaisedBy)
-                            .addComponent(comboStatus, 0, 147, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(76, 76, 76)
+                                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCurrentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,15 +216,13 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7)
                     .addComponent(txtSender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRaisedBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(txtCurrentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -213,33 +231,47 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnSave))
+                    .addComponent(btnUpdateStatus))
                 .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+          
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
+        Component [] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length-1];
+        VendorRoleWorkAreaJPanel vrwajp = (VendorRoleWorkAreaJPanel) component;
+        vrwajp.refreshTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusActionPerformed
+        // TODO add your handling code here:
+        Message.statusType newStatus = (Message.statusType)comboStatus.getSelectedItem();
+        if(newStatus.toString().equals(message.getStatus().toString())){
+            JOptionPane.showMessageDialog(null, "Current status and new status cannot be same!");
+            return;
+        }
+        message.setStatus(newStatus);
+        JOptionPane.showMessageDialog(null, "Status updated successfully");
+    }//GEN-LAST:event_btnUpdateStatusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> comboStatus;
+    private javax.swing.JButton btnUpdateStatus;
+    private javax.swing.JComboBox comboStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -247,7 +279,6 @@ public class ViewComplaintJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtCurrentStatus;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtMessageID;
-    private javax.swing.JTextField txtRaisedBy;
     private javax.swing.JTextField txtSender;
     private javax.swing.JTextField txtSubject;
     // End of variables declaration//GEN-END:variables

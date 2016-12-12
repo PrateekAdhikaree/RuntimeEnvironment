@@ -100,4 +100,9 @@ public class UserAccount {
         this.email = email;
     }
     
+        @Override
+    public String toString() {
+        return email; //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

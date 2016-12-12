@@ -125,10 +125,9 @@
                               <Component id="jDateChooser" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                               <Component id="txtLastName" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace min="36" pref="38" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
