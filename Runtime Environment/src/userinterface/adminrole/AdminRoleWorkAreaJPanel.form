@@ -23,14 +23,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <Component id="btnManageTrainers" min="-2" pref="260" max="-2" attributes="0"/>
+              <Component id="btnManageTrainers" linkSize="1" min="-2" pref="260" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnMessage" max="32767" attributes="0"/>
-                  <Component id="btnManageCustomers" pref="260" max="32767" attributes="0"/>
+                  <Component id="btnMessage" linkSize="1" max="32767" attributes="0"/>
+                  <Component id="btnManageCustomers" linkSize="1" pref="260" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnManageClasses" min="-2" pref="260" max="-2" attributes="0"/>
+              <Component id="btnManageClasses" linkSize="1" min="-2" pref="260" max="-2" attributes="0"/>
               <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -41,12 +41,12 @@
               <Component id="jLabel1" min="-2" pref="56" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnManageCustomers" pref="119" max="32767" attributes="0"/>
-                  <Component id="btnManageTrainers" max="32767" attributes="0"/>
-                  <Component id="btnManageClasses" max="32767" attributes="0"/>
+                  <Component id="btnManageCustomers" linkSize="2" pref="119" max="32767" attributes="0"/>
+                  <Component id="btnManageTrainers" linkSize="2" max="32767" attributes="0"/>
+                  <Component id="btnManageClasses" linkSize="2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
-              <Component id="btnMessage" min="-2" pref="98" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="btnMessage" linkSize="2" min="-2" pref="98" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>

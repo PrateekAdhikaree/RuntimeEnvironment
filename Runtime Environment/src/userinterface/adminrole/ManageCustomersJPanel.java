@@ -6,24 +6,57 @@
 package userinterface.adminrole;
 
 import business.Business;
+import business.enterprise.Enterprise;
+import business.network.Network;
+import business.parentnetwork.ParentNetwork;
+import business.person.customer.Customer;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author raseswaridas
  */
 public class ManageCustomersJPanel extends javax.swing.JPanel {
-      private JPanel userProcessContainer;
+
+    private JPanel userProcessContainer;
     private Business business;
+    private Enterprise enterprise;
 
     /**
      * Creates new form ManageCustomersJPanel
      */
-    public ManageCustomersJPanel(JPanel userProcessContainer, Business business) {
+    public ManageCustomersJPanel(JPanel userProcessContainer, Business business, Enterprise enterprise) {
         initComponents();
-         this.userProcessContainer = userProcessContainer;
+        this.userProcessContainer = userProcessContainer;
         this.business = business;
+        this.enterprise = enterprise;
+        
+        populateTable();
+    }
+                       
+    public void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        
+        for(ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()){
+            for(Network network : parentNetwork.getNetworkDirectory().getNetworkList()){
+                for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                    if(enterprise.getId() == this.enterprise.getId()){
+                        for(Customer customer: enterprise.getCustomerDirectory().getCustomerList()){
+                            Object row[] = new Object[5];
+                            row[0] = customer;
+                            row[1] = customer.getFirstName();
+                            row[2] = customer.getEmail();
+                            row[3] = customer.getMobile();
+                            row[4] = customer.getMembership();
+                            dtm.addRow(row);
+                        }
+                    }  
+                }
+            }
+        }
     }
 
     /**
@@ -115,9 +148,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
