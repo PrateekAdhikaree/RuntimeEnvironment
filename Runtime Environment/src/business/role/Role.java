@@ -48,6 +48,10 @@ public abstract class Role {
 
     public abstract void setSalary();
     
+    public void setSalary(int salary){
+        this.salary = salary;
+    }
+    
     public int getSalary(){
         return salary;
     }

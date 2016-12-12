@@ -6,23 +6,34 @@
 package userinterface.superadminrole;
 
 import business.Business;
+import business.enterprise.Enterprise;
+import business.network.Network;
+import business.parentnetwork.ParentNetwork;
+import business.person.customer.Customer;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author raseswaridas
  */
 public class SAManageCustomersJPanel extends javax.swing.JPanel {
-      private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
     private Business business;
+    private ArrayList<Customer> customerList;
     /**
      * Creates new form ManageCustomersJPanel
      */
     public SAManageCustomersJPanel(JPanel userProcessContainer, Business business) {
         initComponents();
-         this.userProcessContainer = userProcessContainer;
+        this.userProcessContainer = userProcessContainer;
         this.business = business;
+        populateCountryCombo();
+        populateTable();
     }
 
     /**
@@ -44,7 +55,7 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         comboBranch = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCustomer = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
@@ -64,6 +75,12 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
         jLabel22.setText("Country:");
 
         comboCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCountry.setEnabled(false);
+        comboCountry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCountryActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 204, 0));
@@ -71,6 +88,11 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
 
         comboCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboCity.setEnabled(false);
+        comboCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCityActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 204, 0));
@@ -78,8 +100,13 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
 
         comboBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBranch.setEnabled(false);
+        comboBranch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBranchActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -95,11 +122,16 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableCustomer);
 
         btnDelete.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 153, 0));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 153, 0));
@@ -115,37 +147,35 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboCity, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 99, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnBack)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnDelete))
+                                    .addComponent(jLabel2)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel22)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboCity, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 390, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,13 +191,13 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel12)
                     .addComponent(jLabel13)
                     .addComponent(comboBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(93, 93, 93)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnBack))
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addContainerGap(628, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -178,18 +208,157 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populateCountryCombo() {
+        JComboBox countryCombo = comboCountry;
+        countryCombo.removeAllItems();
+        int counter = 0;
+        for (ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
+            if (counter == 0) {
+                populateCityCombo(parentNetwork);
+            }
+            countryCombo.addItem(parentNetwork);
+            counter++;
+        }
+        countryCombo.setEnabled(true);
+    }
+
+    public void populateCityCombo(ParentNetwork parentNetwork) {
+        JComboBox cityCombo = comboCity;
+        cityCombo.removeAllItems();
+        for (ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()) {
+            if (parentNetwork.getId() == pn.getId()) {
+                int counter = 0;
+                for (Network network : pn.getNetworkDirectory().getNetworkList()) {
+                    if (counter == 0) {
+                        populateBranchCombo(parentNetwork, network);
+                    }
+                    cityCombo.addItem(network);
+                    counter++;
+                }
+                cityCombo.setEnabled(true);
+                break;
+            }
+        }
+    }
+
+    public void populateBranchCombo(ParentNetwork parentNetwork, Network network) {
+        JComboBox branchCombo = comboBranch;
+        branchCombo.removeAllItems();
+        for (ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()) {
+            if (parentNetwork.getId() == pn.getId()) {
+                for (Network n : pn.getNetworkDirectory().getNetworkList()) {
+                    if (network.getId() == n.getId()) {
+                        int counter = 0;
+                        for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+                            if(counter == 0){
+                                setCustomerList(pn,n,e);
+                            }
+                            branchCombo.addItem(e);
+                        }
+                        populateTable();
+                        comboBranch.setEnabled(true);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+    
+    public void setCustomerList(ParentNetwork pn, Network n, Enterprise e){
+        for(ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()){
+            if(pn.getId() == parentNetwork.getId()){
+                for(Network network : parentNetwork.getNetworkDirectory().getNetworkList()){
+                    if(network.getId() == n.getId()){
+                        for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                            if(enterprise.getId() == e.getId()){
+                                this.customerList = enterprise.getCustomerDirectory().getCustomerList();
+                            }  
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+                       
+    public void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tableCustomer.getModel();
+        dtm.setRowCount(0);
+        
+        for(Customer customer: customerList){
+            Object row[] = new Object[5];
+            row[0] = customer;
+            row[1] = customer.getFirstName();
+            row[2] = customer.getEmail();
+            row[3] = customer.getMobile();
+            row[4] = customer.getMembership();
+            dtm.addRow(row);
+        }
+    }
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void comboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCountryActionPerformed
+        // TODO add your handling code here:
+        if (comboCountry.isEnabled()) {
+            comboCity.setEnabled(false);
+            comboBranch.setEnabled(false);
+            ParentNetwork parentNetwork = (ParentNetwork) comboCountry.getSelectedItem();
+            populateCityCombo(parentNetwork);
+            comboCity.setEnabled(true);
+        }
+    }//GEN-LAST:event_comboCountryActionPerformed
+
+    private void comboCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCityActionPerformed
+        // TODO add your handling code here:
+        if (comboCity.isEnabled()) {
+            ParentNetwork parentNetwork = (ParentNetwork) comboCountry.getSelectedItem();
+            Network network = (Network) comboCity.getSelectedItem();
+            comboBranch.setEnabled(false);
+            populateBranchCombo(parentNetwork, network);
+        }
+    }//GEN-LAST:event_comboCityActionPerformed
+
+    private void comboBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBranchActionPerformed
+        // TODO add your handling code here:
+        if(comboBranch.isEnabled()){
+            ParentNetwork pn = (ParentNetwork) comboCountry.getSelectedItem();
+            Network n = (Network) comboCity.getSelectedItem();
+            Enterprise e = (Enterprise) comboBranch.getSelectedItem();
+            setCustomerList(pn, n, e);
+            populateTable();
+        }
+    }//GEN-LAST:event_comboBranchActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedrow = tableCustomer.getSelectedRow();
+        
+        if(selectedrow >= 0)
+        {
+            Customer customer = (Customer)tableCustomer.getValueAt(selectedrow, 0);
+            int reply = JOptionPane.showConfirmDialog(null, "Do you really want to delete?");
+            if (reply == JOptionPane.YES_OPTION)
+            {
+                customerList.remove(customer);
+                JOptionPane.showMessageDialog(null, "Customer has been deleted");
+                populateTable();
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(null,"Please select any row");
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -205,6 +374,6 @@ public class SAManageCustomersJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableCustomer;
     // End of variables declaration//GEN-END:variables
 }

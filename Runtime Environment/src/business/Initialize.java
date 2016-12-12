@@ -27,7 +27,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import business.organization.vendor.Vendor;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 /**
  *
@@ -35,8 +34,8 @@ import java.util.ArrayList;
  */
 public final class Initialize {
     
-//    private FileReader file;
-//    private BufferedReader reader;
+    private FileReader file;
+    private BufferedReader reader;
     
     public Business configureBusiness(){
         Business business = Business.getInstance();
@@ -144,11 +143,8 @@ public final class Initialize {
             
         ParentNetworkDirectory parentNetworkDirectory = new ParentNetworkDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/ParentNetworkDataset.csv");
+            this.file = new FileReader("resources/files/ParentNetworkDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getParentNetworks(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -166,7 +162,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getParentNetworks()").log(Level.SEVERE, null, ex);
         }
@@ -178,11 +173,8 @@ public final class Initialize {
         
         PromoDirectory promoDirectory = new PromoDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/PromoDataset.csv");
+            this.file = new FileReader("resources/files/PromoDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getPromos(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -199,7 +191,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getPromos()").log(Level.SEVERE, null, ex);
         }
@@ -211,11 +202,8 @@ public final class Initialize {
             
         NetworkDirectory networkDirectory = new NetworkDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/NetworkDataset.csv");
+            this.file = new FileReader("resources/files/NetworkDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getNetworks(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -237,7 +225,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getNetworks()").log(Level.SEVERE, null, ex);
         }
@@ -249,11 +236,8 @@ public final class Initialize {
             
         EnterpriseDirectory enterpriseDirectory = new EnterpriseDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/EnterpriseDataset.csv");
+            this.file = new FileReader("resources/files/EnterpriseDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getEnterprises(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -288,7 +272,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getEnterprises()").log(Level.SEVERE, null, ex);
         }
@@ -296,14 +279,10 @@ public final class Initialize {
     }
     
     public MembershipDirectory getMemberships(ParentNetwork parentNetwork){
-        
         MembershipDirectory membershipDirectory = new MembershipDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/MembershipDataset.csv");
+            this.file = new FileReader("resources/files/MembershipDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getMemberships(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -328,7 +307,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getMemberships()").log(Level.SEVERE, null, ex);
         }
@@ -355,14 +333,10 @@ public final class Initialize {
     }
     
     private CustomerDirectory getCustomers(String branch, MembershipDirectory membershipDirectory){
-        
         CustomerDirectory customerDirectory = new CustomerDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/CustomerDataset.csv");
+            this.file = new FileReader("resources/files/CustomerDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getCustomers(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -403,7 +377,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getCustomers()").log(Level.SEVERE, null, ex);
         }
@@ -421,14 +394,10 @@ public final class Initialize {
     }
     
     private EmployeeDirectory getEmployees(String branch){
-        
         EmployeeDirectory employeeDirectory = new EmployeeDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/EmployeeDataset.csv");
+            this.file = new FileReader("resources/files/EmployeeDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getEmployees(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -459,7 +428,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getEmployees()").log(Level.SEVERE, null, ex);
         }
@@ -468,14 +436,10 @@ public final class Initialize {
     }
     
     private UserAccountDirectory getUserAccounts(String branch, EmployeeDirectory employeeDirectory, CustomerDirectory customerDirectory){
-        
         UserAccountDirectory userAccountDirectory = new UserAccountDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/UserAccountDataset.csv");
+            this.file = new FileReader("resources/files/UserAccountDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getUserAccounts(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -509,7 +473,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getUserAccounts()").log(Level.SEVERE, null, ex);
         }
@@ -584,11 +547,8 @@ public final class Initialize {
         
         GroupClassesDirectory groupClassesDirectory = new GroupClassesDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/GroupClassesDataset.csv");
+            this.file = new FileReader("resources/files/GroupClassesDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getGroupClasses(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -618,6 +578,7 @@ public final class Initialize {
                                 GroupClasses groupClasses = groupClassesDirectory.addGroupClasses(type);
                                 groupClasses.setTrainer(getEmployeeFromString(employeeDirectory, b[5]));
                                 groupClasses.setDescription(desc);
+                                groupClasses.setCapacity(Integer.parseInt(b[7]));
                                 groupClasses.setDuration(Integer.parseInt(b[6]));
                                 groupClasses.setTime(b[4]);
                                 groupClasses.setName(b[3]);
@@ -636,14 +597,10 @@ public final class Initialize {
     }
     
     private MessageDirectory getMessages(Business business){
-        
         MessageDirectory messageDirectory = new MessageDirectory();
         
-        FileReader file = null;
-        BufferedReader reader = null;
-        
         try {
-            file = new FileReader("resources/files/MessageDataset.csv");
+            this.file = new FileReader("resources/files/MessageDataset.csv");
             reader = new BufferedReader(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Initialize.class.getName()+" in getMessages(): Error in reading file").log(Level.SEVERE, null, ex);
@@ -665,15 +622,15 @@ public final class Initialize {
                         type = Message.messageType.Query;
                     
                     Message.statusType status = null;
-                    if(b[8].equals(Message.statusType.Completed.toString()))
+                    if(b[8].equals(Message.statusType.Completed))
                         status = Message.statusType.Completed;
-                    else if(b[8].equals(Message.statusType.Delivered.toString()))
+                    else if(b[8].equals(Message.statusType.Delivered))
                         status = Message.statusType.Delivered;
-                    else if(b[8].equals(Message.statusType.InProgressWithMaintenance.toString()))
+                    else if(b[8].equals(Message.statusType.InProgressWithMaintenance))
                         status = Message.statusType.InProgressWithMaintenance;
-                    else if(b[8].equals(Message.statusType.InProgressWithVendor.toString()))
+                    else if(b[8].equals(Message.statusType.InProgressWithVendor))
                         status = Message.statusType.InProgressWithVendor;
-                    else if(b[8].equals(Message.statusType.Open.toString()))
+                    else if(b[8].equals(Message.statusType.Open))
                         status = Message.statusType.Open;
                     
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -684,7 +641,6 @@ public final class Initialize {
                 }
                 row++;
             }
-            reader.close();
         } catch (Exception ex) {
             Logger.getLogger(Initialize.class.getName()+" in getMessages()").log(Level.SEVERE, null, ex);
         }
@@ -705,7 +661,6 @@ public final class Initialize {
             for (ParentNetwork parentnetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
                 for (Network network : parentnetwork.getNetworkDirectory().getNetworkList()) {
                     for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
-                        ArrayList<UserAccount> useraccountList = enterprise.getUserAccountDirectory().getUserAccountlist();
                         for(UserAccount ua :enterprise.getUserAccountDirectory().getUserAccountlist()){
                             if(ua.getEmail().equals(email)){
                                 userAccount = ua;

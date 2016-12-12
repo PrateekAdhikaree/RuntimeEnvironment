@@ -104,4 +104,9 @@ public class Membership {
     public float getCurrencyMultiplier() {
         return currencyMultiplier;
     }
+    
+    @Override
+    public String toString(){
+        return description;
+    }
 }

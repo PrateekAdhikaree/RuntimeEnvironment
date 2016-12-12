@@ -32,4 +32,8 @@ public class Employee extends Person {
         return role;
     }
     
+    @Override
+    public String toString(){
+        return super.getFirstName()+" "+super.getLastName();
+    }
 }

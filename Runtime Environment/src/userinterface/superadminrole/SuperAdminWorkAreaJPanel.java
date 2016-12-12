@@ -6,6 +6,7 @@
 package userinterface.superadminrole;
 
 import business.Business;
+import business.organization.accounting.Accounting;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -115,7 +116,7 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         btnManageMembership.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         btnManageMembership.setForeground(new java.awt.Color(255, 153, 0));
-        btnManageMembership.setText("Membership");
+        btnManageMembership.setText("Manage Membership");
         btnManageMembership.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageMembershipActionPerformed(evt);
@@ -127,8 +128,8 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 35, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnManageTrainers, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                     .addComponent(btnManageMembership, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -206,11 +207,10 @@ public class SuperAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnManageMembershipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageMembershipActionPerformed
         // TODO add your handling code here:
         ManageMembershipJPanel manageMembershipJPanel = new ManageMembershipJPanel(userProcessContainer, business);
-        userProcessContainer.add("ContactUsJPanel", manageMembershipJPanel);
+        userProcessContainer.add("ManageMembershipJPanel", manageMembershipJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageMembershipActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnalytics;

@@ -6,16 +6,42 @@
 package userinterface.superadminrole;
 
 import business.Business;
+import business.enterprise.Enterprise;
+import business.network.Network;
+import static business.organization.Organization.organizationType.GroupClasses;
+import business.parentnetwork.ParentNetwork;
+import business.person.employee.Employee;
+import business.role.AccountantRole;
+import business.role.AdminRole;
+import business.role.CustomerRole;
+import business.role.MaintenanceRole;
+import business.role.MarketingRole;
+import business.role.MasterTrainerRole;
+import business.role.RegularTrainerRole;
+import business.role.Role;
+import business.role.SuperAdminRole;
+import business.role.VendorRole;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author raseswaridas
  */
 public class SAManageEmployeesJPanel extends javax.swing.JPanel {
-      private JPanel userProcessContainer;
+
+    private JPanel userProcessContainer;
     private Business business;
+    private ArrayList<Employee> employeeList;
+    private Employee selectedEmployee = null;
+
     /**
      * Creates new form ManageTrainersJPanel
      */
@@ -23,6 +49,9 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        populateCountryCombo();
+        populateTable();
+        populateRoleCombo();
     }
 
     /**
@@ -44,24 +73,26 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         comboBranch = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableEmployee = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtFirstName = new javax.swing.JTextField();
+        txtEmployeeID = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtTime = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtInstructor = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtDuration = new javax.swing.JTextField();
+        txtMobile = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtCapacity = new javax.swing.JTextField();
+        txtSalary = new javax.swing.JTextField();
         btnView = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnCreate = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jComboRole = new javax.swing.JComboBox();
+        jLabel14 = new javax.swing.JLabel();
 
         setForeground(new java.awt.Color(255, 153, 0));
 
@@ -81,6 +112,12 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
         jLabel22.setText("Country:");
 
         comboCountry.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCountry.setEnabled(false);
+        comboCountry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCountryActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 204, 0));
@@ -88,6 +125,11 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
 
         comboCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboCity.setEnabled(false);
+        comboCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCityActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 204, 0));
@@ -95,33 +137,44 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
 
         comboBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBranch.setEnabled(false);
+        comboBranch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBranchActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "Email", "Phone", "Salary"
+                "Name", "Email", "Phone", "Salary"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableEmployee);
 
         btnDelete.setForeground(new java.awt.Color(255, 153, 0));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 204, 0));
         jLabel3.setText("Employee ID:");
 
-        txtFirstName.setForeground(new java.awt.Color(51, 51, 255));
+        txtEmployeeID.setForeground(new java.awt.Color(51, 51, 255));
+        txtEmployeeID.setEnabled(false);
 
         jLabel10.setBackground(new java.awt.Color(255, 204, 0));
         jLabel10.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
@@ -132,7 +185,8 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 204, 0));
         jLabel4.setText("Email:");
 
-        txtInstructor.setForeground(new java.awt.Color(51, 51, 255));
+        txtEmail.setForeground(new java.awt.Color(51, 51, 255));
+        txtEmail.setEnabled(false);
 
         jLabel11.setBackground(new java.awt.Color(255, 204, 0));
         jLabel11.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
@@ -143,22 +197,49 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 204, 0));
         jLabel5.setText("Salary:");
 
-        txtCapacity.setForeground(new java.awt.Color(51, 51, 255));
+        txtSalary.setForeground(new java.awt.Color(51, 51, 255));
 
         btnView.setForeground(new java.awt.Color(255, 153, 0));
         btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         btnEdit.setForeground(new java.awt.Color(255, 153, 0));
         btnEdit.setText("Edit");
+        btnEdit.setEnabled(false);
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnSave.setForeground(new java.awt.Color(255, 153, 0));
         btnSave.setText("Save");
+        btnSave.setEnabled(false);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnCreate.setForeground(new java.awt.Color(255, 153, 0));
         btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         btnClear.setForeground(new java.awt.Color(255, 153, 0));
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btnBack.setForeground(new java.awt.Color(255, 153, 0));
         btnBack.setText("Back");
@@ -167,6 +248,14 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+
+        jComboRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboRole.setEnabled(false);
+
+        jLabel14.setBackground(new java.awt.Color(255, 204, 0));
+        jLabel14.setFont(new java.awt.Font("YuGothic", 3, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel14.setText("Employee:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,37 +284,40 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtEmployeeID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(103, 103, 103)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10)
-                                    .addComponent(jLabel11))
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel14))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtTime)
-                                    .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtName)
+                                    .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnEdit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSave)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCreate))))
+                                .addComponent(btnCreate)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -265,20 +357,22 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmployeeID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtInstructor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtCapacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
                     .addComponent(btnSave)
@@ -297,11 +391,106 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void populateRoleCombo(){
+        jComboRole.removeAllItems();
+        for(Role.RoleType type: Role.RoleType.values()){
+            jComboRole.addItem(type);
+        }
+        jComboRole.setEnabled(true);
+    }
+    
+    public void populateCountryCombo() {
+        JComboBox countryCombo = comboCountry;
+        countryCombo.removeAllItems();
+        int counter = 0;
+        for (ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
+            if (counter == 0) {
+                populateCityCombo(parentNetwork);
+            }
+            countryCombo.addItem(parentNetwork);
+            counter++;
+        }
+        countryCombo.setEnabled(true);
+    }
+
+    public void populateCityCombo(ParentNetwork parentNetwork) {
+        JComboBox cityCombo = comboCity;
+        cityCombo.removeAllItems();
+        int counter = 0;
+        for (ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()) {
+            if (parentNetwork.getId() == pn.getId()) {
+                for (Network network : pn.getNetworkDirectory().getNetworkList()) {
+                    if (counter == 0) {
+                        populateBranchCombo(parentNetwork, network);
+                    }
+                    cityCombo.addItem(network);
+                    counter++;
+                }
+                cityCombo.setEnabled(true);
+                break;
+            }
+        }
+    }
+
+    public void populateBranchCombo(ParentNetwork parentNetwork, Network network) {
+        JComboBox branchCombo = comboBranch;
+        branchCombo.removeAllItems();
+        for (ParentNetwork pn : business.getParentNetworkDirectory().getParentNetworkList()) {
+            if (parentNetwork.getId() == pn.getId()) {
+                for (Network n : pn.getNetworkDirectory().getNetworkList()) {
+                    if (network.getId() == n.getId()) {
+                        int counter = 0;
+                        for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+                            if (counter == 0) {
+                                setEmployeeList(pn, n, e);
+                            }
+                            branchCombo.addItem(e);
+                        }
+                        populateTable();
+                        comboBranch.setEnabled(true);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public void setEmployeeList(ParentNetwork pn, Network n, Enterprise e) {
+        for (ParentNetwork parentNetwork : business.getParentNetworkDirectory().getParentNetworkList()) {
+            if (pn.getId() == parentNetwork.getId()) {
+                for (Network network : parentNetwork.getNetworkDirectory().getNetworkList()) {
+                    if (network.getId() == n.getId()) {
+                        for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                            if (enterprise.getId() == e.getId()) {
+                                this.employeeList = enterprise.getEmployeeDirectory().getEmployeeList();
+                            }
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tableEmployee.getModel();
+        dtm.setRowCount(0);
+
+        for (Employee employee : employeeList) {
+            Object row[] = new Object[4];
+            row[0] = employee;
+            row[1] = employee.getEmail();
+            row[2] = employee.getMobile();
+            row[3] = employee.getRole().getSalary();
+            dtm.addRow(row);
+        }
+    }
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -309,6 +498,294 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void comboCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCountryActionPerformed
+        // TODO add your handling code here:
+        if (comboCountry.isEnabled()) {
+            comboCity.setEnabled(false);
+            comboBranch.setEnabled(false);
+            ParentNetwork parentNetwork = (ParentNetwork) comboCountry.getSelectedItem();
+            populateCityCombo(parentNetwork);
+            comboCity.setEnabled(true);
+        }
+    }//GEN-LAST:event_comboCountryActionPerformed
+
+    private void comboCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCityActionPerformed
+        // TODO add your handling code here:
+        if (comboCity.isEnabled()) {
+            ParentNetwork parentNetwork = (ParentNetwork) comboCountry.getSelectedItem();
+            Network network = (Network) comboCity.getSelectedItem();
+            comboBranch.setEnabled(false);
+            populateBranchCombo(parentNetwork, network);
+        }
+    }//GEN-LAST:event_comboCityActionPerformed
+
+    private void comboBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBranchActionPerformed
+        // TODO add your handling code here:
+        if (comboBranch.isEnabled()) {
+            ParentNetwork pn = (ParentNetwork) comboCountry.getSelectedItem();
+            Network n = (Network) comboCity.getSelectedItem();
+            Enterprise e = (Enterprise) comboBranch.getSelectedItem();
+            setEmployeeList(pn, n, e);
+            populateTable();
+        }
+    }//GEN-LAST:event_comboBranchActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedrow = tableEmployee.getSelectedRow();
+
+        if (selectedrow >= 0) {
+            Employee employee = (Employee) tableEmployee.getValueAt(selectedrow, 0);
+            int reply = JOptionPane.showConfirmDialog(null, "Do you really want to delete?");
+            if (reply == JOptionPane.YES_OPTION) {
+                employeeList.remove(employee);
+                JOptionPane.showMessageDialog(null, "Employee has been deleted");
+                populateTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select any row");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedrow = tableEmployee.getSelectedRow();
+
+        if (selectedrow >= 0) {
+            Employee employee = (Employee) tableEmployee.getValueAt(selectedrow, 0);
+            selectedEmployee = employee;
+            txtEmployeeID.setText(String.valueOf(employee.getId()));
+            txtName.setText(String.valueOf(employee.getFirstName()));
+            txtEmail.setText(String.valueOf(employee.getEmail()));
+            txtMobile.setText(String.valueOf(employee.getMobile()));
+            txtSalary.setText(String.valueOf(employee.getRole().getSalary()));
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "Please select any row to view");
+        }
+        btnEdit.setEnabled(true);
+        btnCreate.setEnabled(false);
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        txtEmployeeID.setEnabled(false);
+        txtName.setEnabled(true);
+        txtEmail.setEnabled(false);
+        txtMobile.setEnabled(true);
+        txtSalary.setEnabled(true);
+        btnEdit.setEnabled(false);
+        btnSave.setEnabled(true);
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private Boolean validateForm() {
+        int dialogShown = 0;
+        Pattern pattern;
+        Matcher matcher;
+
+        pattern = Pattern.compile("^[a-zA-Z]+$");
+        matcher = pattern.matcher(txtName.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 1;
+            }
+            txtName.setBackground(Color.PINK);
+        }
+        pattern = Pattern.compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
+        matcher = pattern.matcher(txtEmail.getText());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 2;
+            }
+            txtEmail.setBackground(Color.PINK);
+        }
+        if (!validatePhoneNumber(txtMobile.getText())) {
+            if (dialogShown <= 0) {
+                dialogShown = 3;
+            }
+            txtMobile.setBackground(Color.PINK);
+        }
+        pattern = Pattern.compile("^[0-9]+$");
+        matcher = pattern.matcher(txtSalary.getText().trim());
+        if (!matcher.matches()) {
+            if (dialogShown <= 0) {
+                dialogShown = 4;
+            }
+            txtSalary.setBackground(Color.PINK);
+        }
+        if (dialogShown == 0) {
+            return true;
+        } else {
+            showValidationDialog(dialogShown);
+            return false;
+        }
+    }
+
+    private void showValidationDialog(int flag) {
+        String errMessage = "";
+        switch (flag) {
+
+            case 1:
+                errMessage = "Invalid Name Entered!";
+                break;
+
+            case 2:
+                errMessage = "Invalid Email Entered!";
+                break;
+                
+            case 3:
+                errMessage = "Invalid Phone number Entered!";
+                break;
+
+            case 4:
+                errMessage = "Invalid Salary Entered!";
+                break;
+        }
+        JOptionPane.showMessageDialog(null, errMessage, "Error Message", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void removeValidationDisplay() {
+
+        txtName.setBackground(Color.white);
+        txtMobile.setBackground(Color.white);
+        txtSalary.setBackground(Color.white);
+    }
+
+    private static boolean validatePhoneNumber(String phone) {
+
+        //validate phone numbers of format "1234567890"
+        if (phone.matches("\\d{10}")) {
+            return true;
+        } //validating phone number with -, . or spaces
+        else if (phone.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")) {
+            return true;
+        } //validating phone number with extension length from 3 to 5
+        else if (phone.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}")) {
+            return true;
+        } //validating phone number where area code is in braces ()
+        else if (phone.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")) {
+            return true;
+        } //return false if nothing matches the input
+        else {
+            return false;
+        }
+    }
+
+    private void saveFormToObject() {
+
+        employeeList.remove(selectedEmployee);
+        selectedEmployee.setFirstName(txtName.getText());
+        selectedEmployee.setEmail(txtEmail.getText());
+        selectedEmployee.setMobile(txtMobile.getText());
+        selectedEmployee.getRole().setSalary(Integer.parseInt(txtSalary.getText()));
+        employeeList.add(selectedEmployee);
+
+        // prompt user data bind success
+        JOptionPane.showMessageDialog(null, "Congratulations, employee details added successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        populateTable();
+        // remove all field values
+        clearForm();
+    }
+    
+    private Role getRoleFromString(String text){
+        Role role = null;
+        if(text.equals(Role.RoleType.Accountant.toString())){
+            role = new AccountantRole();
+        }else if(text.equals(Role.RoleType.Admin.toString())){
+            role = new AdminRole();
+        }else if(text.equals(Role.RoleType.Customer.toString())){
+            role = new CustomerRole();
+        }else if(text.equals(Role.RoleType.Maintenance.toString())){
+            role = new MaintenanceRole();
+        }else if(text.equals(Role.RoleType.Marketing.toString())){
+            role = new MarketingRole();
+        }else if(text.equals(Role.RoleType.MasterTrainer.toString())){
+            role = new MasterTrainerRole();
+        }else if(text.equals(Role.RoleType.RegularTrainer.toString())){
+            role = new RegularTrainerRole();
+        }else if(text.equals(Role.RoleType.SuperAdmin.toString())){
+            role = new SuperAdminRole();
+        }else if(text.equals(Role.RoleType.Vendor.toString())){
+            role = new VendorRole();
+        }
+        return role;
+    }
+
+    private void createEmployee(ParentNetwork parentNetwork, Network network, Enterprise enterprise, Role.RoleType type) {
+        
+        Employee employee = null;
+        for(ParentNetwork pn: business.getParentNetworkDirectory().getParentNetworkList()){
+            if(pn.getCountryName().equals(parentNetwork.getCountryName())){
+                for(Network n: pn.getNetworkDirectory().getNetworkList()){
+                    if(n.getCity().equals(network.getCity())){
+                        for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()){
+                            if(e.getBranchName().equals(enterprise.getBranchName())){
+                                employee = enterprise.getEmployeeDirectory().addEmployee(getRoleFromString(type.toString()));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(employee == null){
+            JOptionPane.showMessageDialog(null, "Unexpected error!");
+            return;
+        }
+        
+        employee.setFirstName(txtName.getText());
+        employee.setEmail(txtEmail.getText());
+        employee.setMobile(txtMobile.getText());
+        employee.getRole().setSalary(Integer.parseInt(txtSalary.getText()));
+        employeeList.add(employee);
+
+        JOptionPane.showMessageDialog(null, "Congratulations, employee details added successfully!", "Info", JOptionPane.INFORMATION_MESSAGE);
+        populateTable();
+    }
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        removeValidationDisplay();
+        Boolean isValid = validateForm();
+        if (isValid) {
+            saveFormToObject();
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void clearForm() {
+        
+        txtEmployeeID.setText(null);
+        txtName.setText(null);
+        txtEmail.setText(null);
+        txtMobile.setText(null);
+        txtSalary.setText(null);
+        btnEdit.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnCreate.setEnabled(true);
+    }
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+        txtEmail.setEnabled(true);
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        removeValidationDisplay();
+        Boolean isValid = validateForm();
+        if (isValid) {
+        ParentNetwork parentNetwork = (ParentNetwork) comboCountry.getSelectedItem();
+        Network network = (Network) comboCity.getSelectedItem();
+        Enterprise enterprise = (Enterprise) comboBranch.getSelectedItem();
+        Role.RoleType type = (Role.RoleType)jComboRole.getSelectedItem();
+        if(parentNetwork == null || network == null || enterprise == null || type == null){
+            JOptionPane.showMessageDialog(null, "Country/City/Branch/Role not chosen!");
+            return;
+        }
+        createEmployee(parentNetwork, network, enterprise, type);
+        }
+    }//GEN-LAST:event_btnCreateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -322,11 +799,13 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JComboBox<String> comboCity;
     private javax.swing.JComboBox comboCountry;
+    private javax.swing.JComboBox jComboRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -334,11 +813,11 @@ public class SAManageEmployeesJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtCapacity;
-    private javax.swing.JTextField txtDuration;
-    private javax.swing.JTextField txtFirstName;
-    private javax.swing.JTextField txtInstructor;
-    private javax.swing.JTextField txtTime;
+    private javax.swing.JTable tableEmployee;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEmployeeID;
+    private javax.swing.JTextField txtMobile;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtSalary;
     // End of variables declaration//GEN-END:variables
 }

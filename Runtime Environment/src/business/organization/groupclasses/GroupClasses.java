@@ -18,6 +18,7 @@ public class GroupClasses extends Organization {
     private int duration;
     private String description;
     private String time;
+    private int capacity;
     private Employee trainer;
     private classType type;
     
@@ -78,10 +79,17 @@ public class GroupClasses extends Organization {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
     
     @Override
     public String toString(){
-        return String.valueOf(id);
+        return name;
     }
-
 }

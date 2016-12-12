@@ -31,4 +31,9 @@ public class Customer extends Person {
     public Membership getMembership() {
         return membership;
     }
+    
+    @Override
+    public String toString(){
+        return Integer.toString(id);
+    }
 }
