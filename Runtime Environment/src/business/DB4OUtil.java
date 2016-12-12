@@ -20,9 +20,9 @@ public class DB4OUtil {
     private ObjectContainer conn;
     
     // For Windows systems
-    private static final String FILENAME = "resources\\files\\DB\\DataBank.db4o"; // path to the data store
+    // private static final String FILENAME = "resources\\files\\DB\\DataBank.db4o"; // path to the data store
     // For Mac systems
-//     private static final String FILENAME = "resources/files/DB/DataBank.db4o"; // path to the data store
+    private static final String FILENAME = "resources/files/DB/DataBank.db4o"; // path to the data store
     
     private static DB4OUtil dB4OUtil;
 

@@ -6,23 +6,76 @@
 package userinterface.message;
 
 import business.Business;
+import business.enterprise.Enterprise;
+import business.network.Network;
+import business.useraccount.UserAccount;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import business.organization.message.Message;
+import business.parentnetwork.ParentNetwork;
+import business.role.Role;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author soumiyaroy
  */
 public class MessageJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private Business business;
+    private UserAccount userAccount;
+    private ArrayList<Message> messageList;
+    private int totalMessages = 0;
+
     /**
      * Creates new form MessageJPanel
      */
-    public MessageJPanel(JPanel userProcessContainer, Business business) {
+    public MessageJPanel(JPanel userProcessContainer, UserAccount userAccount, Business business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        this.userAccount = userAccount;
+        messageList = new ArrayList<Message>();
+        
+        try{
+            for(Message message : business.getMessageDirectory().getMessageList()){
+                if(message.getReceiver().getEmail().equals(userAccount.getEmail())){
+                    messageList.add(message);
+                    totalMessages++;
+                }
+            }
+        }catch(Exception e){}
+        
+        jLabel8.setText(String.valueOf(totalMessages));
+        populateTable();
+        
+        populateComboRole();
+    }
+    
+    private void populateComboRole(){
+        comboRole.removeAllItems();
+        
+        for(Role.RoleType type: Role.RoleType.values()){
+            comboRole.addItem(type);
+        }
+        comboRole.setEnabled(true);
+    }
+    
+    private void populateTable(){
+        DefaultTableModel dtm = (DefaultTableModel) tblMessages.getModel();
+        dtm.setRowCount(0);
+
+        for (Message message : messageList) {
+            Object row[] = new Object[4];
+            row[0] = message;
+            row[1] = message.getRequestDate();
+            row[2] = message.getSender().getEmail();
+            row[3] = message.getSubject();
+            dtm.addRow(row);
+        }
     }
 
     /**
@@ -39,8 +92,8 @@ public class MessageJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        comboDepartment = new javax.swing.JComboBox<>();
-        comboUser = new javax.swing.JComboBox<>();
+        comboRole = new javax.swing.JComboBox();
+        comboUser = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         txtSubject = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -56,7 +109,8 @@ public class MessageJPanel extends javax.swing.JPanel {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMessages = new javax.swing.JTable();
+        btnView = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -79,9 +133,10 @@ public class MessageJPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 204, 0));
         jLabel4.setText("User:");
 
-        comboDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboRole.setEnabled(false);
 
-        comboUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboUser.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
@@ -128,21 +183,29 @@ public class MessageJPanel extends javax.swing.JPanel {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setEnabled(false);
         jScrollPane2.setViewportView(jTextArea1);
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 204, 0));
         jLabel10.setText("Message:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMessages.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Message ID", "Date", "Sent By", "Department", "Subject"
+                "Message ID", "Date", "Sent By", "Subject"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblMessages);
+
+        btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,19 +219,20 @@ public class MessageJPanel extends javax.swing.JPanel {
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10))
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8)
+                                .addGap(21, 21, 21)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(138, 138, 138))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
-                                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel10)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnView)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                                            .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +252,7 @@ public class MessageJPanel extends javax.swing.JPanel {
                                         .addGap(27, 27, 27)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(comboUser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jScrollPane1)
                                             .addComponent(txtSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabel2))
@@ -211,7 +275,7 @@ public class MessageJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(comboDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,10 +301,12 @@ public class MessageJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnView)
+                        .addGap(21, 21, 21)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21))))
         );
@@ -248,16 +314,28 @@ public class MessageJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-                userProcessContainer.remove(this);
+        userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblMessages.getSelectedRow();
+        if(selectedRow >= 0){
+            Message message = (Message) tblMessages.getValueAt(selectedRow, 0);
+            jTextArea1.setText(message.getMessage());
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select a message first!");
+        }
+    }//GEN-LAST:event_btnViewActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JComboBox<String> comboDepartment;
-    private javax.swing.JComboBox<String> comboUser;
+    private javax.swing.JButton btnView;
+    private javax.swing.JComboBox comboRole;
+    private javax.swing.JComboBox comboUser;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -273,9 +351,9 @@ public class MessageJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTable tblMessages;
     private javax.swing.JTextArea txtAreaMessage;
     private javax.swing.JTextField txtSubject;
     // End of variables declaration//GEN-END:variables

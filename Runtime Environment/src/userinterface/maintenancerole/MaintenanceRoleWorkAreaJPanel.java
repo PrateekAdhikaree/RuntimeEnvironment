@@ -189,9 +189,9 @@ public class MaintenanceRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
         // TODO add your handling code here:
-                        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
-        userProcessContainer.add("MessageJPanel",messageJPanel);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, userAccount, business);
+        userProcessContainer.add("MessageJPanel", messageJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnMessageActionPerformed
 

@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.message.MessageJPanel;
+import userinterface.password.ChangePasswordJPanel;
 import userinterface.superadminrole.*;
 
 /**
@@ -566,8 +567,8 @@ public class RegularTrainerProfileJPanel extends javax.swing.JPanel {
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
         // TODO add your handling code here:
-        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
-        userProcessContainer.add("MessageJPanel", messageJPanel);
+        ChangePasswordJPanel changePasswordJPanel = new ChangePasswordJPanel(userProcessContainer, userAccount, business);
+        userProcessContainer.add("ChangePasswordJPanel", changePasswordJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnChangePasswordActionPerformed

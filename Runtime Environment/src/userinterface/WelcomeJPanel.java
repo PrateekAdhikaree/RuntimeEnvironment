@@ -104,7 +104,6 @@ public class WelcomeJPanel extends javax.swing.JPanel {
         comboCity = new javax.swing.JComboBox<>();
         comboBranch = new javax.swing.JComboBox<>();
         btnAboutUs = new javax.swing.JButton();
-        btnContactUS = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -189,16 +188,6 @@ public class WelcomeJPanel extends javax.swing.JPanel {
         btnAboutUs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAboutUsActionPerformed(evt);
-            }
-        });
-
-        btnContactUS.setBackground(new java.awt.Color(255, 255, 255));
-        btnContactUS.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        btnContactUS.setForeground(new java.awt.Color(255, 153, 0));
-        btnContactUS.setText("Contact Us");
-        btnContactUS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContactUSActionPerformed(evt);
             }
         });
 
@@ -292,8 +281,6 @@ public class WelcomeJPanel extends javax.swing.JPanel {
             .addGroup(welcomeJPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btnAboutUs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnContactUS)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(welcomeJPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
@@ -371,9 +358,7 @@ public class WelcomeJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(welcomeJPanelLayout.createSequentialGroup()
-                        .addGroup(welcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAboutUs)
-                            .addComponent(btnContactUS))
+                        .addComponent(btnAboutUs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -494,18 +479,9 @@ public class WelcomeJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnAboutUsActionPerformed
 
-    private void btnContactUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactUSActionPerformed
-        // TODO add your handling code here:
-        ContactUsJPanel contactUsJPanel = new ContactUsJPanel(userProcessContainer);
-        userProcessContainer.add("ContactUsJPanel", contactUsJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnContactUSActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAboutUs;
-    private javax.swing.JButton btnContactUS;
     private javax.swing.JButton btnGo;
     private javax.swing.JComboBox<String> comboBranch;
     private javax.swing.JComboBox<String> comboCity;

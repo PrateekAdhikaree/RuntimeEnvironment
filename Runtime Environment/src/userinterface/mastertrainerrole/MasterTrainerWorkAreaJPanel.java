@@ -152,7 +152,7 @@ public class MasterTrainerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
         // TODO add your handling code here:
-        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, business);
+        MessageJPanel messageJPanel = new MessageJPanel(userProcessContainer, userAccount, business);
         userProcessContainer.add("MessageJPanel", messageJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

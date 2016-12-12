@@ -8,7 +8,6 @@ package userinterface.superadminrole;
 import business.Business;
 import business.enterprise.Enterprise;
 import business.network.Network;
-import static business.organization.Organization.organizationType.GroupClasses;
 import business.parentnetwork.ParentNetwork;
 import business.person.employee.Employee;
 import business.role.AccountantRole;
