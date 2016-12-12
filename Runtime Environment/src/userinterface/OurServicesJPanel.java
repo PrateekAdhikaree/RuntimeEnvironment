@@ -5,6 +5,9 @@
  */
 package userinterface;
 
+import business.enterprise.Enterprise;
+import business.network.Network;
+import business.parentnetwork.ParentNetwork;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -14,14 +17,23 @@ import javax.swing.JPanel;
  */
 public class OurServicesJPanel extends javax.swing.JPanel {
 
-    JPanel userProcessContainer;
+    private JPanel userProcessContainer;
+    private ParentNetwork parentNetwork;
+    private Network netork;
+    private Enterprise enterprise;
 
     /**
      * Creates new form OurServicesJPanel
      */
-    public OurServicesJPanel(JPanel userProcessContainer) {
+    public OurServicesJPanel(JPanel userProcessContainer, ParentNetwork parentNetwork, Network network, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.parentNetwork = parentNetwork;
+        this.netork = network;
+        this.enterprise = enterprise;
+        
+        labelCountry.setText(parentNetwork.getCountryName());
+        labelCity.setText(network.getCity());
     }
 
     /**
@@ -119,9 +131,9 @@ public class OurServicesJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(45, 45, 45)
+                        .addGap(18, 18, 18)
                         .addComponent(labelCountry)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(82, 82, 82)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(labelCity)

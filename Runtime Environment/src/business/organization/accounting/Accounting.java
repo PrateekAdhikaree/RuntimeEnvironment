@@ -47,8 +47,24 @@ public class Accounting extends Organization{
     public void setMembershipDirectory(MembershipDirectory membershipDirectory) {
         this.membershipDirectory = membershipDirectory;
     }
+    
+    public float calculateEnterpriseIncome(){
+        float totalCustomerFees = 0;
+        for(Customer customer : customerDirectory.getCustomerList()){
+            totalCustomerFees += getCustomerFees(customer);
+        }
+        return totalCustomerFees;
+    }
+    
+    public float calculateEnterpriseExpenses(){
+        float totalEmployeeSalary = 0;
+        for(Employee employee : employeeDirectory.getEmployeeList()){
+            totalEmployeeSalary += employee.getRole().getSalary();
+        }
+        return totalEmployeeSalary;
+    }
 
-    public float calculateRevenue(int months) {
+    public float calculateEnterpriseRevenue(int months) {
         float totalFunds = 0;
         float totalEmployeeSalary = 0;        
         float totalCustomerFees = 0;
@@ -57,7 +73,7 @@ public class Accounting extends Organization{
         }
         
         for(Customer customer : customerDirectory.getCustomerList()){
-            totalCustomerFees += calculateCustomerFees(customer);
+            totalCustomerFees += getCustomerFees(customer);
         }
         
         //Calculates revenue for 1 month
@@ -70,7 +86,7 @@ public class Accounting extends Organization{
         return totalFunds;
     }
     
-    public float calculateCustomerFees(Customer customer){
+    public float getCustomerFees(Customer customer){
         float price = 0;
         price = customer.getMembership().getPrice();
         price = (price / customer.getMembership().getDurationInDays()) * 30;
