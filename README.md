@@ -12,6 +12,12 @@ As important as it is to have high-end equipment, it's also very crucial to stay
 
 Runtime Environment Inc. will create a platform that will help achieve better standards by continuous monitoring of members, equipment, scheduling, special services, accounting, marketing, reporting and more in the international level as well.
 
+## Installation/Execution
+
+- Download the project
+- Load _root/Runtime Environment_ on Netbeans or similar IDE as a project
+- Run
+
 ## Features:
 
 ### Role-based access:
