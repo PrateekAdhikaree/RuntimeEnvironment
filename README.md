@@ -8,6 +8,10 @@
 
 As important as it is to have high-end equipment, it's also very crucial to stay up-to-date on technology to attract new customer and keep up with the fierce competition. More so, many fitness centers are unable to retain existing members, maintain quality standards and track records which lead to a stagnant business. So, there is an urgent need to implement a technology which will help health clubs, fitness centers and gyms to manage and monitor their organization efficiently along with being accessible to customers conveniently.
 
+## Class Diagram:
+
+![class_diagram](https://github.com/PrateekAdhikaree/RuntimeEnvironment/blob/master/UML%20Diagram.png "Class Diagram")
+
 ## Scope:
 
 Runtime Environment Inc. will create a platform that will help achieve better standards by continuous monitoring of members, equipment, scheduling, special services, accounting, marketing, reporting and more in the international level as well.
@@ -23,7 +27,7 @@ Runtime Environment Inc. will create a platform that will help achieve better st
 ### Role-based access:
 
 1.	Guests or Members can create accounts and access the whole system depending on their requirements, for example register for group classes, check their membership, enroll for events, pick trainers based on their profiles, order equipment etc.
-2.	Trainers (Master, Visiting or Regular) can upload profiles, view clientâ€™s schedule and progress and pick dates/availability for classes/sessions
+2.	Trainers (Master, Visiting or Regular) can upload profiles, view client's schedule and progress and pick dates/availability for classes/sessions
 3.	Super admin will manage organization details and admin will view dashboard (analytics), trainers and members, schedule, accounting, equipment and merchandise overview
 4.	Maintenance Manager will maintain the equipment and can report issues
 5.	Marketing Manager views the analytics and publishes promo codes
